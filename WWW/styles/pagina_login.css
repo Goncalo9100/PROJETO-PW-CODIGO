@@ -1,0 +1,141 @@
+/*IMAGEM COM O LOGOTIPO*/
+.div_header {
+    background-color: white;
+    margin: 0%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.img_logo{
+    height: 70%;
+    margin-top: 2%;
+    margin-left: 0%;
+    align-self: center;
+}
+/*----------------------------------------------------------------*/
+
+/*BARRA AZUL COM SLOGAN*/
+.div_barra {
+    background-color: #123370;
+    margin: 0%;
+    height: 5%;
+    text-align: center;
+}
+
+.div_barra h1{
+    color: white;
+    font-size: x-large;  
+    font-weight: normal;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    ;
+}
+/*----------------------------------------------------------------*/
+
+/*SEPARADOR DE TABS LOGIN E REGISTO*/
+.line_tabs{
+    color: #aaaaaa;
+    background-color: #aaaaaa;
+    width: 40%;
+    height: 2px;
+}
+
+.link_tabs_autenticar{
+    margin-left: 44%;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    margin-top: 10%;
+}
+.link_tabs_registar{
+    margin-left: 1%;
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 10%;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+/*----------------------------------------------------------------*/
+
+/*CAIXA COM INFO DE LOGIN*/
+.div_body_login{
+    margin-left: 30%;
+    justify-content: center;
+    margin-top: 1%;
+    width: 40%;
+    height: auto;
+    text-align: center;
+    display: flexbox;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+}
+
+.btn_autenticar{
+    background-color: #123370;
+    color: white;
+    margin: 0%;
+    padding-left: 0.5%;
+    padding-top: 0.75%;
+    padding-bottom: 0.75%;
+    padding-right: 0.5%;
+    margin-bottom: 3%;
+    margin-top: 2%;
+    width: 52.5%;
+    border-color: #123370;
+    font-size: small;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+.input_email{
+    width: 50%;
+    padding-left: 0.5%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-right: 0.5%;
+    margin-bottom: 0%;
+    margin-top: 10%;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+.input_password{
+    width: 50%;
+    padding-left: 0.5%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-right: 0.5%;
+    margin-bottom: 3%;
+    margin-top: 1%;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.link_recsenha{
+    color:#aaaaaa;
+    text-align: end;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
+    text-decoration: none;
+    margin-bottom: 10%;
+}
+
+.link_novouser{
+    color:#aaaaaa;
+    text-align: start;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: small;
+    text-decoration: none;
+    margin-bottom: 10%;
+
+}
+
+/*----------------------------------------------------------------*/
+
+/*FOOTER DA PÁGINA*/
+.div_footer{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+    padding-left: 0%;
+    padding-top: 2%;
+    margin-top: 20%;
+}
+/*----------------------------------------------------------------*/
