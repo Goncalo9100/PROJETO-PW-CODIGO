@@ -1,0 +1,111 @@
+.div_header {
+    background-color: white;
+    margin: 0%;
+    height: 5%;
+    display: inline-flex;
+}
+
+.img_logo{
+    height: 70%;
+    margin-top: 2%;
+    margin-left: 99%;
+}
+
+.a_login{
+    color: #123370;
+    font-size: 150%;
+    margin-top: 3.5%;
+    margin-left: 183%;
+    text-decoration: none;
+}
+.a_register{
+    color: #123370;
+    font-size: 150%;
+    margin-top: 3.5%;
+    margin-left: 5%;
+    text-decoration: none;
+}
+
+.div_menu {
+    background-color: #123370;
+    margin: 0%;
+    height: 5%;
+}
+
+.btn_menu_sobre{
+    color: white;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: medium;
+    border-color: rgba(255, 255, 255, 0);
+    margin-left: 20%;
+}
+.btn_menu_sobre:hover{
+    background-color: #ebebeba1;
+    cursor: pointer;
+}
+
+.btn_menu_portefolios{
+    color: white;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: medium;
+    border-color: rgba(255, 255, 255, 0);
+    margin-left: 1%;
+}
+.btn_menu_portefolios:hover{
+    background-color: #ebebeba1;
+    cursor: pointer;
+}
+
+.btn_menu_ofertas{
+    color: white;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: medium;
+    border-color: rgba(255, 255, 255, 0);
+    margin-left: 1%;
+}
+.btn_menu_ofertas:hover{
+    background-color: #ebebeba1;
+    cursor: pointer;
+}
+
+.btn_menu_amigos{
+    color: white;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: medium;
+    border-color: rgba(255, 255, 255, 0);
+    margin-left: 1%;
+    display: none;
+}
+.btn_menu_amigos:hover{
+    background-color: #ebebeba1;
+    cursor: pointer;
+}
+
+.btn_menu_empresas{
+    color: white;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    font-size: medium;
+    border-color: rgba(255, 255, 255, 0);
+    margin-left: 1%;
+    display: none;
+}
+.btn_menu_empresas:hover{
+    background-color: #ebebeba1;
+    cursor: pointer;
+}
+
+/* AREA FOOTER */
+.div_footer{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+    padding-left: 0%;
+    padding-top: 2%;
+}

@@ -1,0 +1,45 @@
+/* Estilos de HTML E BODY */
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* AREA MENU */
+.btn_menu_portefolios {
+    background-color: #ebebeba1;
+}
+
+/* AREA PROCURA */
+.div_body_procura {
+    margin-left: 20.4%;
+    margin-top: 3%;
+    width: 59%;
+    height: auto;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+}
+.input_procura{
+    width: 90%;
+    border: none;
+    font-size: 17px;
+    float: left;
+    margin-top: 0.7%;
+    margin-bottom: 0.4%;
+}
+.btn_procura{
+    border: none;
+    background-color: #123370;
+    color: white;
+    width: 8%;
+    font-size: large;
+    cursor: pointer;
+    padding-top: 0.4%;
+    padding-bottom: 0.3%;
+    margin-top: 0.4%;
+    margin-bottom: 0.4%;
+    margin-left: 1%;
+}

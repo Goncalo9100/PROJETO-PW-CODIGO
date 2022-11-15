@@ -1,3 +1,4 @@
+/* Estilos de HTML E BODY */
 html, body{
   margin: 0;
   height: 100%;
@@ -7,79 +8,12 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-.div_header {
-    background-color: white;
-    margin: 0%;
-    height: 5%;
-    display: inline-flex;
-}
-
-.img_logo{
-    height: 70%;
-    margin-top: 2%;
-    margin-left: 99%;
-}
-
-.a_login{
-    color: #123370;
-    font-size: 150%;
-    margin-top: 3.5%;
-    margin-left: 183%;
-    text-decoration: none;
-}
-.a_register{
-    color: #123370;
-    font-size: 150%;
-    margin-top: 3.5%;
-    margin-left: 5%;
-    text-decoration: none;
-}
-
-.div_menu {
-    background-color: #123370;
-    margin: 0%;
-    height: 5%;
-}
-
+/* AREA MENU */
 .btn_menu_sobre{
-    color: white;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: medium;
-    border-color: rgba(255, 255, 255, 0);
-    margin-left: 20%;
-}
-.btn_menu_sobre:hover{
     background-color: #ebebeba1;
-    cursor: pointer;
 }
 
-.btn_menu_portefolios{
-    color: white;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: medium;
-    border-color: rgba(255, 255, 255, 0);
-    margin-left: 1%;
-}
-.btn_menu_portefolios:hover{
-    background-color: #ebebeba1;
-    cursor: pointer;
-}
-
-.btn_menu_ofertas{
-    color: white;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: medium;
-    border-color: rgba(255, 255, 255, 0);
-    margin-left: 1%;
-}
-.btn_menu_ofertas:hover{
-    background-color: #ebebeba1;
-    cursor: pointer;
-}
-
+/* AREA OBJETIVO */
 .div_body_objetivo{
     margin-left: 20.4%;
     margin-top: 3%;
@@ -102,6 +36,8 @@ body::-webkit-scrollbar {
     padding-bottom: 1%;
 }
 
+
+/* AREA FUNCIONALIDADES */
 .div_body_funcionalidades{
     margin-left: 20.4%;
     margin-top: 2%;
@@ -126,6 +62,7 @@ li{
     margin-top: 0.5%;
 }
 
+/* AREA SOBRE */
 .div_body_sobre{
     margin-left: 20.4%;
     margin-top: 2%;
@@ -166,16 +103,6 @@ li{
 .p_body_sobre_p2{
     padding-left: 1%;
     margin-left: 42%;
-}
-
-.div_footer{
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: black;
-    text-align: center;
-    padding-left: 0%;
-    padding-top: 2%;
 }
 
 
