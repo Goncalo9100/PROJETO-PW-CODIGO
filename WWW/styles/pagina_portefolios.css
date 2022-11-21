@@ -1,5 +1,6 @@
 /* Estilos de HTML E BODY */
-html, body {
+html,
+body {
     margin: 0;
     height: 100%;
     overflow: auto;
@@ -21,16 +22,24 @@ body::-webkit-scrollbar {
     width: 59%;
     height: auto;
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+    display: flex;
 }
-.input_procura{
-    width: 90%;
+
+.input_procura {
+    width: 88.5%;
     border: none;
     font-size: 17px;
     float: left;
     margin-top: 0.7%;
     margin-bottom: 0.4%;
+    margin-left: 1.5%;
 }
-.btn_procura{
+
+.icon_procurar {
+    width: 8%;
+}
+
+.btn_procura {
     border: none;
     background-color: #123370;
     color: white;
@@ -42,4 +51,64 @@ body::-webkit-scrollbar {
     margin-top: 0.4%;
     margin-bottom: 0.4%;
     margin-left: 1%;
+}
+
+/* AREA CENTRO */
+.div_body_container{
+    height: 65%;
+    display: flex;
+    margin-top: 3%;
+}
+.div_body_filtro {
+    width: 17.70%;
+    height: 100%;
+    margin-left: 20.4%;
+    display: inline-block;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+}
+
+.div_body_portefolios {
+    width: 39.49%;
+    height: 100%;
+    margin-left: 1.5%;
+    display: inline-block;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+}
+
+/* AREA ESQUERDA */
+.div_body_left_bnt_container{
+    display: flex;
+    background-color: #123370;
+}
+.btn_empresas{
+    width: 50%;
+    display: inline-block;
+    border-color: rgba(255, 255, 255, 0);
+    font-size: x-large;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+}
+.btn_empresas:hover{
+    background-color: #ebebeba1;
+}
+.btn_curriculos{
+    width: 50%;
+    display: inline-block;
+    border-color: rgba(255, 255, 255, 0);
+    font-size: x-large;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+}
+.btn_curriculos:hover{
+    background-color: #ebebeba1;
+}
+
+.div_container_left_filtros_empresas{
+    margin-left: 3%;
+}
+
+.div_container_left_filtros_curriculos{
+    display: none;
 }
