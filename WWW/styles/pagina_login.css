@@ -42,20 +42,27 @@
     height: 2px;
 }
 
-.link_tabs_autenticar{
+
+.btn_tabs_autenticar{
     margin-left: 44%;
     text-decoration: none;
     font-size: 20px;
     font-family: 'Helvetica', 'Arial', sans-serif;
-    margin-top: 10%;
+    margin-top: 2%;
+    background-color: transparent;
+    border-color: transparent;
 }
-.link_tabs_registar{
+
+.btn_tabs_registar{
     margin-left: 1%;
     text-decoration: none;
     font-size: 20px;
-    margin-top: 10%;
+    margin-top: 2%;
     font-family: 'Helvetica', 'Arial', sans-serif;
+    background-color: transparent;
+    border-color: transparent;
 }
+
 /*----------------------------------------------------------------*/
 
 /*CAIXA COM INFO DE LOGIN*/
@@ -108,11 +115,14 @@
 
 .link_recsenha{
     color:#aaaaaa;
-    text-align: end;
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-size: small;
     text-decoration: none;
-    margin-bottom: 10%;
+    margin-bottom: 7%;
+    margin-left: 23.5%;
+}
+.link_recsenha:visited{
+    color:#aaaaaa;
 }
 
 .link_novouser{
@@ -121,8 +131,17 @@
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-size: small;
     text-decoration: none;
-    margin-bottom: 10%;
+    margin-bottom: 7%;
+    margin-left: 27%;
+    
+}
+.link_novouser:visited{
+    color:#aaaaaa;
+}
 
+.div_links_login{
+    display: flex;
+    margin-bottom: 10%;
 }
 
 /*----------------------------------------------------------------*/

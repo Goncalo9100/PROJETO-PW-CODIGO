@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, install-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/pagina_login.css">
+    <script src="scripts/login_register.js"></script>
     <title>Iniciar Sessão</title>
 </head>
 
@@ -18,8 +19,12 @@
        <h1>Dá asas à tua carreira</h1>
     </div>
 
-    <a href="" class="link_tabs_autenticar">Autenticar</a>
-    <a href="" class="link_tabs_registar">Registar</a>
+    <button id="btn_tabaut" class="btn_tabs_autenticar" onclick="btnClickLogin()">Autenticar</button>   
+    <button id="btn_tabreg" class="btn_tabs_registar">Registar</button>   
+
+    <!--<a href="" class="link_tabs_autenticar" id="link_tabaut" onclick=hrefClick()>Autenticar</a>
+    <a href="" class="link_tabs_registar" id="link_tabreg" onclick=hrefClick()>Registar</a>-->
+
     <hr class="line_tabs"> <!--Linha cinzenta a separar as tabs-->
 
     <div class="div_body_login">
@@ -27,8 +32,10 @@
         <input type="password" id="i_password" name="i_password" placeholder="Palavra-passe" class="input_password"><br><br>
         <button id="btn_autenticar" class="btn_autenticar">Autenticar</button>        
         
-        <br><a href="" class="link_recsenha">Recuperar Senha</a>
-        <a href="" class="link_novouser">Novo Utilizador</a>
+        <div class="div_links_login">
+            <br><a href="" class="link_recsenha">Recuperar Senha</a>
+            <a href="" class="link_novouser">Novo Utilizador</a>
+        </div>
     </div>
     
     <footer>
