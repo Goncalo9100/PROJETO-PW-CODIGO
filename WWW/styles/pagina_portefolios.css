@@ -156,7 +156,7 @@ body::-webkit-scrollbar {
 .h1_container_left_nome{
     font-size: 160%;
     margin-left: 5%;
-    margin-top: 10%;
+    margin-top: 7%;
 }
 .h1_container_left_tipo{
     font-size: 160%;
@@ -182,11 +182,27 @@ body::-webkit-scrollbar {
     width: 90%;
     margin-left: 5%;
     font-size: large;
-    margin-top: 54%;
+    margin-top: 58%;
     padding-top: 1%;
     padding-bottom: 1%;
     background-color: #123370;
     color: white;
     border-color: rgba(255, 255, 255, 0);
     cursor: pointer;
+}
+.btn_curriculos_filtro {
+    width: 90%;
+    margin-left: 5%;
+    font-size: large;
+    margin-top: 74%;
+    padding-top: 1.1%;
+    padding-bottom: 1%;
+    background-color: #123370;
+    color: white;
+    border-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+}
+
+.h1_no_info{
+    margin-left: 5%;
 }

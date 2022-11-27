@@ -1,0 +1,136 @@
+/* Estilos de HTML E BODY */
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* AREA MENU */
+.btn_menu_ofertas {
+    background-color: #ebebeba1;
+}
+
+/* AREA PROCURA */
+.div_body_procura {
+    margin-left: 20.4%;
+    margin-top: 3%;
+    width: 59%;
+    height: auto;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+    display: flex;
+}
+.input_procura {
+    width: 88.5%;
+    border: none;
+    font-size: 17px;
+    float: left;
+    margin-top: 0.7%;
+    margin-bottom: 0.4%;
+    margin-left: 1.5%;
+}
+.icon_procurar {
+    width: 8%;
+}
+.btn_procura {
+    border: none;
+    background-color: #123370;
+    color: white;
+    width: 8%;
+    font-size: large;
+    cursor: pointer;
+    padding-top: 0.4%;
+    padding-bottom: 0.3%;
+    margin-top: 0.4%;
+    margin-bottom: 0.4%;
+    margin-left: 1%;
+}
+
+/* AREA CENTRO */
+.div_body_container{
+    height: 65%;
+    display: flex;
+    margin-top: 3%;
+}
+
+/* AREA CENTRO ESQUERDA */
+.div_body_filtro {
+    width: 17.70%;
+    height: 100%;
+    margin-left: 20.4%;
+    display: inline-block;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+}
+.h1_container_left_filtro{
+    margin-left: 5%;
+    margin-top: 5%;
+    text-decoration: underline;
+}
+.h1_container_left_duracao{
+    font-size: 160%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+}
+.div_container_left_filtros_ofertas_radio{
+    margin-left: 5%;
+}
+.radio_dur {
+    margin-top: 3%;
+}
+.h1_container_left_area{
+    font-size: 160%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    margin-top: 7%;
+}
+.input_area{
+    margin-left: 5%;
+    width: 86%;
+    font-size: medium;
+}
+.h1_container_left_validade{
+    font-size: 160%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    margin-top: 7%;
+}
+.radio_valid{
+    margin-top: 3%;
+}
+.h1_container_left_remuneracao{
+    font-size: 160%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    margin-top: 7%;
+}
+.radio_remun{
+    margin-top: 3%;
+}
+.btn_ofertas_filtro{
+    width: 90%;
+    margin-left: 5%;
+    font-size: large;
+    margin-top: 28.3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #123370;
+    color: white;
+    border-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+}
+
+/* AREA CENTRO DIREITA */
+.div_body_ofertas {
+    width: 39.49%;
+    height: 100%;
+    margin-left: 1.5%;
+    display: inline-block;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+}
+.h1_no_info{
+    margin-left: 5%;
+}
