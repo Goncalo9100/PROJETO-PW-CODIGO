@@ -106,9 +106,87 @@ body::-webkit-scrollbar {
 }
 
 .div_container_left_filtros_empresas{
-    margin-left: 3%;
+    
 }
 
 .div_container_left_filtros_curriculos{
     display: none;
+}
+.h1_container_left_idade{
+    font-size: 160%;
+    margin-left: 5%;
+}
+.div_container_left_filtros_curriculos_radio_idade{
+    margin-left: 5%;
+}
+.input_curriculos_idade{
+    margin-top: 3%;
+    margin-left: 2%;
+    width: 90%;
+    font-size: medium;
+}
+.h1_container_left_localidade{
+    font-size: 160%;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+.input_curriculos_localidade{
+    margin-left: 7%;
+    width: 86%;
+    font-size: medium;
+}
+.h1_container_left_filtro{
+    margin-left: 5%;
+    margin-top: 5%;
+    text-decoration: underline;
+}
+.btn_curriculos_filtro{
+    width: 90%;
+    margin-left: 5%;
+    font-size: large;
+    margin-top: 74%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #123370;
+    color: white;
+    border-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+}
+
+.h1_container_left_nome{
+    font-size: 160%;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+.h1_container_left_tipo{
+    font-size: 160%;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+.input_empresas_nome{
+    margin-left: 7%;
+    width: 86%;
+    font-size: medium;
+}
+.input_empresas_localidade{
+    margin-left: 7%;
+    width: 86%;
+    font-size: medium;
+}
+.select_empresa_tipo{
+    margin-left: 7%;
+    width: 86%;
+    font-size: medium;
+}
+.btn_empresas_filtro{
+    width: 90%;
+    margin-left: 5%;
+    font-size: large;
+    margin-top: 54%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #123370;
+    color: white;
+    border-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
 }

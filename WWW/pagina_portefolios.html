@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/header_menu.css">
     <link rel="stylesheet" href="styles/pagina_portefolios.css">
+    <script src="scripts/script_portefolios.js"> </script>
     <title>Portefólios</title>
 </head>
 
@@ -18,7 +19,7 @@
     </div>
 
     <div class="div_menu">
-        <button class="btn_menu_sobre" onclick="window.location.href='http://127.0.0.1:5500/WWW/pagina_inicial.html'">Sobre nós</button>
+        <button class="btn_menu_sobre" onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_inicial.html'">Sobre nós</button>
         <button class="btn_menu_portefolios">Portefólios</button>
         <button class="btn_menu_ofertas">Ofertas Emprego</button>
         <button class="btn_menu_amigos">Amigos</button>
@@ -37,11 +38,33 @@
                 <button class="btn_curriculos">Curriculos</button>
             </div>
             <div class="div_container_left_filtros_empresas">
-                <h1>Filtrar por:</h1>
-                <h1>Idade:</h1>
+                <h1 class="h1_container_left_filtro">Filtrar por:</h1>
+                <h1 class="h1_container_left_nome">Nome:</h1>
+                <input class="input_empresas_nome" type="text" id="empresa_nome" name="empresa_nome" placeholder="Escreva o Nome Ex: Ana">
+                <h1 class="h1_container_left_tipo">Tipo:</h1>
+                <select class="select_empresa_tipo" name="empresa_tipo" id="empresa_tipo">
+                    <option value="volvo">Financeira</option>
+                    <option value="saab">Contabilidade</option>
+                    <option value="opel">Restauração</option>
+                    <option value="audi">Consultoria</option>
+                </select>
+                <h1 class="h1_container_left_localidade">Localidade:</h1>
+                <input class="input_empresas_localidade" type="text" id="empresa_localidade" name="empresa_localidade" placeholder="Escreva a localidade Ex: Lisboa">
+                <input type="button" class="    " id="btn_empresas_filtro" value="Limpar Filtro">
             </div>
             <div class="div_container_left_filtros_curriculos">
-                <h1>Filtrar por:</h1>
+                <h1 class="h1_container_left_filtro">Filtrar por:</h1>
+                <h1 class="h1_container_left_idade">Idade:</h1>
+                <div class="div_container_left_filtros_curriculos_radio_idade">
+                    <input type="radio" id="idade_jovem" name="idade" value="jovem">
+                    <label for="idade_jovem">Mais Jovem para mais Velho</label><br>
+                    <input type="radio" id="idade_velho" name="idade" value="velho">
+                    <label for="idade_velho">Mais Velho para mais Jovem</label><br>
+                    <input class="input_curriculos_idade" type="number" id="idade_num" name="idade" value="numero" placeholder="Escreva a idade Ex: 22">
+                </div>
+                <h1 class="h1_container_left_localidade">Localidade:</h1>
+                <input class="input_curriculos_localidade" type="text" id="curriculo_ocalidade" name="curriculo_ocalidade" placeholder="Escreva a localidade Ex: Lisboa">
+                <input type="button" class="btn_curriculos_filtro" id="btn_curriculos_filtro" value="Limpar Filtro">
             </div>
         </div>
 
