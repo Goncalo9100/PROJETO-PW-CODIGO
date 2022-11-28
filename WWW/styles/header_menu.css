@@ -78,7 +78,6 @@
     font-size: medium;
     border-color: rgba(255, 255, 255, 0);
     margin-left: 1%;
-    display: none;
 }
 .btn_menu_amigos:hover{
     background-color: #ebebeba1;
@@ -92,7 +91,6 @@
     font-size: medium;
     border-color: rgba(255, 255, 255, 0);
     margin-left: 1%;
-    display: none;
 }
 .btn_menu_empresas:hover{
     background-color: #ebebeba1;
