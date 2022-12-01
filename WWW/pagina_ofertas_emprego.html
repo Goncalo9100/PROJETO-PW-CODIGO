@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="PT">
+<html lang="PT" id="html">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/header_menu.css">
     <link rel="stylesheet" href="styles/pagina_ofertas_emprego.css">
-    <script src="scripts/"> </script>
+    <script src="scripts/script_ofertas.js"> </script>
     <title>Ofertas de Emprego</title>
 </head>
 
@@ -27,51 +27,72 @@
     </div>
 
     <div class="div_body_procura">
-        <input class="input_procura" type="text" placeholder="Search.." name="search">
+        <input class="input_procura" type="text" placeholder="Procurar Empresa" name="search">
         <button class="btn_procura" type="submit">Procurar</button> 
     </div>
 
     <div class="div_body_container">
         <div class="div_body_filtro">
             <div class="div_container_left_filtros_empresas" id="div_container_left_filtros_empresas">
-                <h1 class="h1_container_left_filtro">Filtrar Ofertas por:</h1>
+                <!--<form name="form_filtro_ofertas">-->
+                    <h1 class="h1_container_left_filtro">Filtrar Ofertas por:</h1>
 
-                <h1 class="h1_container_left_duracao">Duração:</h1>
-                <div class="div_container_left_filtros_ofertas_radio">
-                    <input type="radio" class="radio_dur" id="um_ano" name="dur" value="um_ano">
-                    <label for="um_ano">Até 1 Ano</label><br>
-                    <input type="radio" class="radio_dur" id="um_a_cinco" name="dur" value="um_a_cinco">
-                    <label for="um_a_cinco">De 1 a 5 Anos</label><br>
-                    <input type="radio" class="radio_dur" id="cinco_mais" name="dur" value="cinco_mais">
-                    <label for="cinco_mais">5 ou mais Anos</label><br>
-                </div>
+                    <h1 class="h1_container_left_duracao">Duração:</h1>
+                    <div class="div_container_left_filtros_ofertas_radio">
+                        <input type="radio" class="radio_dur" id="um_ano" name="dur" value="um_ano">
+                        <label for="um_ano">Até 1 Ano</label><br>
+                        <input type="radio" class="radio_dur" id="um_a_cinco" name="dur" value="um_a_cinco">
+                        <label for="um_a_cinco">De 1 a 5 Anos</label><br>
+                        <input type="radio" class="radio_dur" id="cinco_mais" name="dur" value="cinco_mais">
+                        <label for="cinco_mais">5 ou mais Anos</label><br>
+                    </div>
 
-                <h1 class="h1_container_left_area">Área:</h1>
-                <input class="input_area" type="text" id="input_area" name="input_area" placeholder="Escreva a área Ex: Contabilidade">
+                    <h1 class="h1_container_left_area">Área:</h1>
+                    <input class="input_area" type="text" id="input_area" name="input_area" placeholder="Escreva a área Ex: Contabilidade">
 
-                <h1 class="h1_container_left_validade">Validade:</h1>
-                <div class="div_container_left_filtros_ofertas_radio">
-                    <input type="radio" class="radio_valid" id="recente" name="valid" value="recente">
-                    <label for="recente">Mais Recente</label><br>
-                    <input type="radio" class="radio_valid" id="antiga" name="valid" value="antiga">
-                    <label for="antiga">Mais Antiga</label><br>
-                </div>
+                    <h1 class="h1_container_left_validade">Validade:</h1>
+                    <div class="div_container_left_filtros_ofertas_radio">
+                        <input type="radio" class="radio_valid" id="recente" name="valid" value="recente">
+                        <label for="recente">Mais Recente</label><br>
+                        <input type="radio" class="radio_valid" id="antiga" name="valid" value="antiga">
+                        <label for="antiga">Mais Antiga</label><br>
+                    </div>
 
-                <h1 class="h1_container_left_remuneracao">Remuneração:</h1>
-                <div class="div_container_left_filtros_ofertas_radio">
-                    <input type="radio" class="radio_remun" id="menor" name="remun" value="menor">
-                    <label for="menor">Menor</label><br>
-                    <input type="radio" class="radio_remun" id="maior" name="remun" value="maior">
-                    <label for="maior">Maior</label><br>
-                </div>
+                    <h1 class="h1_container_left_remuneracao">Remuneração:</h1>
+                    <div class="div_container_left_filtros_ofertas_radio">
+                        <input type="radio" class="radio_remun" id="menor" name="remun" value="menor">
+                        <label for="menor">Menor</label><br>
+                        <input type="radio" class="radio_remun" id="maior" name="remun" value="maior">
+                        <label for="maior">Maior</label><br>
+                    </div>
 
-                <input type="button" class="btn_ofertas_filtro" id="btn_ofertas_filtro" value="Limpar Filtro">
-                
+                    <input type="button" class="btn_ofertas_filtro" id="btn_ofertas_filtro" value="Limpar Filtro">  
+                <!--</form>-->
             </div>
         </div>
 
-        <div class="div_body_ofertas">
-            <h1 class="h1_no_info" id="h1_no_info">Informação Indisponivel</h1>
+        <div class="div_body_ofertas" id="div_body_ofertas">
+            <!--
+                
+            <div class="div_oferta">
+                <div class="div_oferta_info">
+                    <b>Empresa:</b>
+                    <p class="p_oferta_info">Builder Company</p>
+                    <p class="p_oferta_info_val">2 000€</p>
+                </div>
+                <div class="div_oferta_info">
+                    <b>Área:</b>
+                    <p class="p_oferta_info">Construção</p>
+                </div>
+                <div class="div_oferta_info">
+                    <b>Duração:</b>
+                    <p class="p_oferta_info">2 Meses</p>
+                </div>
+                <p>Oferta de emprego na área de Construção, no desenvolvimento de um edificio residencial com 10 andares.</p>
+                <hr class="hr_oferta">
+            </div>
+            
+            -->
         </div> 
     </div>
 

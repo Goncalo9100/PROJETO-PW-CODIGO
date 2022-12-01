@@ -130,7 +130,41 @@ body::-webkit-scrollbar {
     margin-left: 1.5%;
     display: inline-block;
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+    overflow: auto;
+}
+.div_body_ofertas::-webkit-scrollbar {
+    display: none;
 }
 .h1_no_info{
     margin-left: 5%;
+}
+
+/* AREA OFERTA DE EMPREGO */
+.div_oferta{
+    padding-top: 2%;
+    margin-left: 2%;
+    width: 96%;
+}
+.div_oferta:hover{
+    background-color: #ebebeba1;
+    cursor: pointer;
+}
+.div_oferta_info{
+    display: flex;
+    padding-bottom: 1%;
+    position: relative;
+}
+.p_oferta_info {
+    margin: 0%;
+    margin-left: 1%;
+}
+.p_oferta_info_val{
+    margin: 0%;
+    position: absolute;
+    right: 0%;
+}
+.hr_oferta{
+    width: 100%;
+    text-align: left;
+    margin-left: 0%;
 }

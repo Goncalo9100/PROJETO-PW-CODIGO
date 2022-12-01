@@ -52,6 +52,9 @@ body::-webkit-scrollbar {
     margin-bottom: 0.4%;
     margin-left: 1%;
 }
+.form_filtro_emp{
+    width: 100%;
+}
 
 /* AREA CENTRO */
 .div_body_container{
