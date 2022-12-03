@@ -42,7 +42,12 @@ html, body{
 }
 /*----------------------------------------------------------------*/
 
-/*SEPARADOR DE TABS LOGIN E REGISTO*/
+/*SEPARADOR DE TABS EMPRESAS E PROFISSIONAIS*/
+.btn_tabs{
+    display: inline-block;
+    margin: 0 20px;
+}
+
 .line_tabs{
     color: #aaaaaa;
     background-color: #aaaaaa;
@@ -51,8 +56,8 @@ html, body{
 }
 
 
-.btn_tabs_autenticar{
-    margin-left: 42%;
+.btn_tabs_empresas{
+    margin-left: 43%;
     text-decoration: none;
     font-size: 20px;
     font-family: 'Helvetica', 'Arial', sans-serif;
@@ -61,10 +66,11 @@ html, body{
     border-color: transparent;
     cursor: pointer;
     color: #123370;
+    display: inline;
 }
 
-.btn_tabs_registar{
-    margin-left: 1%;
+.btn_tabs_profissionais{
+    
     text-decoration: none;
     font-size: 20px;
     margin-top: 2%;
@@ -72,13 +78,12 @@ html, body{
     background-color: transparent;
     border-color: transparent;
     cursor: pointer;
-    color: #aaaaaa;
+    color:#aaaaaa;
+    display: inline;
 }
 
-/*----------------------------------------------------------------*/
-
-/*CAIXA COM INFO DE LOGIN*/
-.div_body_login{
+/*CAIXA COM INFO DE REGISTO*/
+.div_body_registo{
     margin-left: 30%;
     justify-content: center;
     margin-top: 1%;
@@ -89,7 +94,45 @@ html, body{
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
 }
 
-.btn_autenticar{
+
+.reg_pro_div{
+    display: none;
+}
+/*----------------------------------------------------------------*/
+
+/*Formatar os inputs dos formulários*/
+/*input[type=text] quando queremos definir que tipos de inputs queremos alterar*/
+
+input{
+    width: 55%;
+    padding: 1% 4%;
+    margin: 1.5%;
+    box-sizing: border-box;
+}
+
+input#email_pro{
+    margin-top: 5%;
+}
+input#email_emp{
+    margin-top: 5%;
+}
+
+input#visiblePro{
+    width: 2%;
+}
+
+label#visibleProLb{
+    color: #123370;
+    font-size: small;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+select#genero_pro{
+    width: 25%;
+    padding-top: 1.5%;
+}
+
+.btn_reg_pro{
     background-color: #123370;
     color: white;
     margin: 0%;
@@ -99,63 +142,36 @@ html, body{
     padding-right: 0.5%;
     margin-bottom: 3%;
     margin-top: 2%;
-    width: 52.5%;
+    width: 55%;
     border-color: #123370;
+    border-radius: 4%;
     font-size: small;
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
-.input_email{
-    width: 50%;
+
+.btn_reg_emp{
+    background-color: #123370;
+    color: white;
+    margin: 0%;
     padding-left: 0.5%;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-    padding-right: 0.5%;
-    margin-bottom: 0%;
-    margin-top: 10%;
-    font-family: 'Helvetica', 'Arial', sans-serif;
-}
-.input_password{
-    width: 50%;
-    padding-left: 0.5%;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
+    padding-top: 0.75%;
+    padding-bottom: 0.75%;
     padding-right: 0.5%;
     margin-bottom: 3%;
-    margin-top: 1%;
-    font-family: 'Helvetica', 'Arial', sans-serif;
-}
-
-.link_recsenha{
-    color:#aaaaaa;
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    margin-top: 2%;
+    width: 55%;
+    border-color: #123370;
+    border-radius: 4%;
     font-size: small;
-    text-decoration: none;
-    margin-bottom: 7%;
-    margin-left: 23.5%;
-}
-.link_recsenha:visited{
-    color:#aaaaaa;
-}
-
-.link_novouser{
-    color:#aaaaaa;
-    text-align: start;
     font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: small;
-    text-decoration: none;
-    margin-bottom: 7%;
-    margin-left: 27%;
-    
-}
-.link_novouser:visited{
-    color:#aaaaaa;
 }
 
-.div_links_login{
-    display: flex;
-    margin-bottom: 10%;
+#desc_pro{
+    width: 49.4%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-family: 'Helvetica', 'Arial', sans-serif;
 }
-
 /*----------------------------------------------------------------*/
 
 /*FOOTER DA PÁGINA*/
@@ -167,6 +183,6 @@ html, body{
     text-align: center;
     padding-left: 0%;
     padding-top: 2%;
-    margin-top: 20%;
+    margin-top: 0%;
 }
 /*----------------------------------------------------------------*/
