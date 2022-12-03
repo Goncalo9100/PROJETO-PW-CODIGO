@@ -27,8 +27,8 @@
     </div>
 
     <div class="div_body_procura">
-        <input class="input_procura" type="text" placeholder="Procurar Empresa" name="search">
-        <button class="btn_procura" type="submit">Procurar</button> 
+        <input class="input_procura" id="input_procura" type="text" placeholder="Procurar Empresa" name="search">
+        <button class="btn_procura" id="btn_procura" type="submit">Procurar</button> 
     </div>
 
     <div class="div_body_container">
@@ -48,7 +48,9 @@
                     </div>
 
                     <h1 class="h1_container_left_area">Área:</h1>
-                    <input class="input_area" type="text" id="input_area" name="input_area" placeholder="Escreva a área Ex: Contabilidade">
+                    <select class="select_area" name="select_area" id="select_area">
+                        <option value="nenhuma" selected="selected">Nenhuma</option>
+                    </select>
 
                     <h1 class="h1_container_left_validade">Validade:</h1>
                     <div class="div_container_left_filtros_ofertas_radio">

@@ -1,13 +1,59 @@
+var areas = {
+    0: "Construção",
+    1: "Consultoria",
+    2: "Medicina"
+}
+
+var ofertas = [
+    {
+        empresa: "Builde",
+        area: areas[1],
+        duracao: 0,
+        valor: 1000,
+        descricao: "teste descrição",
+        validade: new Date("2022-12-25")
+    },
+
+    {
+        empresa: "Builder",
+        area: areas[1],
+        duracao: 16,
+        valor: 10000,
+        descricao: "teste descrição",
+        validade: new Date("2023-02-01")
+    },
+
+    {
+        empresa: "Consult",
+        area: areas[0],
+        duracao: 17,
+        valor: 10000,
+        descricao: "teste descrição",
+        validade: new Date("2023-07-16")
+    },
+
+    {
+        empresa: "Consultoria",
+        area: areas[0],
+        duracao: 70,
+        valor: 10000,
+        descricao: "teste descrição",
+        validade: new Date("2023-05-09")
+    }
+];
+
 function init() {
     var valorFormato = new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", minimumFractionDigits: 2 });
-    var todasOfertas = criarArrayObjetosTeste();
-    var ofertasShow = todasOfertas;
+    var todasOfertas = ofertas;
+    var ofertasShow = ofertas;
+
+    buildDropAres();
 
     var div_body_ofertas = document.getElementById("div_body_ofertas");
     
     insertData(ofertasShow);
 
-    //Evento para 
+    //Evento para Enter
     var html = document.getElementById("html");
     html.addEventListener("keypress", function(evt){
         if (evt.key === "Enter") {
@@ -21,6 +67,20 @@ function init() {
     btn_ofertas_filtro.addEventListener("click", function(evt){
         cleanFilter();
     });
+
+    var btn_procura = document.getElementById("btn_procura");
+    btn_procura.addEventListener("click", function(evt){
+        ofertasShow = todasOfertas;
+        validateFilter();
+    });
+
+    function buildDropAres() {
+        var select = document.getElementById("select_area");
+
+        for (var x in areas) {
+            select.options[select.options.length] = new Option(areas[x], areas[x]);
+        }
+    }
 
     function insertData(ofertas) {
         var duracaoTxt = "";
@@ -41,7 +101,8 @@ function init() {
             } else {
                 duracaoTxt = "Sem duração";
             }
-            var div_oferta_info3 = createDivInfo("Duração", duracaoTxt);
+            var div_oferta_info3 = createDivInfo("Duração:", duracaoTxt);
+            var div_oferta_info4 = createDivInfo("Validade:", elem.validade.getDate() + "-" + ( elem.validade.getMonth()+1 ) + "-" + elem.validade.getFullYear());
             //Criar p com dados Descrição
             var p = document.createElement("p");
             p.textContent = elem.descricao;
@@ -53,6 +114,7 @@ function init() {
             div_oferta.appendChild(div_oferta_info1);
             div_oferta.appendChild(div_oferta_info2);
             div_oferta.appendChild(div_oferta_info3);
+            div_oferta.appendChild(div_oferta_info4);
             div_oferta.appendChild(p);
             div_oferta.appendChild(hr);
             //Inserir div_oferta dentro da div com as ofertas
@@ -92,46 +154,9 @@ function init() {
         return div_oferta_info;
     }
     
-    function criarArrayObjetosTeste() {
-        var ofertas = [
-            {
-                empresa: "Builde",
-                area: "Construção",
-                duracao: 0,
-                valor: 1000,
-                descricao: "teste descrição"
-            },
-
-            {
-                empresa: "Builder",
-                area: "Construção",
-                duracao: 16,
-                valor: 10000,
-                descricao: "teste descrição"
-            },
-
-            {
-                empresa: "Consult",
-                area: "Consultoria",
-                duracao: 17,
-                valor: 10000,
-                descricao: "teste descrição"
-            },
-
-            {
-                empresa: "Consultoria",
-                area: "Consultoria",
-                duracao: 70,
-                valor: 10000,
-                descricao: "teste descrição"
-            }
-        ];
-    
-        return ofertas;
-    }
-    
     function validateFilter() {
-        var input_area = document.getElementById("input_area").value;
+        var input_procura = document.getElementById("input_procura").value;
+        var selected_area = document.getElementById("select_area").value;
 
         var radioButtonsDur = document.querySelectorAll('input[name="dur"]');
         for (var radioButtonDur of radioButtonsDur) {
@@ -158,6 +183,9 @@ function init() {
         }
 
         //Executar filtros
+        if (input_procura) {
+            ofertasShow = getElemsByEmpresa(ofertasShow, input_procura);
+        }
         if (radioValueDur) {
             switch (radioValueDur) {
                 case "um_ano":
@@ -171,8 +199,9 @@ function init() {
                     break;
             }
         }
-        if (input_area) {
-            ofertasShow = getElemsByArea(ofertasShow, input_area);
+        if (selected_area && selected_area !== "nenhuma") {
+            console.log(selected_area);
+            ofertasShow = getElemsByArea(ofertasShow, selected_area);
         }
         if (radioValueValid) {
             switch (radioValueValid) {
@@ -202,6 +231,22 @@ function init() {
             cleanFilter();
         }
     }
+
+    function getElemsByEmpresa(array, emp) {
+        var arrayFinal = [];
+
+        for (var elem of array) {
+            if (elem.empresa === emp) {
+                arrayFinal.push(elem);
+            }
+        }
+
+        if (emp !== "") {
+            return arrayFinal;
+        } else {
+            return array;
+        }
+    } 
 
     function getElemsByArea(array, area) {
         var arrayFinal = [];
@@ -307,6 +352,33 @@ function init() {
 
     function cleanFilter() {
         insertData(todasOfertas);
+
+        var select_area = document.getElementById("select_area");
+        select_area.value = "nenhuma";
+
+        var radioButtonsDur = document.querySelectorAll('input[name="dur"]');
+        for (var radioButtonDur of radioButtonsDur) {
+            if (radioButtonDur.checked) {
+                radioButtonDur.checked = false;
+                break;
+            }
+        }
+
+        var radioButtonsValid = document.querySelectorAll('input[name="valid"]');
+        for (var radioButtonValid of radioButtonsValid) {
+            if (radioButtonValid.checked) {
+                radioButtonValid.checked = false;
+                break;
+            }
+        }
+
+        var radioButtonsRemun = document.querySelectorAll('input[name="remun"]');
+        for (var radioButtonRemun of radioButtonsRemun) {
+            if (radioButtonRemun.checked) {
+                radioButtonRemun.checked = false;
+                break;
+            }
+        }
     }
 }
 

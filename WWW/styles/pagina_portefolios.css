@@ -89,7 +89,7 @@ body::-webkit-scrollbar {
     border-color: rgba(255, 255, 255, 0);
     font-size: x-large;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: #ebebeba1;
     color: white;
 }
 .btn_empresas:hover{
@@ -106,10 +106,6 @@ body::-webkit-scrollbar {
 }
 .btn_curriculos:hover{
     background-color: #ebebeba1;
-}
-
-.div_container_left_filtros_empresas{
-    
 }
 
 .div_container_left_filtros_curriculos{
@@ -208,4 +204,8 @@ body::-webkit-scrollbar {
 
 .h1_no_info{
     margin-left: 5%;
+}
+
+.div_container_curriculos{
+    display: none;
 }
