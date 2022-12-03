@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, install-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/pagina_registo.css">
+    <script src="scripts/registo.js"></script>
+    <title>Iniciar Sessão</title>
+</head>
+
+<body>
+    <div class="div_header">
+        <img class="img_logo" src="imagens/logo_com_nome.png" onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_inicial.html'">
+    </div>
+    <div class="div_barra">
+       <h1>Dá asas à tua carreira</h1>
+    </div>
+    <div id="btn_tabs">
+        <button id="btn_empre" class="btn_tabs_empresas">EMPRESA</button>   
+        <button id="btn_profi" class="btn_tabs_profissionais">PROFISSIONAL</button>   
+    </div>
+
+    <hr class="line_tabs"> <!--Linha cinzenta a separar as tabs-->
+
+    <div class="div_body_registo">
+
+        <div id="reg_emp" class="reg_emp_div">
+            <form id="reg_empresa">
+                <!-- E-mail -->
+                <input type="text" id="email_emp" name="email_emp" placeholder="E-mail" /><br>
+                <!-- Palavra-passe -->
+                <input type="password" id="password_emp" name="password_emp" placeholder="Palavra-Passe" /><br>
+                <!-- Nome da empresa -->
+                <input type="text" id="nome_emp" name="nome_emp" placeholder="Nome" /><br>
+                <!-- URL do site -->
+                <input type="text" id="url_site" name="url_site" placeholder="URL do Site" /><br>
+                <!-- URL do logotipo -->
+                <input type="text" id="url_logo" name="url_logo" placeholder="URL do logotipo" /><br>
+                <!-- Caixa de texto para descrição -->
+                <textarea id="desc_pro" name="desc_pro" rows="5" cols="50" placeholder="Descrição" class="desc_pro"></textarea><br>
+            </form> 
+            <!-- Botão para fazer o registo -->
+            <button type="submit" form="reg_empresa" value="Registar" class="btn_reg_emp">Registar</button>
+            </form> 
+        </div>
+
+        <div id="reg_pro" class="reg_pro_div">
+            <form id="reg_profissional" name="reg_profissional">
+                <!-- E-mail -->
+                <input type="text" id="email_pro" name="email_pro" placeholder="E-mail" /><br>
+                <!-- Palavra-passe -->
+                <input type="password" id="password_pro" name="password_pro" placeholder="Palavra-Passe" /><br>
+                <!-- Nome do profissional -->
+                <input type="text" id="nome_pro" name="prim_nome_pro" placeholder="Nome e apelido" /><br>
+                <!-- Data de Nascimento profissional -->
+                <input type="datetime" id="dataNasc_pro" name="dataNasc_pro" placeholder="Data de Nascimento (AAAA/MM/DD)" /><br>
+                <!-- Localidade do profissional -->
+                <input type="text" id="local_pro" name="local_pro" placeholder="Localidade" /><br>
+                <!--Dropbox do género-->
+                <select name="genero_pro" id="genero_pro">
+                    <option value="masc">Masculino</option>
+                    <option value="fem">Feminino</option>
+                    <option value="naoBin">Não Binário</option>
+                    <option value="outro">Outro</option>
+                </select><br>
+                <!-- Caixa de texto para descrição -->
+                <textarea id="desc_pro" name="desc_pro" rows="5" cols="50" placeholder="Descrição" class="desc_pro"></textarea><br>
+                <!-- Checkbox -->
+                <input type="checkbox" id="visiblePro" class="checkVisiPro" name="visiblePro" />
+                <label for="visiblePro" id="visibleProLb">Pretendo ser visto por empresas</label>
+            </form> 
+            <!-- Botão para fazer o registo -->
+            <button type="submit" form="reg_profissional" value="Registar" class="btn_reg_pro">Registar</button>
+        </div>
+    </div>
+    
+    
+    <div class="div_footer">
+        <p>Copyright © 2022 Gustavo Manteigas & Gonçalo Ribeiro Inc. All rights reserved.</p>
+    </div>
+</body>
+</html>
