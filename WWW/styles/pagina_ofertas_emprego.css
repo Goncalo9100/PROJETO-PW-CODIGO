@@ -163,6 +163,11 @@ body::-webkit-scrollbar {
     position: absolute;
     right: 0%;
 }
+.b_oferta_info_val{
+    margin: 0%;
+    position: absolute;
+    right: 0%;
+}
 .hr_oferta{
     width: 100%;
     text-align: left;

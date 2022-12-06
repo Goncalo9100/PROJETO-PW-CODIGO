@@ -1,7 +1,8 @@
 var areas = {
     0: "Construção",
     1: "Consultoria",
-    2: "Medicina"
+    2: "Medicina",
+    3: "Financeira"
 }
 
 var ofertas = [
@@ -44,10 +45,10 @@ var ofertas = [
 
 function init() {
     var valorFormato = new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", minimumFractionDigits: 2 });
-    var todasOfertas = ofertas;
-    var ofertasShow = ofertas;
+    var todasOfertas = structuredClone(ofertas);
+    var ofertasShow = structuredClone(ofertas);
 
-    buildDropAres();
+    buildDropAreas();
 
     var div_body_ofertas = document.getElementById("div_body_ofertas");
     
@@ -57,7 +58,7 @@ function init() {
     var html = document.getElementById("html");
     html.addEventListener("keypress", function(evt){
         if (evt.key === "Enter") {
-            ofertasShow = todasOfertas;
+            ofertasShow = structuredClone(todasOfertas);
             validateFilter();
         }
     });
@@ -70,11 +71,11 @@ function init() {
 
     var btn_procura = document.getElementById("btn_procura");
     btn_procura.addEventListener("click", function(evt){
-        ofertasShow = todasOfertas;
+        ofertasShow = structuredClone(todasOfertas);
         validateFilter();
     });
 
-    function buildDropAres() {
+    function buildDropAreas() {
         var select = document.getElementById("select_area");
 
         for (var x in areas) {
@@ -138,17 +139,17 @@ function init() {
         var p1 = document.createElement("p");
         p1.className = "p_oferta_info";
         p1.textContent = info1;
-    
+        
         if (info2) {
-            var p2 = document.createElement("p");
-            p2.className = "p_oferta_info_val";
-            p2.textContent = info2;
+            var b1 = document.createElement("b");
+            b1.className = "p_oferta_info_val";
+            b1.textContent = info2;
         }
     
         div_oferta_info.appendChild(b);
         div_oferta_info.appendChild(p1);
-        if (p2) {
-            div_oferta_info.appendChild(p2);
+        if (b1) {
+            div_oferta_info.appendChild(b1);
         }
     
         return div_oferta_info;
@@ -206,10 +207,10 @@ function init() {
         if (radioValueValid) {
             switch (radioValueValid) {
                 case "recente":
-                    ofertasShow = sortArrayDur(ofertasShow, "recente");
+                    ofertasShow = sortArrayValidade(ofertasShow, "recente");
                     break;
                 case "antiga":
-                    ofertasShow = sortArrayDur(ofertasShow, "antiga");
+                    ofertasShow = sortArrayValidade(ofertasShow, "antiga");
                     break;
             }
         }
@@ -278,13 +279,13 @@ function init() {
         return arrayFinal;
     }
 
-    function sortArrayDur(array, ordem) {
+    function sortArrayValidade(array, ordem) {
 
         switch (ordem) {
             case "recente":
                 array.sort((a, b) => {
-                    let da = a.duracao,
-                        db = b.duracao;
+                    let da = a.validade,
+                        db = b.validade;
                 
                     if (da < db) {
                         return -1;
@@ -297,8 +298,8 @@ function init() {
                 break;
             case "antiga":
                 array.sort((a, b) => {
-                    let da = a.duracao,
-                        db = b.duracao;
+                    let da = a.validade,
+                        db = b.validade;
                 
                     if (da > db) {
                         return -1;
@@ -351,6 +352,7 @@ function init() {
     } 
 
     function cleanFilter() {
+        deleteDataDivOfertas();
         insertData(todasOfertas);
 
         var select_area = document.getElementById("select_area");

@@ -151,21 +151,10 @@ body::-webkit-scrollbar {
     border-color: rgba(255, 255, 255, 0);
     cursor: pointer;
 }
-
-.h1_container_left_nome{
-    font-size: 160%;
-    margin-left: 5%;
-    margin-top: 7%;
-}
 .h1_container_left_tipo{
     font-size: 160%;
     margin-left: 5%;
     margin-top: 10%;
-}
-.input_empresas_nome{
-    margin-left: 7%;
-    width: 86%;
-    font-size: medium;
 }
 .input_empresas_localidade{
     margin-left: 7%;

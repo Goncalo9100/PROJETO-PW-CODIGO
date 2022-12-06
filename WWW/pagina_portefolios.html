@@ -15,7 +15,7 @@
     <div class="div_header">
         <img class="img_logo" src="imagens/logo_com_nome.png">
         <a class="a_login" href="">Login</a>
-        <a class="a_register" href="">Registar</a>
+        <a class="a_register" href="">Registo</a>
     </div>
 
     <div class="div_menu">
@@ -28,7 +28,7 @@
 
     <div class="div_body_procura">
         <form if="form_filtro_emp" class="form_filtro_emp" action="">
-            <input class="input_procura" type="text" placeholder="Procurar..." name="search">
+            <input class="input_procura" type="text" placeholder="Procurar Empresa..." name="search">
             <input type="submit" id="btn_procura" class="btn_procura" value="Procurar">
         </form> 
     </div>
@@ -42,41 +42,33 @@
             </div>
             
             <div class="div_container_left_filtros_empresas" id="div_container_left_filtros_empresas">
-                <form if="form_filtro_emp" class="form_filtro_emp" action="">
-                    <h1 class="h1_container_left_filtro">Filtrar Empresa por:</h1>
-                    <h1 class="h1_container_left_nome">Nome:</h1>
-                    <input class="input_empresas_nome" type="text" id="empresa_nome" name="empresa_nome" placeholder="Escreva o Nome Ex: Sangsug">
-                    <h1 class="h1_container_left_tipo">Tipo:</h1>
-                    <select class="select_empresa_tipo" name="empresa_tipo" id="empresa_tipo">
-                        <option value="">Nenhum</option>
-                        <option value="financeira">Financeira</option>
-                        <option value="contabilidade">Contabilidade</option>
-                        <option value="restauracao">Restauração</option>
-                        <option value="consultoria">Consultoria</option>
-                    </select>
-                    <h1 class="h1_container_left_localidade">Localidade:</h1>
-                    <input class="input_empresas_localidade" type="text" id="empresa_localidade" name="empresa_localidade" placeholder="Escreva a localidade Ex: Lisboa">
-                    <input type="reset" class="btn_empresas_filtro" id="btn_empresas_filtro" value="Limpar Filtro">
-                    <input type="submit" id="submit_filtro_emp" style="display: none;">
-                </form>
+                <h1 class="h1_container_left_filtro">Filtrar Empresa por:</h1>
+                <h1 class="h1_container_left_tipo">Tipo:</h1>
+                <select class="select_empresa_tipo" name="empresa_tipo" id="empresa_tipo">
+                    <option value="">Nenhum</option>
+                    <option value="financeira">Financeira</option>
+                    <option value="contabilidade">Contabilidade</option>
+                    <option value="restauracao">Restauração</option>
+                    <option value="consultoria">Consultoria</option>
+                </select>
+                <h1 class="h1_container_left_localidade">Localidade:</h1>
+                <input class="input_empresas_localidade" type="text" id="empresa_localidade" name="empresa_localidade" placeholder="Escreva a localidade Ex: Lisboa">
+                <input type="reset" class="btn_empresas_filtro" id="btn_empresas_filtro" value="Limpar Filtro">
             </div>
 
             <div class="div_container_left_filtros_curriculos" id="div_container_left_filtros_curriculos">
-                <form if="form_filtro_curr" class="form_filtro_curr" action="">
-                    <h1 class="h1_container_left_filtro">Filtrar Curriculo por:</h1>
-                    <h1 class="h1_container_left_idade">Idade:</h1>
-                    <div class="div_container_left_filtros_curriculos_radio_idade">
-                        <input type="radio" id="idade_jovem" name="idade" value="jovem">
-                        <label for="idade_jovem">Mais Jovem para mais Velho</label><br>
-                        <input type="radio" id="idade_velho" name="idade" value="velho">
-                        <label for="idade_velho">Mais Velho para mais Jovem</label><br>
-                        <input class="input_curriculos_idade" type="number" id="idade_num" name="idade" value="numero" placeholder="Escreva a idade Ex: 22" min="16">
-                    </div>
-                    <h1 class="h1_container_left_localidade">Localidade:</h1>
-                    <input class="input_curriculos_localidade" type="text" id="curriculo_ocalidade" name="curriculo_ocalidade" placeholder="Escreva a localidade Ex: Lisboa">
-                    <input type="reset" class="btn_curriculos_filtro" id="btn_curriculos_filtro" value="Limpar Filtro">
-                    <input type="submit" id="submit_filtro_curr" style="display: none;">
-                </form>
+                <h1 class="h1_container_left_filtro">Filtrar Curriculo por:</h1>
+                <h1 class="h1_container_left_idade">Idade:</h1>
+                <div class="div_container_left_filtros_curriculos_radio_idade">
+                    <input type="radio" id="idade_jovem" name="idade" value="jovem">
+                    <label for="idade_jovem">Mais Jovem para mais Velho</label><br>
+                    <input type="radio" id="idade_velho" name="idade" value="velho">
+                    <label for="idade_velho">Mais Velho para mais Jovem</label><br>
+                    <input class="input_curriculos_idade" type="number" id="idade_num" name="idade" value="numero" placeholder="Escreva a idade Ex: 22" min="16">
+                </div>
+                <h1 class="h1_container_left_localidade">Localidade:</h1>
+                <input class="input_curriculos_localidade" type="text" id="curriculo_ocalidade" name="curriculo_ocalidade" placeholder="Escreva a localidade Ex: Lisboa">
+                <input type="reset" class="btn_curriculos_filtro" id="btn_curriculos_filtro" value="Limpar Filtro">
             </div>
 
         </div>
