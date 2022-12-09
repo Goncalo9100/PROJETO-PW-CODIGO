@@ -1,3 +1,6 @@
+/**
+ * Função chamada quando página é carregada
+ */
 function init(){
 
 var btn_logintab = document.getElementById("btn_tabaut");
