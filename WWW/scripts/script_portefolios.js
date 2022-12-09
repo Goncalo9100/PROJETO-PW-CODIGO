@@ -1,8 +1,14 @@
+/**
+ * Função chamada quando página é carregada
+ */
 function init() {
 
     //inicializar botões da parte do filtro empresa/curriculo
     init_btn_filtro_emp_curr();
     
+    /**
+    * Função que inicializa os botões e os eventos dos mesmos
+    */
     function init_btn_filtro_emp_curr(){
         var btn_empresas = document.getElementById("btn_empresas");
         var btn_curriculos = document.getElementById("btn_curriculos");

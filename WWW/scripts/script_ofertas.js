@@ -1,3 +1,6 @@
+/**
+ * Enumerado com áreas
+ */
 var areas = {
     0: "Construção",
     1: "Consultoria",
@@ -5,6 +8,9 @@ var areas = {
     3: "Financeira"
 }
 
+/**
+ * Array de Ofertas
+ */
 var ofertas = [
     {
         empresa: "Builde",
@@ -43,6 +49,9 @@ var ofertas = [
     }
 ];
 
+/**
+ * Função chamada quando página é carregada
+ */
 function init() {
     var valorFormato = new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", minimumFractionDigits: 2 });
     var todasOfertas = structuredClone(ofertas);
@@ -51,12 +60,12 @@ function init() {
     buildDropAreas();
 
     var div_body_ofertas = document.getElementById("div_body_ofertas");
-    
+
     insertData(ofertasShow);
 
     //Evento para Enter
     var html = document.getElementById("html");
-    html.addEventListener("keypress", function(evt){
+    html.addEventListener("keypress", function (evt) {
         if (evt.key === "Enter") {
             ofertasShow = structuredClone(todasOfertas);
             validateFilter();
@@ -65,16 +74,18 @@ function init() {
 
     //Adicionar evento a botão para limpar o filtro
     var btn_ofertas_filtro = document.getElementById("btn_ofertas_filtro");
-    btn_ofertas_filtro.addEventListener("click", function(evt){
+    btn_ofertas_filtro.addEventListener("click", function (evt) {
         cleanFilter();
     });
 
+    //Adicionar evento a botão para procura
     var btn_procura = document.getElementById("btn_procura");
-    btn_procura.addEventListener("click", function(evt){
+    btn_procura.addEventListener("click", function (evt) {
         ofertasShow = structuredClone(todasOfertas);
         validateFilter();
     });
 
+    //Construir dropdown com as áres
     function buildDropAreas() {
         var select = document.getElementById("select_area");
 
@@ -82,20 +93,24 @@ function init() {
             select.options[select.options.length] = new Option(areas[x], areas[x]);
         }
     }
-
+    
+    /**
+    * Função que insere as ofertas na div com a informação
+    * @param {Array} ofertas - array com as ofertas a inserir
+    */
     function insertData(ofertas) {
         var duracaoTxt = "";
         deleteDataDivOfertas();
         for (var elem of ofertas) {
             var div_oferta = document.createElement("div"); //Div com a info da oferta
             div_oferta.className = "div_oferta";
-    
+
             //Criar div com dados empresa/valor
             var div_oferta_info1 = createDivInfo("Empresa:", elem.empresa, valorFormato.format(elem.valor));
             //Criar div com dados Área
             var div_oferta_info2 = createDivInfo("Área:", elem.area);
             //Criar div com dados Duração
-            if (elem.duracao === 1){
+            if (elem.duracao === 1) {
                 duracaoTxt = elem.duracao + " Mês";
             } else if (elem.duracao > 1) {
                 duracaoTxt = elem.duracao + " Meses";
@@ -103,14 +118,14 @@ function init() {
                 duracaoTxt = "Sem duração";
             }
             var div_oferta_info3 = createDivInfo("Duração:", duracaoTxt);
-            var div_oferta_info4 = createDivInfo("Validade:", elem.validade.getDate() + "-" + ( elem.validade.getMonth()+1 ) + "-" + elem.validade.getFullYear());
+            var div_oferta_info4 = createDivInfo("Validade:", elem.validade.getDate() + "-" + (elem.validade.getMonth() + 1) + "-" + elem.validade.getFullYear());
             //Criar p com dados Descrição
             var p = document.createElement("p");
             p.textContent = elem.descricao;
             //Criar hr
             var hr = document.createElement("hr");
             hr.className = "hr_oferta";
-    
+
             //Inserir divs com informação dentro da div_oferta
             div_oferta.appendChild(div_oferta_info1);
             div_oferta.appendChild(div_oferta_info2);
@@ -123,38 +138,50 @@ function init() {
         }
     }
 
+    /**
+    * Função que remove as ofertas na div com a informação
+    */
     function deleteDataDivOfertas() {
-        while(div_body_ofertas.firstChild) {
+        while (div_body_ofertas.firstChild) {
             div_body_ofertas.removeChild(div_body_ofertas.firstChild);
         }
     }
-    
+
+    /**
+    * Função que cria a div com a informação
+    * @param {String} title - legenda da informação
+    * @param info1 - valor da informação
+    * @param info2 - 2º valor da informação
+    */
     function createDivInfo(title, info1, info2) {
         var div_oferta_info = document.createElement("div");
         div_oferta_info.className = "div_oferta_info";
-    
+
         var b = document.createElement("b");
         b.textContent = title;
-    
+
         var p1 = document.createElement("p");
         p1.className = "p_oferta_info";
         p1.textContent = info1;
-        
+
         if (info2) {
             var b1 = document.createElement("b");
             b1.className = "p_oferta_info_val";
             b1.textContent = info2;
         }
-    
+
         div_oferta_info.appendChild(b);
         div_oferta_info.appendChild(p1);
         if (b1) {
             div_oferta_info.appendChild(b1);
         }
-    
+
         return div_oferta_info;
     }
-    
+
+    /**
+    * Função que valida o filtro e aplica o conjunto de filtros aplicado
+    */
     function validateFilter() {
         var input_procura = document.getElementById("input_procura").value;
         var selected_area = document.getElementById("select_area").value;
@@ -195,7 +222,7 @@ function init() {
                 case "um_a_cinco":
                     ofertasShow = getElemsByDur(ofertasShow, 12, 59);
                     break;
-                case "cinco_mais":    
+                case "cinco_mais":
                     ofertasShow = getElemsByDur(ofertasShow, 60, Infinity);
                     break;
             }
@@ -233,6 +260,11 @@ function init() {
         }
     }
 
+    /**
+    * Função que retorna a empresa filtrada
+    * @param {Array} array - Array com a informação atual
+    * @param {String} emp - Empresa
+    */
     function getElemsByEmpresa(array, emp) {
         var arrayFinal = [];
 
@@ -247,8 +279,13 @@ function init() {
         } else {
             return array;
         }
-    } 
+    }
 
+    /**
+    * Função que filtra a informação por área
+    * @param {Array} array - Array com a informação atual
+    * @param {String} area - area
+    */
     function getElemsByArea(array, area) {
         var arrayFinal = [];
 
@@ -263,8 +300,14 @@ function init() {
         } else {
             return array;
         }
-    } 
+    }
 
+    /**
+    * Função que filtra a informação por duração (range)
+    * @param {Array} array - Array com a informação atual
+    * @param {Int} durMin - duração minima
+    * @param {Int} durMax - duração máxima
+    */
     function getElemsByDur(array, durMin, durMax) {
         var arrayFinal = [];
 
@@ -279,14 +322,19 @@ function init() {
         return arrayFinal;
     }
 
-    function sortArrayValidade(array, ordem) {
+    /**
+    * Função que filtra a informação por Validade
+    * @param {Array} array - Array com a informação atual
+    * @param {String} array - oderm (crescente ou decrescente)
+    */
+    function sortArrayValidade(array, array) {
 
         switch (ordem) {
             case "recente":
                 array.sort((a, b) => {
                     let da = a.validade,
                         db = b.validade;
-                
+
                     if (da < db) {
                         return -1;
                     }
@@ -300,7 +348,7 @@ function init() {
                 array.sort((a, b) => {
                     let da = a.validade,
                         db = b.validade;
-                
+
                     if (da > db) {
                         return -1;
                     }
@@ -315,6 +363,11 @@ function init() {
         return array;
     }
 
+    /**
+    * Função que filtra a informação por Remuneração (Valor)
+    * @param {Array} array - Array com a informação atual
+    * @param {String} array - oderm (crescente ou decrescente)
+    */
     function sortArrayRemun(array, ordem) {
 
         switch (ordem) {
@@ -322,7 +375,7 @@ function init() {
                 array.sort((a, b) => {
                     let da = a.valor,
                         db = b.valor;
-                
+
                     if (da < db) {
                         return -1;
                     }
@@ -336,7 +389,7 @@ function init() {
                 array.sort((a, b) => {
                     let da = a.valor,
                         db = b.valor;
-                
+
                     if (da > db) {
                         return -1;
                     }
@@ -349,8 +402,11 @@ function init() {
         }
 
         return array;
-    } 
+    }
 
+    /**
+    * Função que limpa o filtro e retorna a informação completa das ofertas
+    */
     function cleanFilter() {
         deleteDataDivOfertas();
         insertData(todasOfertas);
