@@ -1,7 +1,6 @@
 {
   "name": "projeto-pw-codigo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/Goncalo9100/PROJETO-PW-CODIGO/issues"
   },
-  "homepage": "https://github.com/Goncalo9100/PROJETO-PW-CODIGO#readme"
+  "homepage": "https://github.com/Goncalo9100/PROJETO-PW-CODIGO#readme",
+  "description": "",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
 }
