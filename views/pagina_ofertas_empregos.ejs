@@ -7,26 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/header_menu.css">
     <link rel="stylesheet" href="styles/pagina_ofertas_emprego.css">
+    <script src="scripts/script_ofertas2.js"> </script>
     <title>Ofertas de Emprego</title>
 </head>
 
 <body>
     <div class="div_header">
         <img class="img_logo" src="imagens/logo_com_nome.png">
-        <a class="a_login" onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_login.html'">Login</a>
-        <a class="a_register" onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_registo.html'">Registo</a>
+        <a class="a_login" onclick="window.location.href='http://127.0.0.1:8888/WWW/pagina_login.html'">Login</a>
+        <a class="a_register" onclick="window.location.href='http://127.0.0.1:8888/WWW/pagina_registo.html'">Registo</a>
     </div>
 
     <div class="div_menu">
         <button class="btn_menu_sobre"
-            onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_inicial.html'">Sobre nós</button>
+            onclick="window.location.href='http://127.0.0.1:8888/WWW/pagina_inicial.html'">Sobre nós</button>
         <button class="btn_menu_portefolios"
-            onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_portefolios.html'">Portefólios</button>
+            onclick="window.location.href='http://127.0.0.1:8888/WWW/pagina_portefolios.html'">Portefólios</button>
         <button class="btn_menu_ofertas">Ofertas Emprego</button>
         <button class="btn_menu_amigos"
-            onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_amigos.html'">Amigos</button>
+            onclick="window.location.href='http://127.0.0.1:8888/WWW/pagina_amigos.html'">Amigos</button>
         <button class="btn_menu_empresas"
-            onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_empresas.html'">Empresas</button>
+            onclick="window.location.href='http://127.0.0.1:8888/WWW/pagina_empresas.html'">Empresas</button>
     </div>
 
     <div class="div_body_procura">
@@ -80,21 +81,25 @@
             <%if(sampleData.length> 0)
                 {
                 sampleData.forEach(function(results){%>
-                <div class="div_oferta">
+                <div class="div_oferta" onclick="teste('<%= results.nomeEmpresa %>')">
                     <div class="div_oferta_info">
                         <b>Empresa:</b>
-                        <p class="p_oferta_info"><%= results.nome_livro %></p>
-                        <p class="p_oferta_info_val"><%= results.preco_livro %> €</p>
+                        <p class="p_oferta_info"><%= results.nomeEmpresa %></p>
+                        <p class="p_oferta_info_val"><%= results.valor %> €</p>
                     </div>
                     <div class="div_oferta_info">
                         <b>Área:</b>
-                        <p class="p_oferta_info">Construção</p>
+                        <p class="p_oferta_info"><%= results.areaDescricao %></p>
                     </div>
                     <div class="div_oferta_info">
                         <b>Duração:</b>
-                        <p class="p_oferta_info">2 Meses</p>
+                        <p class="p_oferta_info"><%= results.duracao %></p>
                     </div>
-                    <p>Oferta de emprego na área de Construção, no desenvolvimento de um edificio residencial com 10 andares.</p>
+                    <div class="div_oferta_info">
+                        <b>Validade:</b>
+                        <p class="p_oferta_info"><%= results.dataValidade %></p>
+                    </div>
+                    <p><%= results.descricao %></p>
                     <hr class="hr_oferta">
 
                 </div>

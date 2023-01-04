@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     user: "projetopwuser",
     password: "",
-    database: "db_biblioteca"
+    database: "db_portfly"
 });
 
 connection.connect(function (err) {
