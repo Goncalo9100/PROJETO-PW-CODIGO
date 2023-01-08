@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/header_menu.css">
     <link rel="stylesheet" href="styles/pagina_ofertas_emprego.css">
     <script src="scripts/script_ofertas2.js"> </script>
+    <script src="scripts/output.js"> </script>
     <title>Ofertas de Emprego</title>
 </head>
 
@@ -81,25 +82,25 @@
             <%if(sampleData.length> 0)
                 {
                 sampleData.forEach(function(results){%>
-                <div class="div_oferta" onclick="teste('<%= results.nomeEmpresa %>')">
+                <div id="div_oferta" class="div_oferta">
                     <div class="div_oferta_info">
                         <b>Empresa:</b>
-                        <p class="p_oferta_info"><%= results.nomeEmpresa %></p>
-                        <p class="p_oferta_info_val"><%= results.valor %> €</p>
+                        <p id="p_nome_empresa" class="p_oferta_info"><%= results.nomeEmpresa %></p>
+                        <p id="p_valor" class="p_oferta_info_val"><%= results.valor %> €</p>
                     </div>
                     <div class="div_oferta_info">
                         <b>Área:</b>
-                        <p class="p_oferta_info"><%= results.areaDescricao %></p>
+                        <p id="p_area_descricao" class="p_oferta_info"><%= results.areaDescricao %></p>
                     </div>
                     <div class="div_oferta_info">
                         <b>Duração:</b>
-                        <p class="p_oferta_info"><%= results.duracao %></p>
+                        <p id="p_duracao" class="p_oferta_info"><%= results.duracao %></p>
                     </div>
                     <div class="div_oferta_info">
                         <b>Validade:</b>
-                        <p class="p_oferta_info"><%= results.dataValidade %></p>
+                        <p id="p_data_validade" class="p_oferta_info"><%= results.dataValidade %></p>
                     </div>
-                    <p><%= results.descricao %></p>
+                    <p id="p_descricao"><%= results.descricao %></p>
                     <hr class="hr_oferta">
 
                 </div>
