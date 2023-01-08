@@ -4,6 +4,8 @@ var express = require('express');
 
 var app = express();
 
+//app.set("port", process.env.PORT || 4000);
+
 /**
  * Configurações do Express
  */                                                                               
@@ -29,13 +31,21 @@ app.use(express.static('WWW'));
  */
 require('./routes/usersRoutes')(app);
 
-var server = app.listen(8888, "127.0.0.1", function () {
+
+var server = app.listen(5502, "127.0.0.1", function () {
 
     var host = server.address().address
     var port = server.address().port
 
-    console.log("Aplicação Express à escuta em http://%s:%s", host, port)
+    console.log("Aplicação Express à escuta em http://%s:%s/pagina_inicial.html", host, port)
 
 });
+
+
+/*
+app.listen(app.get("port"), () => {
+    console.log(`Find the server at: http://localhost:${app.get("port")}/pagina_inicial.html`);
+});
+*/
 
 exports = module.exports = app;
