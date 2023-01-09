@@ -3,23 +3,15 @@
  */
 function init() {
     var valorFormato = new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", minimumFractionDigits: 2 });
-    var todasOfertas = data;
-    var ofertasShow = data;
-    
+
+    var todasOfertas;
+    var ofertasShow;
+
     //buildDropAreas();
 
+    obterOfertas();
+
     var div_body_ofertas = document.getElementById("div_body_ofertas");
-
-    insertData(ofertasShow);
-
-    //Evento para Enter
-    var html = document.getElementById("html");
-    html.addEventListener("keypress", function (evt) {
-        if (evt.key === "Enter") {
-            ofertasShow = structuredClone(todasOfertas);
-            validateFilter();
-        }
-    });
 
     //Adicionar evento a botão para limpar o filtro
     var btn_ofertas_filtro = document.getElementById("btn_ofertas_filtro");
@@ -186,6 +178,7 @@ function init() {
         if (radioValueRemun) {
             switch (radioValueRemun) {
                 case "menor":
+                    
                     ofertasShow = sortArrayRemun(ofertasShow, "menor");
                     break;
                 case "maior":
@@ -195,7 +188,7 @@ function init() {
         }
 
         //Exibir ofertas e atualizar array show
-        if (ofertasShow !== void 0 || ofertasShow.length > 0) {
+        if (ofertasShow !== void 0 || ofertasShow.length > 0) {~
             insertData(ofertasShow);
         } else {
             cleanFilter();
@@ -384,6 +377,41 @@ function init() {
                 break;
             }
         }
+    }
+
+    function obterOfertas() {
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr) {
+            // Configurar a solicitação
+            xhr.open('GET', 'http://127.0.0.1:5502/ofertas', true);
+
+            // Definir a função de retorno de chamada
+            xhr.onreadystatechange = function () {
+                if ((xhr.readyState === 4) && (xhr.status === 200)) {
+                    // Fazer algo com os dados recebidos
+                    todasOfertas = JSON.parse(xhr.responseText);
+                    ofertasShow = JSON.parse(xhr.responseText);
+                    insertData(ofertasShow);
+
+                    var html = document.getElementById("html");
+                    html.addEventListener("keypress", function (evt) {
+                        if (evt.key === "Enter") {
+                            ofertasShow = structuredClone(todasOfertas);
+                            validateFilter();
+                        }
+                    });
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr.send();
     }
 }
 
