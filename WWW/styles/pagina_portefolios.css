@@ -198,3 +198,31 @@ body::-webkit-scrollbar {
 .div_container_curriculos{
     display: none;
 }
+
+
+.div_curr{
+    padding-top: 2%;
+    margin-left: 2%;
+    width: 96%;
+}
+.div_curr:hover{
+    background-color: #ebebeba1;
+    cursor: pointer;
+}
+.div_info{
+    display: flex;
+    position: relative;
+}
+.p_descricao {
+    margin: 0%;
+    margin-left: 1%;
+} 
+.p_info {
+    margin: 0%;
+    margin-left: 1%;
+}  
+.hr_curriculo{
+    width: 100%;
+    text-align: left;
+    margin-left: 0%;
+}

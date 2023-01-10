@@ -36,10 +36,10 @@ require('./routes/usersRoutes')(app);
 
 var server = app.listen(5502, "127.0.0.1", function () {
 
-    var host = server.address().address
-    var port = server.address().port
+    var host = server.address().address;
+    var port = server.address().port;
 
-    console.log("Aplicação Express à escuta em http://%s:%s/pagina_ofertas_emprego.html", host, port)
+    console.log("Aplicação Express à escuta em http://%s:%s/pagina_portefolios.html", host, port);
 
 });
 

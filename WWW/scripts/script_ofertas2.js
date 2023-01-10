@@ -3,13 +3,12 @@
  */
 function init() {
     var valorFormato = new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", minimumFractionDigits: 2 });
-
     var todasOfertas;
     var ofertasShow;
-
-    //buildDropAreas();
+    var areas;
 
     obterOfertas();
+    obterAreas();
 
     var div_body_ofertas = document.getElementById("div_body_ofertas");
 
@@ -162,7 +161,6 @@ function init() {
             }
         }
         if (selected_area && selected_area !== "nenhuma") {
-            console.log(selected_area);
             ofertasShow = getElemsByArea(ofertasShow, selected_area);
         }
         if (radioValueValid) {
@@ -247,8 +245,6 @@ function init() {
     */
     function getElemsByDur(array, durMin, durMax) {
         var arrayFinal = [];
-
-        console.log(arrayFinal);
 
         for (var elem of array) {
             if (elem.duracao >= durMin && elem.duracao <= durMax) {
@@ -396,7 +392,7 @@ function init() {
                 if ((xhr.readyState === 4) && (xhr.status === 200)) {
                     // Fazer algo com os dados recebidos
                     todasOfertas = JSON.parse(xhr.responseText);
-                    ofertasShow = JSON.parse(xhr.responseText);
+                    ofertasShow = structuredClone(todasOfertas);
                     insertData(ofertasShow);
 
                     var html = document.getElementById("html");
@@ -406,12 +402,72 @@ function init() {
                             validateFilter();
                         }
                     });
+
+                    var radio_dur = document.getElementById("radio_dur");
+                    radio_dur.addEventListener("change", function(evt) {
+                        ofertasShow = structuredClone(todasOfertas);
+                        validateFilter();
+                    });
+
+                    var select_area = document.getElementById("select_area");
+                    select_area.addEventListener("change", function(evt) {
+                        ofertasShow = structuredClone(todasOfertas);
+                        validateFilter();
+                    });
+
+                    var radio_valid = document.getElementById("radio_valid");
+                    radio_valid.addEventListener("change", function(evt) {
+                        ofertasShow = structuredClone(todasOfertas);
+                        validateFilter();
+                    });
+
+                    var radio_remun = document.getElementById("radio_remun");
+                    radio_remun.addEventListener("change", function(evt) {
+                        ofertasShow = structuredClone(todasOfertas);
+                        validateFilter();
+                    });
                 }
             };
         }
 
         // Enviar a solicitação
         xhr.send();
+    }
+
+    function obterAreas() {
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr2 = new XMLHttpRequest();
+        } else {
+            xhr2 = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr2) {
+            // Configurar a solicitação
+            xhr2.open('GET', 'http://127.0.0.1:5502/areas', true);
+
+            // Definir a função de retorno de chamada
+            xhr2.onreadystatechange = function () {
+                if ((xhr2.readyState === 4) && (xhr2.status === 200)) {
+                    areas = JSON.parse(xhr2.responseText);
+
+                    var select = document.getElementById("select_area");
+
+                    for (var i=0; i<areas.length; i++) {
+                        select.options[select.options.length] = new Option(areas[i].descricao, areas[i].descricao);
+                    }
+
+                    /*
+                    for (var x in areas) {
+                        select.options[select.options.length] = new Option(areas[x], areas[x]);
+                    }
+                    */
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr2.send();
     }
 }
 

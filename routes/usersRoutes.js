@@ -17,4 +17,49 @@ module.exports = function (app) {
             console.log(results);
         });
     });
+
+    //rest api para obter areas.
+    app.get('/areas', function (req, res) {
+        let query = "select * from area";
+        connection.query(query, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
+                res.end(JSON.stringify(results));
+            }
+            console.log(results);
+        });
+    });
+
+    //rest api para obter areas.
+    app.get('/profissionais', function (req, res) {
+        let query = "select * from profissionais";
+        connection.query(query, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
+                res.end(JSON.stringify(results));
+            }
+            console.log(results);
+        });
+    });
+
+    //rest api para obter areas.
+    app.get('/empresas', function (req, res) {
+        let query = "select * from empresas";
+        connection.query(query, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
+                res.end(JSON.stringify(results));
+            }
+            console.log(results);
+        });
+    });
 }
