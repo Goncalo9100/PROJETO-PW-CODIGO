@@ -27,7 +27,7 @@
     <div class="div_body_registo">
 
         <div id="reg_emp" class="reg_emp_div">
-            <form id="reg_empresa">
+            <form id="reg_empresa" action="javascript:newEmp()" method="POST">
                 <!-- E-mail -->
                 <input type="text" id="email_emp" name="email_emp" placeholder="E-mail" /><br>
                 <!-- Palavra-passe -->
@@ -42,12 +42,12 @@
                 <textarea id="desc_pro" name="desc_pro" rows="5" cols="50" placeholder="Descrição" class="desc_pro"></textarea><br>
             </form> 
             <!-- Botão para fazer o registo -->
-            <button type="submit" form="reg_empresa" value="Registar" class="btn_reg_emp">Registar</button>
+            <input type="submit" form="reg_empresa" value="Registar" class="btn_reg_emp" id="btnRegEmp"></button>
             </form> 
         </div>
 
         <div id="reg_pro" class="reg_pro_div">
-            <form id="reg_profissional" name="reg_profissional">
+            <form id="reg_profissional" name="reg_profissional" action="javascript:newUserPro()" method="POST" >
                 <!-- E-mail -->
                 <input type="text" id="email_pro" name="email_pro" placeholder="E-mail" /><br>
                 <!-- Palavra-passe -->
@@ -55,7 +55,7 @@
                 <!-- Nome do profissional -->
                 <input type="text" id="nome_pro" name="prim_nome_pro" placeholder="Nome e apelido" /><br>
                 <!-- Data de Nascimento profissional -->
-                <input type="datetime" id="dataNasc_pro" name="dataNasc_pro" placeholder="Data de Nascimento (AAAA/MM/DD)" /><br>
+                <input type="date" id="dataNasc_pro" name="dataNasc_pro" placeholder="Data de Nascimento (AAAA-MM-DD)" /><br>
                 <!-- Localidade do profissional -->
                 <input type="text" id="local_pro" name="local_pro" placeholder="Localidade" /><br>
                 <!--Dropbox do género-->
@@ -68,11 +68,11 @@
                 <!-- Caixa de texto para descrição -->
                 <textarea id="desc_pro" name="desc_pro" rows="5" cols="50" placeholder="Descrição" class="desc_pro"></textarea><br>
                 <!-- Checkbox -->
-                <input type="checkbox" id="visiblePro" class="checkVisiPro" name="visiblePro" />
+                <input type="checkbox" id="visiblePro" class="checkVisiPro" name="visiblePro" value="1"/>
                 <label for="visiblePro" id="visibleProLb">Pretendo ser visto por empresas</label>
             </form> 
             <!-- Botão para fazer o registo -->
-            <button type="submit" form="reg_profissional" value="Registar" class="btn_reg_pro">Registar</button>
+            <input type="submit" form="reg_profissional" value="Registar" class="btn_reg_pro" id="btnRegPro"></button>
         </div>
 
 
