@@ -6,29 +6,48 @@ module.exports = function (app) {
 
     app.post('/reg_emp', function (req, res) {
         //Registo das empresas
-       
+        console.log("sucesso empresa");
+        //Registo das empresas
+        let info = [[req.body.IdUser, req.body.Nome, req.body.Descricao, req.body.URLSite, req.body.URLLogo, req.body.Email, req.body.Password]];
+        console.log(req.body);
+        let query = "INSERT INTO Empresas (Users_idUser,nomeEmpresa, descricao, urlSite, urlLogo, email, password) VALUES ?";
+
+        console.log("INFO " + info);
+        var delayInMilliseconds = 1000; //1 second
+
+        setTimeout(function () {
+            connection.query(query, [info], function (err, data) {
+                if (err) {
+                    console.log("Error inserting : %s ", err);
+                }
+                else {
+                    console.log(data);
+                    res.status(200).send();
+                }
+            });
+        }, delayInMilliseconds);
     });
 
     //Cria novo profissional
     app.post('/reg_pro', function (req, res) {
         console.log("sucesso");
         //Registo dos profissionais
-        let info = [[req.body.IdUser,req.body.Nome,req.body.Email,req.body.Password,req.body.DataNas,req.body.Localidade, req.body.Genero, req.body.Descricao, req.body.isVisible]];
+        let info = [[req.body.IdUser, req.body.Nome, req.body.Email, req.body.Password, req.body.DataNas, req.body.Localidade, req.body.Genero, req.body.Descricao, req.body.isVisible]];
         console.log(req.body);
         let query = "INSERT INTO Profissionais (Users_idUser,nome,email,password,dataNasc,localidade,genero,descricao,isVisible) VALUES ?";
-        
+
         console.log("INFO " + info);
         var delayInMilliseconds = 1000; //1 second
 
-        setTimeout(function() {
-            connection.query(query,[info], function(err, data){
-                if(err){
-                    console.log("Error inserting : %s ",err );
+        setTimeout(function () {
+            connection.query(query, [info], function (err, data) {
+                if (err) {
+                    console.log("Error inserting : %s ", err);
                 }
-                else{
+                else {
                     console.log(data);
                     res.status(200).send();
-                }	
+                }
             });
         }, delayInMilliseconds);
     });
@@ -40,7 +59,7 @@ module.exports = function (app) {
         let query = "INSERT INTO Users (TipoUser_idTipoUser,dataAdesao,email) VALUES ?";
         console.log("Query de insert: " + query);
 
-        connection.query(query,[info], function (error, data) {
+        connection.query(query, [info], function (error, data) {
             if (error) {
                 res.render(error)
             }
@@ -57,7 +76,7 @@ module.exports = function (app) {
 
         let query = "select * from Users where email = ?";
 
-        connection.query(query,req.params.email, function (error, results, fields) {
+        connection.query(query, req.params.email, function (error, results, fields) {
             if (error) {
                 res.render(error)
             }

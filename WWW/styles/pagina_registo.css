@@ -172,6 +172,13 @@ select#genero_pro{
     margin: 8px 0;
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
+
+#desc_emp{
+    width: 49.4%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
 /*----------------------------------------------------------------*/
 
 /*FOOTER DA PÁGINA*/

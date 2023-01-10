@@ -23,74 +23,21 @@ function init() {
     });
 }
 
-var user;
-
-//Função que regista um novo profissional
-function newUserPro() {
-    const dataAtual = new Date();
-    let day = dataAtual.getDate();
-    let month = dataAtual.getMonth();
-    let year = dataAtual.getFullYear();
-
-    var gen = document.getElementById('genero_pro');
-    var visible = document.getElementById('visiblePro');
-    var descricao = document.getElementById('desc_pro').value;
-    var dataNas = document.getElementById('dataNasc_pro').value;
-    var localidade = document.getElementById('local_pro').value;
-    var vis = 0;
-
-    //Transforma dados para não dar erro na BD
-    if (visible.checked == true) {
-        vis = 1;
-    }
-
-    //Validação para a descrição
-    if ( descricao === '' ){
-        descricao = "Não tenho nada a dizer! :(";
-    }
-
-    //Validação para a data de nascimento
-    let currentDate = `${year}-${month}-${day}`;
-
-    var anoNas = dataNas.slice(0, 4);
-    var mesNas = dataNas.slice(4, 2);
-
-    //Calcular Idade
-    let idade = parseInt(year) - parseInt(anoNas);
-    if(month>mesNas){
-        idade = idade + 1;
-    }else{
-        idade = idade - 1;
-    }
-    if(idade < 18){
-        document.getElementById("erroDatNas").textContent = "Tens de ter mais de 18 anos para te registares!";
-        return false;  
-    }
-    if(dataNas > currentDate){
-        document.getElementById("erroDatNas").textContent = "A data de nascimento está superior à data atual!";
-        return false;
-    }else {
-        document.getElementById("erroDatNas").textContent = "";
-    }
-
-    //Validação para a localidade
-    if (localidade === '') {
-        localidade = "N/A";
-    }
+//Função que regista uma nova empresa
+function newUserEmp() {
+    var descricao = document.getElementById('desc_emp').value;
 
     var data = {
-        Nome: document.getElementById('nome_pro').value,
-        Email: document.getElementById('email_pro').value,
-        Password: document.getElementById('password_pro').value,
-        DataNas: dataNas,
-        Localidade: localidade,
-        Genero: gen.options[gen.selectedIndex].text,
+        Nome: document.getElementById('nome_emp').value,
+        Email: document.getElementById('email_emp').value,
+        Password: document.getElementById('password_emp').value,
+        URLSite: document.getElementById('url_site').value,
+        URLLogo: document.getElementById('url_logo').value,
         Descricao: descricao,
-        isVisible: vis
     };
     console.log(data);
 
-    var url = "/newUser/" + 2;
+    var url = "/newUser/" + 1;
 
     var xhttp = new XMLHttpRequest();
     //Open first, before setting the request headers.
@@ -106,10 +53,11 @@ function newUserPro() {
     xhttp.send(JSON.stringify(data));
 }
 
-function createPro(dataPro) {
-    console.log(dataPro);
+//Função que cria uma nova empresa
+function createEmp(dataEmp) {
+    console.log(dataEmp);
 
-    var url = "/reg_pro";
+    var url = "/reg_emp";
 
     var xhttp2 = new XMLHttpRequest();
     //Open first, before setting the request headers.
@@ -117,14 +65,15 @@ function createPro(dataPro) {
     xhttp2.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     xhttp2.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            alert('Utilizador criado');
+            alert('Empresa criada');
             //Limpar as caixas de texto todas
-            document.forms["reg_profissional"].reset();
+            document.forms["reg_empresa"].reset();
         }
     }
-    xhttp2.send(JSON.stringify(dataPro));
+    xhttp2.send(JSON.stringify(dataEmp));
 }
 
+//Funcao que vai buscar o user criado
 function getUser(data) {
     // Criar a instância de XMLHttpRequest
     if (window.XMLHttpRequest) {
@@ -147,7 +96,7 @@ function getUser(data) {
 
                 data.IdUser = linhaResultado["idUser"];
 
-                createPro(data);
+                createEmp(data);
             }
         };
     }
