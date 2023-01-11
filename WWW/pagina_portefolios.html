@@ -21,15 +21,15 @@
     <div class="div_menu">
         <button class="btn_menu_sobre" onclick="window.location.href='http://127.0.0.1:5502/pagina_inicial.html'">Sobre nós</button>
         <button class="btn_menu_portefolios">Portefólios</button>
-        <button class="btn_menu_ofertas" onclick="window.location.href='http://127.0.0.1:5502/ofertas'">Ofertas Emprego</button>
+        <button class="btn_menu_ofertas" onclick="window.location.href='http://127.0.0.1:5502/pagina_ofertas_emprego.html'">Ofertas Emprego</button>
         <button class="btn_menu_amigos" onclick="window.location.href='http://127.0.0.1:5502/pagina_amigos.html'">Amigos</button>
         <button class="btn_menu_empresas" onclick="window.location.href='http://127.0.0.1:5502/pagina_empresas.html'">Empresas</button>
     </div>
 
     <div class="div_body_procura">
         <form if="form_filtro_emp" class="form_filtro_emp" action="">
-            <input class="input_procura" type="text" placeholder="Procurar Empresa..." name="search">
-            <input type="submit" id="btn_procura" class="btn_procura" value="Procurar">
+            <input class="input_procura" id="input_procura" type="text" placeholder="Procurar Empresa..." name="search">
+            <input type="button" id="btn_procura" class="btn_procura" value="Procurar">
         </form> 
     </div>
 
@@ -53,13 +53,13 @@
                 </select>
                 <h1 class="h1_container_left_localidade">Localidade:</h1>
                 <input class="input_empresas_localidade" type="text" id="empresa_localidade" name="empresa_localidade" placeholder="Escreva a localidade Ex: Lisboa">
-                <input type="reset" class="btn_empresas_filtro" id="btn_empresas_filtro" value="Limpar Filtro">
+                <input type="button" class="btn_empresas_filtro" id="btn_empresas_filtro" value="Limpar Filtro">
             </div>
 
             <div class="div_container_left_filtros_curriculos" id="div_container_left_filtros_curriculos">
                 <h1 class="h1_container_left_filtro">Filtrar Curriculos por:</h1>
                 <h1 class="h1_container_left_idade">Idade:</h1>
-                <div class="div_container_left_filtros_curriculos_radio_idade">
+                <div class="div_container_left_filtros_curriculos_radio_idade" id="radio_idade">
                     <input type="radio" id="idade_jovem" name="idade" value="jovem">
                     <label for="idade_jovem">Mais Jovem para mais Velho</label><br>
                     <input type="radio" id="idade_velho" name="idade" value="velho">
@@ -67,8 +67,8 @@
                     <input class="input_curriculos_idade" type="number" id="idade_num" name="idade" value="numero" placeholder="Escreva a idade Ex: 22" min="16">
                 </div>
                 <h1 class="h1_container_left_localidade">Localidade:</h1>
-                <input class="input_curriculos_localidade" type="text" id="curriculo_ocalidade" name="curriculo_ocalidade" placeholder="Escreva a localidade Ex: Lisboa">
-                <input type="reset" class="btn_curriculos_filtro" id="btn_curriculos_filtro" value="Limpar Filtro">
+                <input class="input_curriculos_localidade" type="text" id="curriculo_localidade" name="curriculo_localidade" placeholder="Escreva a localidade Ex: Lisboa">
+                <input type="button" class="btn_curriculos_filtro" id="btn_curriculos_filtro" value="Limpar Filtro">
             </div>
 
         </div>

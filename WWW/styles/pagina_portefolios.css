@@ -199,6 +199,17 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.div_body_portefolios {
+    width: 39.49%;
+    height: 100%;
+    margin-left: 1.5%;
+    display: inline-block;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+    overflow: auto;
+}
+.div_body_portefolios::-webkit-scrollbar {
+    display: none;
+}
 
 .div_curr{
     padding-top: 2%;
@@ -219,10 +230,31 @@ body::-webkit-scrollbar {
 } 
 .p_info {
     margin: 0%;
-    margin-left: 1%;
+    margin-top: 0.5%;
 }  
 .hr_curriculo{
     width: 100%;
     text-align: left;
     margin-left: 0%;
+}
+.img_info{
+    width: 100%;
+    height: 100%;
+}
+.div_info_row{
+    display: flex;
+}
+.div_info_img{
+    width: 20%;
+    height: 20%;
+}
+.h1_nome{
+    margin: 0%;
+    font-size: 180%;
+}
+.div_info_row_right{
+    width: 100%;
+}
+.p_descricao{
+    padding-top: 3%;
 }
