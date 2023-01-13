@@ -87,6 +87,23 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/pedidos/:idUser', function (req, res) {
+        console.log(req.params.idUser);
+
+        let query = "select pedidosamizade.idPedidosAmizade, profissionais.nome from pedidosamizade inner join profissionais on pedidosamizade.idSoliciador = profissionais.idProfissional where Profissionais_idUser = ?";
+        //let query = "select * from pedidosamizade"
+
+        connection.query(query, req.params.idUser, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(results);
+                res.end(JSON.stringify(results));
+            }
+        });
+    });
+
     //rest api para obter ofertas.
     app.get('/ofertas', function (req, res) {
         let query = "select ofertasemprego.idOferta, empresas.nomeEmpresa, area.descricao as areaDescricao, ofertasemprego.descricao, ofertasemprego.duracao, ofertasemprego.valor, ofertasemprego.dataValidade from ofertasemprego inner join empresas on ofertasemprego.Empresas_Users_idUser = empresas.Users_idUser inner join area on ofertasemprego.Area_idArea = area.idArea";
