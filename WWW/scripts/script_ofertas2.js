@@ -456,12 +456,6 @@ function init() {
                     for (var i=0; i<areas.length; i++) {
                         select.options[select.options.length] = new Option(areas[i].descricao, areas[i].descricao);
                     }
-
-                    /*
-                    for (var x in areas) {
-                        select.options[select.options.length] = new Option(areas[x], areas[x]);
-                    }
-                    */
                 }
             };
         }
