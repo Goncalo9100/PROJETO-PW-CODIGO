@@ -9,49 +9,124 @@ let logged = 'N';
 
 
 module.exports = function (app) {
-
+    
     /**
- * Função que executa todas as operações necessárias para efetuar o login na aplicação
+ * Função que executa todas as operações necessárias para efetuar o login na aplicação para empresas
  * @param {*} Route caminho que despoleta esta função
  * @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
  */
     app.get('/loginEmpresa/:email/:password/:user', function (req, res) {
-        let info = [req.params.email,req.params.password, req.params.user]; 
-        
+        let info = [req.params.email, req.params.password, req.params.user];
+
         let query = "select Users_idUser, nomeEmpresa from Empresas where email=? and password=? and Users_idUser=?";
+        try {
+            connection.query(query, info, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                }
+                else if (results.length > 0) {
+                    //Processar os resultados e enviá-los de volta para o cliente
+                    idUser = results[0].Users_idUser;
+                    nomeUser = results[0].nomeEmpresa;
+                    logged = 'S';
+                    res.status(200).send(results);
+                } else {
+                    //Se não houver resultados, enviar uma mensagem personalizada para o lado do cliente
+                    res.status(204).send({ message: 'Não foram encontrados resultados para sua pesquisa' });
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
 
-        connection.query(query, info, function (error, results, fields) {
-            if (error) {
-                res.render(error)
-            }
-            else {
-                idUser = results[0].Users_idUser;
-                nomeUser = results[0].nomeEmpresa;
-                tipoUser = 1;
-                logged = 'S';
+    /**
+* Função que executa todas as operações necessárias para efetuar o login na aplicação para profissionais
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/loginProfissional/:email/:password/:user', function (req, res) {
+        let info = [req.params.email, req.params.password, req.params.user];
 
-                res.end(JSON.stringify(results));
-            }
-        });
+        let query = "select Users_idUser, nome from profissionais where email=? and password=? and Users_idUser=?";
+
+        try {
+            connection.query(query, info, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                }
+                else if (results.length > 0) {
+                    //Processar os resultados e enviá-los de volta para o cliente
+                    idUser = results[0].Users_idUser;
+                    nomeUser = results[0].nome;
+                    logged = 'S';
+                    res.status(200).send(results);
+                } else {
+                    //Se não houver resultados, enviar uma mensagem personalizada para o lado do cliente
+                    res.status(204).send({ message: 'Não foram encontrados resultados para sua pesquisa' });
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
 
     });
 
-    app.get('/userLogin/:email', function(req, res){
+
+    /**
+     * Função que executa todas as operações necessárias para efetuar o login na aplicação para administradores
+     * @param {*} Route caminho que despoleta esta função
+     * @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+     */
+    app.get('/loginAdmin/:email/:password/:user', function (req, res) {
+        let info = [req.params.email, req.params.password, req.params.user];
+
+        let query = "select Users_idUser, Nome from administradores where email=? and password=? and Users_idUser=?";
+
+        try {
+            connection.query(query, info, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                }
+                else if (results.length > 0) {
+                    //Processar os resultados e enviá-los de volta para o cliente
+                    idUser = results[0].Users_idUser;
+                    nomeUser = results[0].Nome;
+                    logged = 'S';
+                    res.status(200).send(results);
+                } else {
+                    //Se não houver resultados, enviar uma mensagem personalizada para o lado do cliente
+                    res.status(204).send({ message: 'Não foram encontrados resultados para sua pesquisa' });
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
+    app.get('/userLogin/:email', function (req, res) {
         console.log(req.params.email);
         let query = "select idUser, TipoUser_idTipoUser from Users where email=?";
 
-        connection.query(query, req.params.email, function (error, results, fields) {
-            if (error) {
-                console.log(query);
-                res.render(error)
-            }
-            else {
-                console.log(query);
-                console.log(results);
-                res.end(JSON.stringify(results));
-            }
-        });
-        
+        try {
+            connection.query(query, req.params.email, function (error, results, fields) {
+                if (error) {
+                    console.log(query);
+                    res.render(error)
+                }
+                else {
+                    console.log(query);
+                    console.log(results);
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch { }
     })
     //-------------------------------------------------------------------------
 
@@ -229,24 +304,24 @@ module.exports = function (app) {
         });
     });
 
-    app.patch('/rejeitarAmigo/:idPedido', function (req, res) { 
+    app.patch('/rejeitarAmigo/:idPedido', function (req, res) {
         var query = "UPDATE pedidosamizade Set situacao='R' Where idPedidosAmizade=?";
-        connection.query(query, req.params.idPedido, function(error,result){
-            if(error){
+        connection.query(query, req.params.idPedido, function (error, result) {
+            if (error) {
                 res.render(error)
             }
-            else{
+            else {
                 console.log(result);
                 res.status(200).send();
             }
-        }); 
+        });
     });
 
     app.get('/getUserLogged', function (req, res) {
-        if(logged=='S') {
+        if (logged == 'S') {
             let query;
 
-            switch(tipoUser) {
+            switch (tipoUser) {
                 case 1:
                     query = "select users.TipoUser_idTipoUser, empresas.Users_idUser, empresas.nomeEmpresa as nome from empresas inner join users on empresas.Users_idUser = users.idUser where Users_idUser=?"
                     break;
@@ -269,6 +344,6 @@ module.exports = function (app) {
                 }
                 console.log(results);
             });
-        }else{res.status(401).send();}
+        } else { res.status(401).send(); }
     });
 }
