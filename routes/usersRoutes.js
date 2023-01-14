@@ -4,6 +4,7 @@ const connection = require("../config/connection");
 
 let idUser;
 let nomeUser;
+let tipoUser;
 let logged = 'N';
 
 
@@ -26,6 +27,7 @@ module.exports = function (app) {
             else {
                 idUser = results[0].Users_idUser;
                 nomeUser = results[0].nomeEmpresa;
+                tipoUser = 1;
                 logged = 'S';
 
                 res.end(JSON.stringify(results));
@@ -225,5 +227,48 @@ module.exports = function (app) {
             }
             console.log(results);
         });
+    });
+
+    app.patch('/rejeitarAmigo/:idPedido', function (req, res) { 
+        var query = "UPDATE pedidosamizade Set situacao='R' Where idPedidosAmizade=?";
+        connection.query(query, req.params.idPedido, function(error,result){
+            if(error){
+                res.render(error)
+            }
+            else{
+                console.log(result);
+                res.status(200).send();
+            }
+        }); 
+    });
+
+    app.get('/getUserLogged', function (req, res) {
+        if(logged=='S') {
+            let query;
+
+            switch(tipoUser) {
+                case 1:
+                    query = "select users.TipoUser_idTipoUser, empresas.Users_idUser, empresas.nomeEmpresa as nome from empresas inner join users on empresas.Users_idUser = users.idUser where Users_idUser=?"
+                    break;
+                case 2:
+                    query = "select users.TipoUser_idTipoUser, profissionais.Users_idUser, profissionais.nome from profissionais inner join users on profissionais.Users_idUser = users.idUser where Users_idUser=?"
+                    break;
+                case 3:
+                    query = "select users.TipoUser_idTipoUser, administradores.Users_idUser, administradores.nome from administradores inner join users on administradores.Users_idUser = users.idUser where Users_idUser=?"
+                    break;
+                default:
+            }
+
+            connection.query(query, idUser, function (error, results, fields) {
+                if (error) {
+                    res.render(error)
+                }
+                else {
+                    //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
+                    res.end(JSON.stringify(results));
+                }
+                console.log(results);
+            });
+        }else{res.status(401).send();}
     });
 }

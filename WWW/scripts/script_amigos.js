@@ -57,6 +57,7 @@ function init() {
             div_pedido.appendChild(hr);
             divPedidos.appendChild(div_pedido);
         }
+        
     }
 
     function deleteDivPedidos() {
@@ -70,12 +71,34 @@ function init() {
     }
 
     function rejeitarPedido(idPedido) {
-        console.log(idPedido);
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_rejeitar = new XMLHttpRequest();
+        } else {
+            xhr_rejeitar = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_rejeitar) {
+            // Configurar a solicitação
+            let url = "http://127.0.0.1:5502/rejeitarAmigo/" + idPedido;
+            console.log(url);
+            xhr_rejeitar.open('PATCH', url, true);
+            xhr_rejeitar.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            // Definir a função de retorno de chamada
+            xhr_rejeitar.onreadystatechange = function () {
+                if ((xhr_rejeitar.readyState === 4) && (xhr_rejeitar.status === 200)) {
+                    obterPedidosAmizade();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_rejeitar.send();
     }
 
     function insertAmigos() {
         deleteDivAmigos();
-
+        
         for(var elem of amigos) {
             var div_amigo = document.createElement("div"); //div com toda a info do amigo
             div_amigo.className = "div_pedido";
