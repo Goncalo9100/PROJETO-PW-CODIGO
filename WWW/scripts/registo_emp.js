@@ -24,7 +24,7 @@ function init() {
 }
 
 //Função que regista uma nova empresa
-function newUserEmp() {
+/*function newUserEmp() {
     var descricao = document.getElementById('desc_emp').value;
 
     var data = {
@@ -51,11 +51,32 @@ function newUserEmp() {
     };
 
     xhttp.send(JSON.stringify(data));
-}
+}*/
 
 //Função que cria uma nova empresa
-function createEmp(dataEmp) {
-    console.log(dataEmp);
+function createEmpConf() {
+    var descricao = document.getElementById('desc_emp').value;
+
+    //Obter data atual para pedido de empresa
+    var currentdate = new Date(); 
+    var datetime = currentdate.getFullYear() + "-"
+                    + (currentdate.getMonth()+1) + "-" 
+                    + currentdate.getDate() + " "  
+                    + currentdate.getHours() + ":"  
+                    + currentdate.getMinutes() + ":" 
+                    + currentdate.getSeconds();
+
+    var data = {
+        Nome: document.getElementById('nome_emp').value,
+        Email: document.getElementById('email_emp').value,
+        Password: document.getElementById('password_emp').value,
+        URLSite: document.getElementById('url_site').value,
+        URLLogo: document.getElementById('url_logo').value,
+        Localidade: document.getElementById('localidade').value,
+        Descricao: descricao,
+        DataPedido: datetime,
+    };
+    console.log(data);
 
     var url = "/reg_emp";
 
@@ -70,11 +91,11 @@ function createEmp(dataEmp) {
             document.forms["reg_empresa"].reset();
         }
     }
-    xhttp2.send(JSON.stringify(dataEmp));
+    xhttp2.send(JSON.stringify(data));
 }
 
 //Funcao que vai buscar o user criado
-function getUser(data) {
+/*function getUser(data) {
     // Criar a instância de XMLHttpRequest
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
@@ -103,6 +124,6 @@ function getUser(data) {
 
     // Enviar a solicitação
     xhr.send();
-}
+}*/
 
 window.onload = init;

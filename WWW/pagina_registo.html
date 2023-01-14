@@ -28,7 +28,7 @@
     <div class="div_body_registo">
 
         <div id="reg_emp" class="reg_emp_div">
-            <form id="reg_empresa" action="javascript:newUserEmp()" method="POST">
+            <form id="reg_empresa" action="javascript:createEmpConf()" method="POST">
                 <!-- E-mail -->
                 <input type="text" id="email_emp" name="email_emp" placeholder="E-mail" /><br>
                 <!-- Palavra-passe -->
@@ -39,6 +39,8 @@
                 <input type="text" id="url_site" name="url_site" placeholder="URL do Site" /><br>
                 <!-- URL do logotipo -->
                 <input type="text" id="url_logo" name="url_logo" placeholder="URL do logotipo" /><br>
+                <!-- URL do logotipo -->
+                <input type="text" id="localidade" name="localidade" placeholder="Localidade da Empresa" /><br>
                 <!-- Caixa de texto para descrição -->
                 <textarea id="desc_emp" name="desc_emp" rows="5" cols="50" placeholder="Descrição" class="desc_pro"></textarea><br>
             </form> 
