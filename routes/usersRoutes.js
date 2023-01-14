@@ -9,8 +9,6 @@ let logged = 'N';
 
 
 module.exports = function (app) {
-
-    /* ___________ Código novo! _______________ */
     app.post('/newExperience', function (req, res) {
 
         let info = [[req.body.IDUser, req.body.Cargo, req.body.Empresa, req.body.URLLogo, req.body.Localizacao, req.body.Descricao, req.body.DataInicio, req.body.DataFim ]];
@@ -53,8 +51,6 @@ module.exports = function (app) {
         }, delayInMilliseconds);
     });
 
-    /* ___________ FIM Código novo! _______________ */
-
     /**
  * Função que executa todas as operações necessárias para efetuar o login na aplicação para empresas
  * @param {*} Route caminho que despoleta esta função
@@ -74,6 +70,7 @@ module.exports = function (app) {
                     //Processar os resultados e enviá-los de volta para o cliente
                     idUser = results[0].Users_idUser;
                     nomeUser = results[0].nomeEmpresa;
+                    tipoUser = 1;
                     logged = 'S';
                     res.status(200).send(results);
                 } else {
@@ -107,6 +104,7 @@ module.exports = function (app) {
                     //Processar os resultados e enviá-los de volta para o cliente
                     idUser = results[0].Users_idUser;
                     nomeUser = results[0].nome;
+                    tipoUser = 2;
                     logged = 'S';
                     res.status(200).send(results);
                 } else {
@@ -142,6 +140,7 @@ module.exports = function (app) {
                     //Processar os resultados e enviá-los de volta para o cliente
                     idUser = results[0].Users_idUser;
                     nomeUser = results[0].Nome;
+                    tipoUser = 3;
                     logged = 'S';
                     res.status(200).send(results);
                 } else {
@@ -276,7 +275,7 @@ module.exports = function (app) {
     app.get('/amigos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
-        let query = "select amigos.idAmigo, profissionais.nome from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
+        let query = "select amigos.idAmigos, amigos.idAmigo, profissionais.nome from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
 
         connection.query(query, req.params.idUser, function (error, results, fields) {
             if (error) {
@@ -288,6 +287,21 @@ module.exports = function (app) {
             }
         });
     });
+
+    app.delete('/deleteAmigo/:idAmigos', function (req, res) {
+		var query = "DELETE FROM amigos Where idAmigos=?";
+
+        connection.query(query, req.params.idAmigos, function(error, data){
+            if(error){
+                res.render(error)
+            }
+            else{
+                console.log(data);
+                res.status(200).send(data);
+            }
+
+        });			
+	});
 
     //rest api para obter ofertas.
     app.get('/ofertas', function (req, res) {
@@ -357,6 +371,57 @@ module.exports = function (app) {
             }
             else {
                 console.log(result);
+                res.status(200).send();
+            }
+        });
+    });
+
+    app.get('/pedidoAmizade/:idPedido', function (req, res) {
+        let query = "select * from pedidosamizade where idPedidosAmizade = ?";
+        connection.query(query, req.params.idPedido, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                res.end(JSON.stringify(results));
+            }
+            console.log(results);
+        });
+    });
+
+    app.patch('/aceitarAmigo/:idPedido', function (req, res) {
+        var date = new Date();
+        var datetime = date.getFullYear() + "-"
+        + (date.getMonth() + 1) + "-"
+        + date.getDate() + " "
+        + date.getHours() + ":"
+        + date.getMinutes() + ":"
+        + date.getSeconds();
+        let info = [datetime, req.params.idPedido];
+        var query = "UPDATE pedidosamizade Set situacao='A', dataConfirmacao=? Where idPedidosAmizade=?";
+        connection.query(query, info, function (error, result) {
+            console.log(query);
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(result);
+                res.status(200).send(JSON.stringify(result));
+            }
+        });
+    });
+
+    app.post('/criarAmizade/:idProf/:idAmigo', function (req, res) {
+        let info = [[req.params.idProf, req.params.idAmigo]];
+        console.log(info);
+        let query = "INSERT INTO amigos (Profissionais_idUser,idAmigo) VALUES ?";
+
+        connection.query(query, [info], function (error, data) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(data);
                 res.status(200).send();
             }
         });

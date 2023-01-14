@@ -14,6 +14,15 @@ body::-webkit-scrollbar {
 .btn_menu_ofertas {
     background-color: #ebebeba1;
 }
+.a_adcionar_oferta{
+    color: white;
+    font-size: 120%;
+    margin-left: 33.3%;
+    display: none;
+}
+.a_adcionar_oferta:hover{
+    cursor: pointer;
+}
 
 /* AREA PROCURA */
 .div_body_procura {

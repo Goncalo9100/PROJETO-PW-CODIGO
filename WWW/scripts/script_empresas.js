@@ -54,6 +54,8 @@ function init() {
                 if ((xhr_userLogged.readyState === 4) && (xhr_userLogged.status === 200)) {
                     user = JSON.parse(xhr_userLogged.responseText);
                     verifyUser();
+                    obterPedidosAmizade();
+                    obterAmigos();
                 }
             };
         }
