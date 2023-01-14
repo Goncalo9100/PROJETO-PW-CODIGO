@@ -90,8 +90,22 @@ module.exports = function (app) {
     app.get('/pedidos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
-        let query = "select pedidosamizade.idPedidosAmizade, profissionais.nome from pedidosamizade inner join profissionais on pedidosamizade.idSoliciador = profissionais.idProfissional where Profissionais_idUser = ?";
-        //let query = "select * from pedidosamizade"
+        let query = "select pedidosamizade.idPedidosAmizade, profissionais.nome from pedidosamizade inner join profissionais on pedidosamizade.idSoliciador = profissionais.Users_idUser where Profissionais_idUser = ? and situacao = 'P'";
+
+        connection.query(query, req.params.idUser, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                res.end(JSON.stringify(results));
+            }
+        });
+    });
+
+    app.get('/amigos/:idUser', function (req, res) {
+        console.log(req.params.idUser);
+
+        let query = "select amigos.idAmigo, profissionais.nome from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
 
         connection.query(query, req.params.idUser, function (error, results, fields) {
             if (error) {
