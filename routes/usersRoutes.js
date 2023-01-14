@@ -1,16 +1,65 @@
 const { Console } = require("console");
 const fs = require("fs");
-const connection = require("../config/connection")
+const connection = require("../config/connection");
+
+let idUser;
+let nomeUser;
+let logged = 'N';
+
 
 module.exports = function (app) {
+
+    /**
+ * Função que executa todas as operações necessárias para efetuar o login na aplicação
+ * @param {*} Route caminho que despoleta esta função
+ * @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+ */
+    app.get('/loginEmpresa/:email/:password/:user', function (req, res) {
+        let info = [req.params.email,req.params.password, req.params.user]; 
+        
+        let query = "select Users_idUser, nomeEmpresa from Empresas where email=? and password=? and Users_idUser=?";
+
+        connection.query(query, info, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                idUser = results[0].Users_idUser;
+                nomeUser = results[0].nomeEmpresa;
+                logged = 'S';
+
+                res.end(JSON.stringify(results));
+            }
+        });
+
+    });
+
+    app.get('/userLogin/:email', function(req, res){
+        console.log(req.params.email);
+        let query = "select idUser, TipoUser_idTipoUser from Users where email=?";
+
+        connection.query(query, req.params.email, function (error, results, fields) {
+            if (error) {
+                console.log(query);
+                res.render(error)
+            }
+            else {
+                console.log(query);
+                console.log(results);
+                res.end(JSON.stringify(results));
+            }
+        });
+        
+    })
+    //-------------------------------------------------------------------------
 
     app.post('/reg_emp', function (req, res) {
         //Registo das empresas
         console.log("sucesso empresa");
         //Registo das empresas
-        let info = [[req.body.IdUser, req.body.Nome, req.body.Descricao, req.body.URLSite, req.body.URLLogo, req.body.Email, req.body.Password]];
+        let info = [[req.body.Nome, req.body.Descricao, req.body.URLSite, req.body.URLLogo, req.body.Email, req.body.Password, req.body.Localidade, req.body.DataPedido, 'P']];
         console.log(req.body);
-        let query = "INSERT INTO Empresas (Users_idUser,nomeEmpresa, descricao, urlSite, urlLogo, email, password) VALUES ?";
+        let query = "INSERT INTO empresaconfirma (nomeEmpresa, descricao, urlSite, urlLogo, email, password, localidade, dataPedido, situacao) VALUES ?";
 
         console.log("INFO " + info);
         var delayInMilliseconds = 1000; //1 second

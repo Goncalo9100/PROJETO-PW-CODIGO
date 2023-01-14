@@ -57,14 +57,19 @@ function init() {
 function createEmpConf() {
     var descricao = document.getElementById('desc_emp').value;
 
+    //Validação da descrição da empresa
+    if (descricao === '') {
+        descricao = "Não temos nada a dizer! :(";
+    }
+
     //Obter data atual para pedido de empresa
-    var currentdate = new Date(); 
+    var currentdate = new Date();
     var datetime = currentdate.getFullYear() + "-"
-                    + (currentdate.getMonth()+1) + "-" 
-                    + currentdate.getDate() + " "  
-                    + currentdate.getHours() + ":"  
-                    + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds();
+        + (currentdate.getMonth() + 1) + "-"
+        + currentdate.getDate() + " "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds();
 
     var data = {
         Nome: document.getElementById('nome_emp').value,

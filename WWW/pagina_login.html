@@ -12,28 +12,34 @@
 
 <body>
     <div class="div_header">
-        <img class="img_logo" src="imagens/logo_com_nome.png" onclick="window.location.href='http://127.0.0.1:5502/pagina_inicial.html'">
+        <img class="img_logo" src="imagens/logo_com_nome.png"
+            onclick="window.location.href='http://127.0.0.1:5502/pagina_inicial.html'">
     </div>
     <div class="div_barra">
-       <h1>Dá asas à tua carreira</h1>
+        <h1>Dá asas à tua carreira</h1>
     </div>
 
-    <button class="btn_tabs_autenticar" id="btn_tabaut">AUTENTICAR</button>   
-    <button id="btn_tabreg" class="btn_tabs_registar" onclick="window.location.href='http://127.0.0.1:5502/pagina_registo.html'">REGISTAR</button>   
+    <button class="btn_tabs_autenticar" id="btn_tabaut">AUTENTICAR</button>
+    <button id="btn_tabreg" class="btn_tabs_registar"
+        onclick="window.location.href='http://127.0.0.1:5502/pagina_registo.html'">REGISTAR</button>
 
     <hr class="line_tabs"> <!--Linha cinzenta a separar as tabs-->
 
     <div class="div_body_login">
-        <input type="email" id="i_email" name="i_email" placeholder="E-mail" class="input_email"><br><br>
-        <input type="password" id="i_password" name="i_password" placeholder="Palavra-passe" class="input_password"><br><br>
-        <button id="btn_autenticar" class="btn_autenticar">Autenticar</button>        
-        
+        <form id="formLogin" action="javascript:login()" method="GET">
+            <input type="email" id="i_email" name="i_email" placeholder="E-mail" class="input_email" /><br><br>
+            <input type="password" id="i_password" name="i_password" placeholder="Palavra-passe"
+                class="input_password" /><br><br>
+            <input type="submit" id="btn_autenticar" class="btn_autenticar" />
+        </form>
+
         <div class="div_links_login">
             <br><a href="" class="link_recsenha">Recuperar Senha</a>
-            <a href="" class="link_novouser" onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_registo.html'">Novo Utilizador</a>
+            <a href="" class="link_novouser"
+                onclick="window.location.href='http://127.0.0.1:5502/WWW/pagina_registo.html'">Novo Utilizador</a>
         </div>
     </div>
-    
+
     <footer>
         <div class="div_footer">
             <p>Copyright © 2022 Gustavo Manteigas & Gonçalo Ribeiro Inc. All rights reserved.</p>
