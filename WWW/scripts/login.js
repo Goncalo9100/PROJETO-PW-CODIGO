@@ -43,6 +43,8 @@ function login(){
 
 function loginFinal(resultado, info){
     let url;
+
+    console.log(resultado[0].TipoUser_idTipoUser);
    
     switch(resultado[0].TipoUser_idTipoUser){
         //Empresa
@@ -76,6 +78,9 @@ function loginFinal(resultado, info){
         if(this.readyState == 4 && this.status == 200)
         {   
             window.location.href = 'http://127.0.0.1:5502/pagina_inicial.html';
+        }else if(this.readyState == 4 && this.status == 204){
+            document.getElementById("errologin").textContent = "E-mail ou password errada!";
+            //alert('Email ou Password errados');
         }
     };
     xhttp2.send(JSON.stringify(data));
