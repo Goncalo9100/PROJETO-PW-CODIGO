@@ -9,7 +9,52 @@ let logged = 'N';
 
 
 module.exports = function (app) {
-    
+
+    /* ___________ Código novo! _______________ */
+    app.post('/newExperience', function (req, res) {
+
+        let info = [[req.body.IDUser, req.body.Cargo, req.body.Empresa, req.body.URLLogo, req.body.Localizacao, req.body.Descricao, req.body.DataInicio, req.body.DataFim ]];
+        console.log(info);
+        let query = "INSERT INTO experienciapro (Profissionais_idUser, cargo, empresa, urlLogoEmp, localizacao, descriFunc, dataInicio, dataFim) VALUES ?";
+
+        var delayInMilliseconds = 1000; //1 second
+
+        setTimeout(function () {
+            connection.query(query, [info], function (err, data) {
+                if (err) {
+                    console.log("Error inserting : %s ", err);
+                }
+                else {
+                    console.log(data);
+                    res.status(200).send();
+                }
+            });
+        }, delayInMilliseconds);
+    });
+
+    app.post('/newDegree', function (req, res) {
+
+        let info = [[req.body.IDUser, req.body.Curso, req.body.TipoCurso,  req.body.Estab, req.body.Media, req.body.DataInicio, req.body.DataFim ]];
+        console.log(info);
+        let query = "INSERT INTO habilitacoes (Profissionais_idUser, curso, tipoCurso, estabelEnsino, mediaFinal, dataInicio, dataFim) VALUES ?";
+
+        var delayInMilliseconds = 1000; //1 second
+
+        setTimeout(function () {
+            connection.query(query, [info], function (err, data) {
+                if (err) {
+                    console.log("Error inserting : %s ", err);
+                }
+                else {
+                    console.log(data);
+                    res.status(200).send();
+                }
+            });
+        }, delayInMilliseconds);
+    });
+
+    /* ___________ FIM Código novo! _______________ */
+
     /**
  * Função que executa todas as operações necessárias para efetuar o login na aplicação para empresas
  * @param {*} Route caminho que despoleta esta função

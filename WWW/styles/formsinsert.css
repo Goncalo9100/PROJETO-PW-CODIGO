@@ -1,0 +1,65 @@
+/* Estilos de HTML E BODY */
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+/* AREA MENU */
+.btn_menu_sobre{
+    background-color: #ebebeba1;
+}
+
+/* AREA DE INSERIR NOVA EXPERIENCIA */
+.div_body{
+    margin-left: 30%;
+    justify-content: center;
+    margin-top: 1%;
+    width: 40%;
+    height: auto;
+    text-align: center;
+    display: flexbox;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
+}
+.h1_funcionalidades{
+    color: #123370;
+    margin: 0%;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+input{
+    width: 55%;
+    padding: 1% 4%;
+    margin: 1.5%;
+    box-sizing: border-box;
+}
+.btnNewExp{
+    background-color: #123370;
+    color: white;
+    margin: 0%;
+    padding-left: 0.5%;
+    padding-top: 0.75%;
+    padding-bottom: 0.75%;
+    padding-right: 0.5%;
+    margin-bottom: 3%;
+    margin-top: 2%;
+    width: 55%;
+    border-color: #123370;
+    border-radius: 4%;
+    font-size: small;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+#descr_func{
+    width: 49.4%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+select{
+    width: 55%;
+    padding-top: 1.5%;
+}
+
+
