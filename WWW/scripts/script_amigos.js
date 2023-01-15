@@ -51,10 +51,6 @@ function init() {
             var div_pedido_row = document.createElement("div"); //div com informação em linha
             div_pedido_row.className = "div_pedido_row";
 
-            var p_idPed = document.createElement("p");
-            p_idPed.textContent = elem.idPedidosAmizade;
-            p_idPed.style.display = "none";
-
             var div_imagem = document.createElement("div"); //Div com imagem do user
             div_imagem.className = "div_pedido_img";
             var img = document.createElement("img");
@@ -79,7 +75,6 @@ function init() {
             var hr = document.createElement("hr");
             hr.className = "hr_pedido";
 
-            div_pedido_row.appendChild(p_idPed);
             div_pedido_row.appendChild(div_imagem);
             div_pedido_row.appendChild(h1_nome);
             div_pedido_row.appendChild(btn_aceitar);

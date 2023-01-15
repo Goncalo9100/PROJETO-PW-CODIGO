@@ -32,7 +32,7 @@ body {
 .div_pedidos_scroll {
     overflow: auto;
     height: 75%;
-    width: 100%;
+    width: 95%;
     margin-left: 2%;
     margin-right: 2%;
 }
@@ -43,9 +43,56 @@ body {
     margin-bottom: 1%;
 }
 .hr_pedido{
-    width: 95%;
+    width: 100%;
     text-align: left;
     margin-left: 0%;
+}
+.div_pedido{
+    height: 50%;
+}
+.div_pedido_row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.div_pedido_img{
+    width: 7%;
+    height: 7%;
+}
+.img_pedido{
+    width: 100%;
+    height: 100%;
+}
+.h1_nome_pedido{
+    width: 100%;
+    margin-top: 1%;
+    margin-left: 2%;
+}
+.btn_aceitar{
+    color: white;
+    height: 50%;
+    background-color: #123370;
+    font-size: x-large;
+    border-color: rgba(255, 255, 255, 0);
+    margin-left: 1%;
+    margin-top: 1%;
+}
+.btn_aceitar:hover{
+    background-color: #1233705e;
+    cursor: pointer;
+}
+.btn_rejeitar{
+    color: white;
+    height: 50%;
+    background-color: red;
+    font-size: x-large;
+    border-color: rgba(255, 255, 255, 0);
+    margin-left: 1%;
+    margin-top: 1%;
+}
+.btn_rejeitar:hover{
+    background-color: rgba(255, 0, 0, 0.37);
+    cursor: pointer;
 }
 
 /* AREA CENTRO BAIXO */
