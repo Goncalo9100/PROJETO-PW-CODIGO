@@ -7,12 +7,12 @@ body {
 }
 
 /* AREA MENU */
-.btn_menu_sobre{
+.btn_menu_sobre {
     background-color: #ebebeba1;
 }
 
 /* AREA DE INSERIR NOVA EXPERIENCIA */
-.div_body{
+.div_body {
     margin-left: 30%;
     justify-content: center;
     margin-top: 1%;
@@ -22,19 +22,22 @@ body {
     display: flexbox;
     box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.103);
 }
-.h1_funcionalidades{
+
+.h1_funcionalidades {
     color: #123370;
     margin: 0%;
     padding-left: 1%;
     padding-top: 1%;
 }
-input{
+
+input {
     width: 55%;
     padding: 1% 4%;
     margin: 1.5%;
     box-sizing: border-box;
 }
-.btnNewExp{
+
+.btnNewExp {
     background-color: #123370;
     color: white;
     margin: 0%;
@@ -50,16 +53,19 @@ input{
     font-size: small;
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
-#descr_func{
+
+#descr_func {
     width: 49.4%;
     padding: 12px 20px;
     margin: 8px 0;
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
-select{
+select {
     width: 55%;
     padding-top: 1.5%;
 }
 
-
+#area option{
+    color: gray;
+}

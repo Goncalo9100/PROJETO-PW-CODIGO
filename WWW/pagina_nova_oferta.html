@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/header_menu.css">
     <link rel="stylesheet" href="styles/formsinsert.css">
-    <script src="scripts/port_cursos_expe.js"></script>
-    <title>Experiência Profissional</title>
+    <script src="scripts/port_nova_oferta.js"></script>
+    <title>Nova oferta</title>
 </head>
 
 <body>
@@ -32,18 +32,16 @@
     </div>
 
     <div class="div_body">
-        <br><h1 class="h1_funcionalidades">Nova experiência profissional</h1><br><br>
-        <form id="newExperience" action="javascript:newExperience()" method="POST">
-            <input type="text" id="i_cargo" name="i_cargo" placeholder="Cargo" required title="O cargo é obrigatório!"/><br>
-            <input type="text" id="i_empresa" name="i_empresa" placeholder="Empresa" required title="A empresa é obrigatória!"/><br>
-            <input type="text" id="i_logoempresa" name="i_logoempresa" placeholder="URL do logo da empresa"/><br>
-            <input type="text" id="i_localizacao" name="i_localizacao" placeholder="Localização"/><br>
-            <input type="date" id="i_inicio" name="i_inicio" placeholder="Data Inicio (AAAA/MM/DD)" required title="A data de início é obrigatória!"/><br>
-            <input type="date" id="i_fim" name="i_fim" placeholder="Data Fim (AAAA/MM/DD)"/><br>
-            <textarea id="descr_func" name="descr_func" class="descr_func" rows="5" cols="50" placeholder="Descrição de funções exercidas"></textarea><br><br><br>
+        <br><h1 class="h1_funcionalidades">Nova oferta de emprego</h1><br><br>
+        <form id="newOferta" action="javascript:novaOferta()" method="POST">
+            <input type="date" id="i_validade" name="i_validade" placeholder="Validade (AAAA/MM/DD)" required title="A validade é obrigatória!"/><br> 
+            <input type="text" id="i_duracao" name="i_duracao" placeholder="Duração em meses. Ex:2" required title="A duração é obrigatória!"/><br>
+            <select name="area" id="area" class="area"></select>
+            <input type="text" id="i_renumeracao" name="i_renumeracao" placeholder="Renumeração"/><br>
+            <textarea id="descr_func" name="descr_func" class="descr_func" rows="5" cols="50" placeholder="Descrição"></textarea><br><br><br>
         </form>
         <!-- Botão para guardar a informação nova -->
-        <input type="submit" form="newExperience" value="Adicionar" id="btnNewExp" class="btnNewExp"></button>
+        <input type="submit" form="newOferta" value="Adicionar" id="btnNewOferta" class="btnNewExp"></button>
     </div>
 
     <div class="div_footer">
