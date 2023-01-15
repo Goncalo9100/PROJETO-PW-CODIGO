@@ -7,21 +7,33 @@ function init() {
     getUserLogged();
 
     function verifyUser() {
-        var btn_menu_amigos = document.getElementById("btn_menu_amigos");
-        var btn_menu_empresas = document.getElementById("btn_menu_empresas");
-        
-        switch(user[0].TipoUser_idTipoUser) {
-            case 1:
-                btn_menu_amigos.style.display = "none";
-                btn_menu_empresas.style.display = "none";
-                break;
-            case 2:
-                btn_menu_empresas.style.display = "none";
-                break;
-            case 3:
-                btn_menu_amigos.style.display = "none";
-                break;
-            default:
+        if (user) {
+            var btn_menu_amigos = document.getElementById("btn_menu_amigos");
+            var btn_menu_empresas = document.getElementById("btn_menu_empresas");
+            var a_login = document.getElementById("a_login");
+            var a_register = document.getElementById("a_register");
+            
+            switch(user[0].TipoUser_idTipoUser) {
+                case 1:
+                    break;
+                case 2:
+                    btn_menu_amigos.style.display = "inline";
+                    break;
+                case 3:
+                    btn_menu_empresas.style.display = "inline";
+                    break;
+                default:
+            }
+
+            a_login.style.display = "none";
+            a_register.style.display = "none";
+
+            var div_header = document.getElementById("div_header");
+            var linkPerfil = document.createElement("a");
+            linkPerfil.textContent =  user[0].nome;
+            linkPerfil.className = "a_perfil";
+
+            div_header.appendChild(linkPerfil);
         }
     }
 

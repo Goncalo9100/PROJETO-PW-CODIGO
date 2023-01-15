@@ -9,8 +9,6 @@ let logged = 'N';
 
 
 module.exports = function (app) {
-
-    /* ___________ Código novo! _______________ */
     app.post('/newExperience', function (req, res) {
 
         let info = [[req.body.IDUser, req.body.Cargo, req.body.Empresa, req.body.URLLogo, req.body.Localizacao, req.body.Descricao, req.body.DataInicio, req.body.DataFim ]];
@@ -53,8 +51,6 @@ module.exports = function (app) {
         }, delayInMilliseconds);
     });
 
-    /* ___________ FIM Código novo! _______________ */
-
     /**
  * Função que executa todas as operações necessárias para efetuar o login na aplicação para empresas
  * @param {*} Route caminho que despoleta esta função
@@ -74,6 +70,7 @@ module.exports = function (app) {
                     //Processar os resultados e enviá-los de volta para o cliente
                     idUser = results[0].Users_idUser;
                     nomeUser = results[0].nomeEmpresa;
+                    tipoUser = 1;
                     logged = 'S';
                     res.status(200).send(results);
                 } else {
@@ -107,6 +104,7 @@ module.exports = function (app) {
                     //Processar os resultados e enviá-los de volta para o cliente
                     idUser = results[0].Users_idUser;
                     nomeUser = results[0].nome;
+                    tipoUser = 2;
                     logged = 'S';
                     res.status(200).send(results);
                 } else {
@@ -142,6 +140,7 @@ module.exports = function (app) {
                     //Processar os resultados e enviá-los de volta para o cliente
                     idUser = results[0].Users_idUser;
                     nomeUser = results[0].Nome;
+                    tipoUser = 3;
                     logged = 'S';
                     res.status(200).send(results);
                 } else {
@@ -199,6 +198,25 @@ module.exports = function (app) {
         }, delayInMilliseconds);
     });
 
+    app.post('/criarEmp', function (req, res) {
+        console.log(req);
+        let info = [[req.body.IdUser, req.body.Nome, req.body.Descricao, req.body.UrlSite, req.body.UrlLogo, req.body.Email, req.body.Password, req.body.Localidade]];
+        let query = "INSERT INTO empresas (Users_idUser, nomeEmpresa, descricao, urlSite, urlLogo, email, password, localidade) VALUES ?";
+        var delayInMilliseconds = 500; //1 second
+
+        setTimeout(function () {
+            connection.query(query, [info], function (err, data) {
+                if (err) {
+                    console.log("Error inserting : %s ", err);
+                }
+                else {
+                    console.log(data);
+                    res.status(200).send();
+                }
+            });
+        }, delayInMilliseconds);
+    });
+
     //Cria novo profissional
     app.post('/reg_pro', function (req, res) {
         console.log("sucesso");
@@ -225,7 +243,14 @@ module.exports = function (app) {
 
     //Criar novo user
     app.post('/newUser/:idTipo', function (req, res) {
-        let info = [[req.params.idTipo, '2022-10-13', req.body.Email]];
+        var date = new Date();
+        var datetime = date.getFullYear() + "-"
+        + (date.getMonth() + 1) + "-"
+        + date.getDate() + " "
+        + date.getHours() + ":"
+        + date.getMinutes() + ":"
+        + date.getSeconds();
+        let info = [[req.params.idTipo, datetime, req.body.Email]];
         console.log(info);
         let query = "INSERT INTO Users (TipoUser_idTipoUser,dataAdesao,email) VALUES ?";
         console.log("Query de insert: " + query);
@@ -236,7 +261,7 @@ module.exports = function (app) {
             }
             else {
                 console.log(data);
-                res.status(200).send();
+                res.status(200).send(JSON.stringify(data));
             }
         });
     });
@@ -276,7 +301,7 @@ module.exports = function (app) {
     app.get('/amigos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
-        let query = "select amigos.idAmigo, profissionais.nome from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
+        let query = "select amigos.idAmigos, amigos.idAmigo, profissionais.nome from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
 
         connection.query(query, req.params.idUser, function (error, results, fields) {
             if (error) {
@@ -288,6 +313,51 @@ module.exports = function (app) {
             }
         });
     });
+
+    app.delete('/deleteAmigo/:idAmigos', function (req, res) {
+		var query = "DELETE FROM amigos Where idAmigos=?";
+
+        connection.query(query, req.params.idAmigos, function(error, data){
+            if(error){
+                res.render(error)
+            }
+            else{
+                console.log(data);
+                res.status(200).send(data);
+            }
+
+        });			
+	});
+
+    app.delete('/deleteEmpresa/:Users_idUser', function (req, res) {
+		var query = "DELETE FROM empresas Where Users_idUser=?";
+
+        connection.query(query, req.params.Users_idUser, function(error, data){
+            if(error){
+                res.render(error)
+            }
+            else{
+                console.log(data);
+                res.status(200).send(data);
+            }
+
+        });			
+	});
+
+    app.delete('/deleteUser/:Users_idUser', function (req, res) {
+		var query = "DELETE FROM users Where idUser=?";
+
+        connection.query(query, req.params.Users_idUser, function(error, data){
+            if(error){
+                res.render(error)
+            }
+            else{
+                console.log(data);
+                res.status(200).send(data);
+            }
+
+        });			
+	});
 
     //rest api para obter ofertas.
     app.get('/ofertas', function (req, res) {
@@ -349,6 +419,19 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/pedidosEmp', function (req, res) {
+        let query = "select * from empresaconfirma where situacao = 'P'";
+        connection.query(query, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                res.end(JSON.stringify(results));
+            }
+            console.log(results);
+        });
+    });
+
     app.patch('/rejeitarAmigo/:idPedido', function (req, res) {
         var query = "UPDATE pedidosamizade Set situacao='R' Where idPedidosAmizade=?";
         connection.query(query, req.params.idPedido, function (error, result) {
@@ -357,6 +440,84 @@ module.exports = function (app) {
             }
             else {
                 console.log(result);
+                res.status(200).send();
+            }
+        });
+    });
+
+    app.patch('/rejeitarEmpresa/:idEmpresaConfirm', function (req, res) {
+        var query = "UPDATE empresaconfirma Set situacao='R' Where idEmpresaConfirm=?";
+        connection.query(query, req.params.idEmpresaConfirm, function (error, result) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(result);
+                res.status(200).send();
+            }
+        });
+    });
+
+    app.get('/pedidoAmizade/:idPedido', function (req, res) {
+        let query = "select * from pedidosamizade where idPedidosAmizade = ?";
+        connection.query(query, req.params.idPedido, function (error, results, fields) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                res.end(JSON.stringify(results));
+            }
+            console.log(results);
+        });
+    });
+
+    app.patch('/aceitarAmigo/:idPedido', function (req, res) {
+        var date = new Date();
+        var datetime = date.getFullYear() + "-"
+        + (date.getMonth() + 1) + "-"
+        + date.getDate() + " "
+        + date.getHours() + ":"
+        + date.getMinutes() + ":"
+        + date.getSeconds();
+        let info = [datetime, req.params.idPedido];
+        var query = "UPDATE pedidosamizade Set situacao='A', dataConfirmacao=? Where idPedidosAmizade=?";
+        connection.query(query, info, function (error, result) {
+            console.log(query);
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(result);
+                res.status(200).send(JSON.stringify(result));
+            }
+        });
+    });
+
+    app.patch('/aceitarEmpresa/:idPedido', function (req, res) {
+        var query = "UPDATE empresaconfirma Set situacao='A' Where idEmpresaConfirm=?";
+        connection.query(query, req.params.idPedido, function (error, result) {
+            console.log(query);
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(result);
+                res.status(200).send(JSON.stringify(result));
+            }
+        });
+    });
+
+    app.post('/criarAmizade/:idProf/:idAmigo', function (req, res) {
+        let info = [[req.params.idProf, req.params.idAmigo]];
+        console.log(info);
+        let query = "INSERT INTO amigos (Profissionais_idUser,idAmigo) VALUES ?";
+
+        connection.query(query, [info], function (error, data) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(data);
                 res.status(200).send();
             }
         });

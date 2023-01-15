@@ -2,12 +2,14 @@
  * Função chamada quando página é carregada
  */
 function init() {
+    var user;
     var profissionais;
     var profissionaisShow;
     var empresas;
     var empresasShow;
 
     //inicializar botões da parte do filtro empresa/curriculo
+    getUserLogged();
     init_btn_filtro_emp_curr();
     obterEmpresas();
     obterProfissionais();
@@ -26,6 +28,37 @@ function init() {
     btn_filtro.addEventListener("click", function (evt) {
         cleanFilterEmp();
     });
+
+    function verifyUser() {
+        if (user) {
+            var btn_menu_amigos = document.getElementById("btn_menu_amigos");
+            var btn_menu_empresas = document.getElementById("btn_menu_empresas");
+            var a_login = document.getElementById("a_login");
+            var a_register = document.getElementById("a_register");
+            
+            switch(user[0].TipoUser_idTipoUser) {
+                case 1:
+                    break;
+                case 2:
+                    btn_menu_amigos.style.display = "inline";
+                    break;
+                case 3:
+                    btn_menu_empresas.style.display = "inline";
+                    break;
+                default:
+            }
+
+            a_login.style.display = "none";
+            a_register.style.display = "none";
+
+            var div_header = document.getElementById("div_header");
+            var linkPerfil = document.createElement("a");
+            linkPerfil.textContent =  user[0].nome;
+            linkPerfil.className = "a_perfil";
+
+            div_header.appendChild(linkPerfil);
+        }
+    }
     
     /**
     * Função que inicializa os botões e os eventos dos mesmos
@@ -49,13 +82,18 @@ function init() {
         });
     
         btn_curriculos.addEventListener("click", function(evt) {
-            div_cont_left_filt_curr.style.display = "initial";
-            div_cont_left_filt_emp.style.display = "none";
-            div_container_curriculos.style.display = "initial";
-            div_container_empresas.style.display = "none";
-            btn_empresas.style.backgroundColor = "rgba(255, 255, 255, 0)";
-            btn_curriculos.style.backgroundColor = "#ebebeba1";
-            section_checked = 2;
+
+            if (!user){
+                alert("Tem de ter login efetuado para aceder a esta secção!");
+            }else{
+                div_cont_left_filt_curr.style.display = "initial";
+                div_cont_left_filt_emp.style.display = "none";
+                div_container_curriculos.style.display = "initial";
+                div_container_empresas.style.display = "none";
+                btn_empresas.style.backgroundColor = "rgba(255, 255, 255, 0)";
+                btn_curriculos.style.backgroundColor = "#ebebeba1";
+                section_checked = 2;
+            }
         });
     };
 
@@ -93,6 +131,13 @@ function init() {
             p_tipo.textContent = "Empresa";
             div_tipo.appendChild(p_tipo);
 
+            var div_localidade = document.createElement("div");
+            div_localidade.className = "div_info";
+            var p_localidade = document.createElement("p");
+            p_localidade.className = "p_info";
+            p_localidade.textContent = elem.localidade;
+            div_localidade.appendChild(p_localidade);
+
             var div_descricao = document.createElement("div");
             div_descricao.className = "div_info";
             var p_descricao = document.createElement("p");
@@ -105,6 +150,7 @@ function init() {
 
             div_info_row_right.appendChild(div_nome);
             div_info_row_right.appendChild(div_tipo);
+            div_info_row_right.appendChild(div_localidade);
             div_info_row.appendChild(div_imagem);
             div_info_row.appendChild(div_info_row_right);
             div_empresa.appendChild(div_info_row);
@@ -348,12 +394,15 @@ function init() {
 
     function validateFilterEmp() {
         var inputNome = document.getElementById("input_procura").value;
+        var inputLocalidade = document.getElementById("empresa_localidade").value;
 
         if (inputNome) {
             empresasShow = getElemsByName(empresasShow, inputNome);
         }
 
-        console.log(empresasShow);
+        if (inputLocalidade) {
+            empresasShow = getElemsByLocal(empresasShow, inputLocalidade);
+        }
 
         //Exibir ofertas e atualizar array show
         if (empresasShow !== void 0) {
@@ -468,13 +517,42 @@ function init() {
                         validateFilterEmp();
                     });
 
-                    
+                    var inputLocal = document.getElementById("empresa_localidade");
+                    inputLocal.addEventListener("change", function(evt) {
+                        empresasShow = structuredClone(empresas);
+                        validateFilterEmp();
+                    });
                 }
             };
         }
 
         // Enviar a solicitação
         xhr2.send();
+    }
+
+    function getUserLogged() {
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_userLogged = new XMLHttpRequest();
+        } else {
+            xhr_userLogged = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_userLogged) {
+            // Configurar a solicitação
+            xhr_userLogged.open('GET', 'http://127.0.0.1:5502/getUserLogged', true);
+
+            // Definir a função de retorno de chamada
+            xhr_userLogged.onreadystatechange = function () {
+                if ((xhr_userLogged.readyState === 4) && (xhr_userLogged.status === 200)) {
+                    user = JSON.parse(xhr_userLogged.responseText);
+                    verifyUser();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_userLogged.send();
     }
 }
 

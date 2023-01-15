@@ -3,12 +3,12 @@
     margin: 0%;
     height: 5%;
     display: inline-flex;
+    padding-left: 20%;
 }
 
 .img_logo{
     height: 70%;
     margin-top: 2%;
-    margin-left: 99%;
 }
 
 .a_login{
@@ -24,6 +24,18 @@
     margin-top: 3.5%;
     margin-left: 5%;
     text-decoration: none;
+}
+
+.a_perfil{
+    color: #123370;
+    font-size: 150%;
+    margin-top: 3.5%;
+    margin-left: 250%;
+    text-decoration: none;
+    font: bold;
+}
+.a_perfil:hover{
+    cursor: pointer;
 }
 
 .div_menu {
@@ -78,6 +90,7 @@
     font-size: medium;
     border-color: rgba(255, 255, 255, 0);
     margin-left: 1%;
+    display: none;
 }
 
 .btn_menu_amigos:hover{
@@ -92,6 +105,7 @@
     font-size: medium;
     border-color: rgba(255, 255, 255, 0);
     margin-left: 1%;
+    display: none;
 }
 .btn_menu_empresas:hover{
     background-color: #ebebeba1;
