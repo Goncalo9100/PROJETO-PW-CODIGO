@@ -36,6 +36,22 @@ function init() {
             var linkPerfil = document.createElement("a");
             linkPerfil.textContent =  user[0].nome;
             linkPerfil.className = "a_perfil";
+            linkPerfil.addEventListener("click", function (evt) {
+                sessionStorage.setItem("Users_idUser", user[0].Users_idUser);
+                sessionStorage.setItem("TipoUsers_idUser", user[0].TipoUser_idTipoUser);
+                switch(user[0].TipoUser_idTipoUser) {
+                    case 1:
+                        window.location.href = "http://127.0.0.1:5502/pagina_perfil_emp.html";
+                        break;
+                    case 2:
+                        window.location.href = "http://127.0.0.1:5502/pagina_perfil_pro.html";
+                        break;
+                    case 3:
+                        window.location.href = "http://127.0.0.1:5502/pagina_perfil_emp.html";
+                        break;
+                    default:
+                }
+            });
 
             div_header.appendChild(linkPerfil);
         }
@@ -60,6 +76,12 @@ function init() {
 
             var h1_nome = document.createElement("h1");
             h1_nome.textContent = elem.nome;
+            h1_nome.id = elem.idSoliciador;
+            h1_nome.addEventListener("click", function (evt) {
+                sessionStorage.setItem("Users_idUser", evt.target.id);
+                sessionStorage.setItem("TipoUsers_idUser", 1);
+                window.location.href = "http://127.0.0.1:5502/pagina_perfil_pro.html";
+            });
             h1_nome.className = "h1_nome_pedido";
 
             var btn_aceitar = document.createElement("button");
@@ -219,6 +241,12 @@ function init() {
 
             var h1_nome = document.createElement("h1");
             h1_nome.textContent = elem.nome;
+            h1_nome.id = elem.idAmigo;
+            h1_nome.addEventListener("click", function (evt) {
+                sessionStorage.setItem("Users_idUser", evt.target.id);
+                sessionStorage.setItem("TipoUsers_idUser", 1);
+                window.location.href = "http://127.0.0.1:5502/pagina_perfil_pro.html";
+            });
             h1_nome.className = "h1_nome_pedido";
 
             var btn_eliminar = document.createElement("button");

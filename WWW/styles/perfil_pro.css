@@ -107,6 +107,14 @@ html, body{
 .img_editar:hover{
     cursor: pointer;
 }
+.img_save{
+    width: 4%;
+    margin-left: 26%;
+    display: none;
+}
+.img_save:hover{
+    cursor: pointer;
+}
 
 /*Div com os icones da informação*/
 .div_icon{

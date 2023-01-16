@@ -183,6 +183,14 @@ module.exports = function (app) {
             });
         } catch { }
     })
+
+    app.get('/logOut', function (req, res) {
+        idUser = 0;
+        nomeUser = "";
+        tipoUser = 0;
+        logged = 'N';
+        res.status(200).send();
+    })
     //-------------------------------------------------------------------------
 
     app.post('/reg_emp', function (req, res) {
@@ -297,7 +305,7 @@ module.exports = function (app) {
     app.get('/pedidos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
-        let query = "select pedidosamizade.idPedidosAmizade, profissionais.nome from pedidosamizade inner join profissionais on pedidosamizade.idSoliciador = profissionais.Users_idUser where Profissionais_idUser = ? and situacao = 'P'";
+        let query = "select pedidosamizade.idPedidosAmizade, profissionais.nome, pedidosamizade.idSoliciador from pedidosamizade inner join profissionais on pedidosamizade.idSoliciador = profissionais.Users_idUser where Profissionais_idUser = ? and situacao = 'P'";
 
         connection.query(query, req.params.idUser, function (error, results, fields) {
             if (error) {
@@ -312,7 +320,7 @@ module.exports = function (app) {
     app.get('/amigos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
-        let query = "select amigos.idAmigos, amigos.idAmigo, profissionais.nome from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
+        let query = "select amigos.idAmigos, amigos.idAmigo, profissionais.nome, amigos.idAmigo from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
 
         connection.query(query, req.params.idUser, function (error, results, fields) {
             if (error) {

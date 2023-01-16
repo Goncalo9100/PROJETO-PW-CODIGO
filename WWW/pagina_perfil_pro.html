@@ -25,9 +25,10 @@
             onclick="window.location.href='http://127.0.0.1:5502/pagina_portefolios.html'">Portefólios</button>
         <button class="btn_menu_ofertas" onclick="window.location.href='http://127.0.0.1:5502/pagina_ofertas_emprego.html'">Ofertas
             Emprego</button>
-        <button class="btn_menu_amigos" id="btn_menu_amigos">Amigos</button>
-        <button class="btn_menu_empresas" id="btn_menu_empresas"
-            onclick="window.location.href='http://127.0.0.1:5502/pagina_empresas.html'">Empresas</button>
+        <button class="btn_menu_amigos" id="btn_menu_amigos"
+            onclick="window.location.href='http://127.0.0.1:5502/pagina_amigos.html'">Amigos</button>
+        <button class="btn_menu_empresas" id="btn_menu_empresas">Empresas</button>
+        <button class="btn_menu_terminar_sessao" id="btn_menu_terminar_sessao">Terminar Sessao</button>
     </div>
 
     <div class="div_body_container">
@@ -58,6 +59,7 @@
                 <div class="div_pro_nome">
                     <!-- Label Nome do profissional -->
                     <input type="text" class="input_nome" placeholder="Gustavo" disabled></input>
+                    <img class="img_save" id="img_save" src="imagens/icon_save.png">
                     <img class="img_editar" src="imagens/editar.png">
                 </div>
                 <div class="div_pro_descricao">
@@ -79,7 +81,7 @@ Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) a
             <div class="info_bottom_left">
                 <div class="div_info_left_row">
                     <h1 class="h1_info_left">Experiência Profissional</h1>
-                    <img class="img_editar_info_left" src="imagens/editar.png">
+                    <img class="img_editar_info_left" onclick="window.location.href='http://127.0.0.1:5502/pagina_insert_experiencia.html'" src="imagens/icon_add.png">
                 </div>
                 <hr class="hr"/>
                 <div class="div_experiencias_scroll" id="div_experiencias_scroll">
@@ -100,7 +102,7 @@ Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) a
             <div class="info_bottom_right">
                 <div class="div_info_left_row">
                     <h1 class="h1_info_right">Cursos e Formações</h1>
-                    <img class="img_editar_info_right" src="imagens/editar.png">
+                    <img class="img_editar_info_right" onclick="window.location.href='http://127.0.0.1:5502/pagina_insert_habilitacoes.html'" src="imagens/icon_add.png">
                 </div>
                 <hr class="hr"/>
                 <div class="div_cursos_scroll" id="div_cursos_scroll">
@@ -114,6 +116,57 @@ Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) a
                             <p class="p_exp_right_top3">Setubal, Portugal</p>
                         </div>
                     </div>
+                    <div class="div_experiencia">
+                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
+                        <div class="div_experiencia_right">
+                            <div class="div_experiencia_right_top">
+                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
+                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
+                            </div>
+                            <p class="p_exp_right_top3">Setubal, Portugal</p>
+                        </div>
+                    </div>
+                    <div class="div_experiencia">
+                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
+                        <div class="div_experiencia_right">
+                            <div class="div_experiencia_right_top">
+                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
+                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
+                            </div>
+                            <p class="p_exp_right_top3">Setubal, Portugal</p>
+                        </div>
+                    </div>
+                    <div class="div_experiencia">
+                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
+                        <div class="div_experiencia_right">
+                            <div class="div_experiencia_right_top">
+                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
+                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
+                            </div>
+                            <p class="p_exp_right_top3">Setubal, Portugal</p>
+                        </div>
+                    </div>
+                    <div class="div_experiencia">
+                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
+                        <div class="div_experiencia_right">
+                            <div class="div_experiencia_right_top">
+                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
+                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
+                            </div>
+                            <p class="p_exp_right_top3">Setubal, Portugal</p>
+                        </div>
+                    </div>
+                    <div class="div_experiencia">
+                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
+                        <div class="div_experiencia_right">
+                            <div class="div_experiencia_right_top">
+                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
+                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
+                            </div>
+                            <p class="p_exp_right_top3">Setubal, Portugal</p>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
