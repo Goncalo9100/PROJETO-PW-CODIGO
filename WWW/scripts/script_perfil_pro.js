@@ -4,6 +4,7 @@
 function init() {
     var user;
     var experiencias;
+    var infoUser;
     var cursos;
     var div_experiencias_scroll = document.getElementById("div_experiencias_scroll");
     var div_cursos_scroll = document.getElementById("div_cursos_scroll");
@@ -36,8 +37,21 @@ function init() {
 
             var p_exp_right_top2 = document.createElement("p");
             p_exp_right_top2.className = "p_exp_right_top2";
+
             if (elem.dataFim) {
-                p_exp_right_top2.textContent = elem.dataInicio + " até " + elem.dataFim;
+                var datFim = new Date(elem.dataFim);
+                var datInicio = new Date(elem.dataInicio);
+                var fimString;
+                var iniString;
+                if(datFim.getFullYear() == '9999'){
+                    fimString = "Presente";
+                }else{
+                    fimString = datFim.getMonth()+1 + "/" + datFim.getFullYear();
+                }
+
+                iniString = datInicio.getMonth()+1 + "/" + datInicio.getFullYear();
+
+                p_exp_right_top2.textContent = iniString + " até " + fimString;
             }else{
                 p_exp_right_top2.textContent = elem.dataInicio + " até Presente";
             }
@@ -54,7 +68,6 @@ function init() {
             div_experiencia.appendChild(div_experiencia_left);
             div_experiencia.appendChild(div_experiencia_right);
             div_experiencias_scroll.appendChild(div_experiencia);
-            console.log(div_experiencia);
         }
     }
 
@@ -80,19 +93,31 @@ function init() {
 
             var p_exp_right_top1 = document.createElement("p");
             p_exp_right_top1.className = "p_exp_right_top1";
-            p_exp_right_top1.textContent = elem.cargo + " na " + elem.empresa;
+            p_exp_right_top1.textContent = elem.curso + " em " + elem.estabelEnsino;
 
             var p_exp_right_top2 = document.createElement("p");
             p_exp_right_top2.className = "p_exp_right_top2";
             if (elem.dataFim) {
-                p_exp_right_top2.textContent = elem.dataInicio + " até " + elem.dataFim;
+                var datFim = new Date(elem.dataFim);
+                var datInicio = new Date(elem.dataInicio);
+                var fimString;
+                var iniString;
+                if(datFim.getFullYear() == '9999'){
+                    fimString = "Presente";
+                }else{
+                    fimString = datFim.getMonth()+1 + "/" + datFim.getFullYear();
+                }
+
+                iniString = datInicio.getMonth()+1 + "/" + datInicio.getFullYear();
+
+                p_exp_right_top2.textContent = iniString + " até " + fimString;
             }else{
                 p_exp_right_top2.textContent = elem.dataInicio + " até Presente";
             }
 
             var p_exp_right_top3 = document.createElement("p");
             p_exp_right_top3.className = "p_exp_right_top3";
-            p_exp_right_top3.textContent = elem.localizacao;
+            p_exp_right_top3.textContent = elem.tipoCurso;
 
             div_experiencia_right_top.appendChild(p_exp_right_top1);
             div_experiencia_right_top.appendChild(p_exp_right_top2);
@@ -102,7 +127,6 @@ function init() {
             div_experiencia.appendChild(div_experiencia_left);
             div_experiencia.appendChild(div_experiencia_right);
             div_cursos_scroll.appendChild(div_experiencia);
-            console.log(div_experiencia);
         }
     }
 
@@ -168,11 +192,52 @@ function init() {
             btn_menu_terminar_sessao.addEventListener("click", function() {
                 getLogOut();
             });
-            console.log(user[0].Users_idUser);
-            console.log(idUser);
             if(user[0].Users_idUser != idUser) {
                 btn_menu_terminar_sessao.style.display = "none";
             }
+
+            var img_editar = document.getElementById("img_editar");
+            var img_save = document.getElementById("img_save");
+
+
+            img_editar.addEventListener("click", function() {
+                
+                img_editar.style.display = "none";
+                img_save.style.display = "inline";
+                
+                const input_nome = document.getElementById('input_nome');
+                input_nome.removeAttribute('disabled');
+                input_nome.style.border = "solid black";
+
+                const input_descricao = document.getElementById('input_descricao');
+                input_descricao.removeAttribute('disabled');
+                input_descricao.style.border = "solid black";
+
+                const input_localidade = document.getElementById('input_localidade');
+                input_localidade.removeAttribute('disabled');
+                input_localidade.style.border = "solid black";
+            });
+
+            img_save.addEventListener("click", function() {
+                
+                img_editar.style.display = "inline";    
+                img_save.style.display = "none";
+
+                const input_nome = document.getElementById('input_nome');
+                input_nome.setAttribute('disabled', "");
+                input_nome.style.border = "none";
+
+                const input_descricao = document.getElementById('input_descricao');
+                input_descricao.setAttribute('disabled', "");
+                input_descricao.style.border = "none";
+
+                const input_localidade = document.getElementById('input_localidade');
+                input_localidade.setAttribute('disabled', "");
+                input_localidade.style.border = "none";
+
+                //Alterar informação (bd)
+                
+            });
         }
     }
 
@@ -200,6 +265,98 @@ function init() {
         xhr_logOut.send();
     }
 
+    function obterInfoUserPro(){
+        var url = "/userPro/" + sessionStorage.getItem("Users_idUser"); 
+
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_infopro = new XMLHttpRequest();
+        } else {
+            xhr_infopro = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_infopro) {
+            // Configurar a solicitação
+            xhr_infopro.open('GET', url, true);
+
+            // Definir a função de retorno de chamada
+            xhr_infopro.onreadystatechange = function () {
+                if ((xhr_infopro.readyState === 4) && (xhr_infopro.status === 200)) {
+                    infoUser = JSON.parse(xhr_infopro.responseText);
+                    console.log(infoUser);
+                    inserirInfoUser();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_infopro.send();
+    }
+
+    function inserirInfoUser(){
+        var adesao = new Date(infoUser[0].dataAdesao);
+
+        document.getElementById("input_descricao").placeholder = infoUser[0].descricao;
+        document.getElementById("input_nome").placeholder = infoUser[0].nome;
+        document.getElementById("input_localidade").placeholder = infoUser[0].localidade;
+        document.getElementById("label_adesao").textContent = "Aderiu a " + adesao.getDate() + "/" + adesao.getMonth()+1 + "/" + adesao.getFullYear();
+        
+    }
+
+    function obterExperiencias(){
+        var url = "/experiencias/" + sessionStorage.getItem("Users_idUser"); 
+
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_exp = new XMLHttpRequest();
+        } else {
+            xhr_exp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_exp) {
+            // Configurar a solicitação
+            xhr_exp.open('GET', url, true);
+
+            // Definir a função de retorno de chamada
+            xhr_exp.onreadystatechange = function () {
+                if ((xhr_exp.readyState === 4) && (xhr_exp.status === 200)) {
+                    experiencias = JSON.parse(xhr_exp.responseText);
+                    inserirExperiencias();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_exp.send();
+    }
+
+    function obterCursos(){
+        var url = "/cursos/" + sessionStorage.getItem("Users_idUser"); 
+
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_curso = new XMLHttpRequest();
+        } else {
+            xhr_curso = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_curso) {
+            // Configurar a solicitação
+            xhr_curso.open('GET', url, true);
+
+            // Definir a função de retorno de chamada
+            xhr_curso.onreadystatechange = function () {
+                if ((xhr_curso.readyState === 4) && (xhr_curso.status === 200)) {
+                    cursos = JSON.parse(xhr_curso.responseText);
+                    insertCursos();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_curso.send();
+    }
+
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -220,6 +377,10 @@ function init() {
                     var perfilUser = sessionStorage.getItem("Users_idUser");
                     var perfilUserTipo = sessionStorage.getItem("TipoUsers_idUser");
                     verifyUser();
+                    obterInfoUserPro();
+                    obterExperiencias();
+                    obterCursos();
+
                 }
             };
         }

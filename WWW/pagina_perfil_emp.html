@@ -42,7 +42,7 @@
                         <img class="img_icon" id="icon_adesao" src="imagens/adesao_icon.png">
                     </div>
                     <!-- Label de tempo de adesão -->
-                    <label class="label_info_left"> Aderiu a 12/10/2022</label>
+                    <label class="label_info_left" id="label_adesao">Adesão</label>
                 </div>
                 <div class="line_info_pro">
                     <div class="div_icon">
@@ -50,7 +50,7 @@
                         <img class="img_icon" id="icon_locali" src="imagens/localizacao_icon.png">
                     </div>
                     <!-- Label de localização -->
-                    <input class="input_info_left" placeholder="Lisboa, Portugal" disabled></input>
+                    <input class="input_info_left" id="input_localizacao" placeholder="Localização" disabled></input>
                 </div>
             </div>
             <br>
@@ -58,18 +58,13 @@
             <div class="right_top">
                 <div class="div_pro_nome">
                     <!-- Label Nome do profissional -->
-                    <input type="text" class="input_nome" placeholder="Gustavo" disabled></input>
+                    <input type="text" class="input_nome" id="input_nome" placeholder="Nome Empresa" disabled></input>
                     <img class="img_editar" src="imagens/editar.png">
                 </div>
                 <div class="div_pro_descricao">
                     <!-- Text Area Informação sobre profissional -->
-                    <textarea type="text" class="input_descricao"
-                        placeholder="I started my career as a programmer in 2013 with the IT management course. 
-
-Since then, I have had the opportunity to work with several programming languages ​​such as C, Java, JavaScript, Phyton, PHP, among others. 
-
-Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) and I confess that this programming language is, as they say, 'my thing'."
-                        rows="15" cols="50" disabled></textarea>
+                    <textarea type="text" id="input_descricao" class="input_descricao"
+                        placeholder="Descrição" rows="15" cols="50"></textarea>
                 </div>
             </div>
 

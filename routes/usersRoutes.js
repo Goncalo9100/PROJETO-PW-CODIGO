@@ -9,6 +9,103 @@ let logged = 'N';
 
 
 module.exports = function (app) {
+    /**
+* Função que executa todas as operações para obter as experiências
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/experiencias/:user', function (req, res) {
+
+        let query = "select * from experienciapro where Users_idUser=?";
+        try {
+            connection.query(query, req.params.user, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                } else {
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
+    /**
+* Função que executa todas as operações para obter os cursos
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/cursos/:user', function (req, res) {
+
+        let query = "select * from habilitacoes where Users_idUser=?";
+        try {
+            connection.query(query, req.params.user, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                } else {
+                    console.log(results);
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
+    /**
+* Função que executa todas as operações para obter a informação do perfil do user profissional
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/userPro/:user', function (req, res) {
+
+        let query = "select profissionais.Users_idUser, profissionais.nome, profissionais.descricao, profissionais.localidade, users.dataAdesao from profissionais inner join users on profissionais.Users_idUser = users.idUser where Users_idUser=?";
+
+        try {
+            connection.query(query, req.params.user, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                } else {
+                    console.log(results);
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
+    /**
+* Função que executa todas as operações para obter a informação do perfil do user profissional
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/userEmp/:user', function (req, res) {
+
+        let query = "select empresas.Users_idUser, empresas.nomeEmpresa, empresas.descricao, empresas.localidade, users.dataAdesao from empresas inner join users on empresas.Users_idUser = users.idUser where Users_idUser=?";
+
+        try {
+            connection.query(query, req.params.user, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                } else {
+                    console.log(results);
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
     app.post('/newOferta', function (req, res) {
 
         let info = [[req.body.IdUser, req.body.Area, req.body.Descricao, req.body.Duracao, req.body.Renumeracao, req.body.Validade]];
@@ -42,7 +139,7 @@ module.exports = function (app) {
                 res.status(200).send();
             }
         });
-        
+
     });
 
     app.post('/newDegree', function (req, res) {
@@ -69,7 +166,7 @@ module.exports = function (app) {
  */
     app.get('/loginEmpresa/:email/:password/:user', function (req, res) {
         let info = [req.params.email, req.params.password, req.params.user];
-
+        console.log(info);
         let query = "select Users_idUser, nomeEmpresa from Empresas where email=? and password=? and Users_idUser=?";
         try {
             connection.query(query, info, function (error, results, fields) {

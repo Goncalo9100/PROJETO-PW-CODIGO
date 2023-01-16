@@ -147,7 +147,7 @@ function init() {
     } 
 
     function criarUser(data) {
-        var url = "/newUser/" + 2;
+        var url = "/newUser/" + 1;
 
         var xhttp = new XMLHttpRequest();
         //Open first, before setting the request headers.

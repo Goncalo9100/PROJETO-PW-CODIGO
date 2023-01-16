@@ -34,7 +34,7 @@
     <div class="div_body_container">
         <div class="info_pro_top">
             <div class="left_top">
-                <img class="img_body_pro" src="imagens/Foto Gustavo.jpg">
+                <img class="img_body_pro" src="imagens/person_icon.png">
                 <!-- Informação sobre localização e adesão -->
                 <div class="line_info_pro">
                     <div class="div_icon">
@@ -42,7 +42,7 @@
                         <img class="img_icon" id="icon_adesao" src="imagens/adesao_icon.png">
                     </div>
                     <!-- Label de tempo de adesão -->
-                    <label class="label_info_left"> Aderiu a 12/10/2022</label>
+                    <label class="label_info_left" id="label_adesao">Adesão</label>
                 </div>
                 <div class="line_info_pro">
                     <div class="div_icon">
@@ -50,7 +50,7 @@
                         <img class="img_icon" id="icon_locali" src="imagens/localizacao_icon.png">
                     </div>
                     <!-- Label de localização -->
-                    <input class="input_info_left" placeholder="Lisboa, Portugal" disabled></input>
+                    <input class="input_info_left" id="input_localidade" placeholder="Localidade" disabled></input>
                 </div>
             </div>
             <br>
@@ -58,19 +58,14 @@
             <div class="right_top">
                 <div class="div_pro_nome">
                     <!-- Label Nome do profissional -->
-                    <input type="text" class="input_nome" placeholder="Gustavo" disabled></input>
+                    <input type="text" id="input_nome" class="input_nome" placeholder="Nome" disabled></input>
                     <img class="img_save" id="img_save" src="imagens/icon_save.png">
-                    <img class="img_editar" src="imagens/editar.png">
+                    <img class="img_editar" id="img_editar" src="imagens/editar.png">
                 </div>
                 <div class="div_pro_descricao">
                     <!-- Text Area Informação sobre profissional -->
-                    <textarea type="text" class="input_descricao"
-                        placeholder="I started my career as a programmer in 2013 with the IT management course. 
-
-Since then, I have had the opportunity to work with several programming languages ​​such as C, Java, JavaScript, Phyton, PHP, among others. 
-
-Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) and I confess that this programming language is, as they say, 'my thing'."
-                        rows="15" cols="50" disabled></textarea>
+                    <textarea type="text" id="input_descricao" class="input_descricao"
+                        placeholder="Descrição" rows="15" cols="50" disabled></textarea>
                 </div>
             </div>
 
@@ -85,7 +80,7 @@ Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) a
                 </div>
                 <hr class="hr"/>
                 <div class="div_experiencias_scroll" id="div_experiencias_scroll">
-                    <div class="div_experiencia">
+                    <!--<div class="div_experiencia">
                         <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
                         <div class="div_experiencia_right">
                             <div class="div_experiencia_right_top">
@@ -94,7 +89,7 @@ Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) a
                             </div>
                             <p class="p_exp_right_top3">Setubal, Portugal</p>
                         </div>
-                    </div> 
+                    </div> -->
                 </div>
             </div>
 
@@ -106,7 +101,7 @@ Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) a
                 </div>
                 <hr class="hr"/>
                 <div class="div_cursos_scroll" id="div_cursos_scroll">
-                    <div class="div_experiencia">
+                    <!--<div class="div_experiencia">
                         <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
                         <div class="div_experiencia_right">
                             <div class="div_experiencia_right_top">
@@ -115,58 +110,7 @@ Right now, I am a student of computer engineering, I work with ABAP (SAP HANA) a
                             </div>
                             <p class="p_exp_right_top3">Setubal, Portugal</p>
                         </div>
-                    </div>
-                    <div class="div_experiencia">
-                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
-                        <div class="div_experiencia_right">
-                            <div class="div_experiencia_right_top">
-                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
-                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
-                            </div>
-                            <p class="p_exp_right_top3">Setubal, Portugal</p>
-                        </div>
-                    </div>
-                    <div class="div_experiencia">
-                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
-                        <div class="div_experiencia_right">
-                            <div class="div_experiencia_right_top">
-                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
-                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
-                            </div>
-                            <p class="p_exp_right_top3">Setubal, Portugal</p>
-                        </div>
-                    </div>
-                    <div class="div_experiencia">
-                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
-                        <div class="div_experiencia_right">
-                            <div class="div_experiencia_right_top">
-                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
-                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
-                            </div>
-                            <p class="p_exp_right_top3">Setubal, Portugal</p>
-                        </div>
-                    </div>
-                    <div class="div_experiencia">
-                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
-                        <div class="div_experiencia_right">
-                            <div class="div_experiencia_right_top">
-                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
-                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
-                            </div>
-                            <p class="p_exp_right_top3">Setubal, Portugal</p>
-                        </div>
-                    </div>
-                    <div class="div_experiencia">
-                        <div class="div_experiencia_left"><p class="p_experiencia">t</p></div>
-                        <div class="div_experiencia_right">
-                            <div class="div_experiencia_right_top">
-                                <p class="p_exp_right_top1">Programmer na Deloitte</p>
-                                <p class="p_exp_right_top2">(10/2022 até Presente) </p>
-                            </div>
-                            <p class="p_exp_right_top3">Setubal, Portugal</p>
-                        </div>
-                    </div>
-                    
+                    </div>-->                    
                 </div>
             </div>
         </div>
