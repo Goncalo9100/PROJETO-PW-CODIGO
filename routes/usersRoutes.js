@@ -9,6 +9,25 @@ let logged = 'N';
 
 
 module.exports = function (app) {
+    app.post('/newOferta', function (req, res) {
+
+        let info = [[req.body.IdUser, req.body.Area , req.body.Descricao , req.body.Duracao, req.body.Renumeracao , req.body.Validade ]];
+        console.log(info);
+        let query = "INSERT INTO OfertasEmprego (Empresas_Users_idUser, Area_idArea, descricao, duracao, valor, dataValidade) VALUES ?";
+
+        var delayInMilliseconds = 1000; //1 second
+
+            connection.query(query, [info], function (err, data) {
+                if (err) {
+                    console.log("Error inserting : %s ", err);
+                }
+                else {
+                    console.log(data);
+                    res.status(200).send();
+                }
+            });
+    });
+
     app.post('/newExperience', function (req, res) {
 
         let info = [[req.body.IDUser, req.body.Cargo, req.body.Empresa, req.body.URLLogo, req.body.Localizacao, req.body.Descricao, req.body.DataInicio, req.body.DataFim ]];

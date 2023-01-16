@@ -12,10 +12,10 @@
 </head>
 
 <body>
-    <div class="div_header">
+    <div class="div_header" id="div_header">
         <img class="img_logo" src="imagens/logo_com_nome.png">
-        <a class="a_login" onclick="window.location.href='http://127.0.0.1:5502/pagina_login.html'">Login</a>
-        <a class="a_register" onclick="window.location.href='http://127.0.0.1:5502/pagina_registo.html'">Registo</a>
+        <a class="a_login" id="a_login" onclick="window.location.href='http://127.0.0.1:5502/pagina_login.html'">Login</a>
+        <a class="a_register" id="a_register"  onclick="window.location.href='http://127.0.0.1:5502/pagina_registo.html'">Registo</a>
     </div>
 
     <div class="div_menu">
@@ -33,8 +33,8 @@
 
     <div class="div_body">
         <br><h1 class="h1_funcionalidades">Nova oferta de emprego</h1><br><br>
-        <form id="newOferta" action="javascript:novaOferta()" method="POST">
-            <input type="date" id="i_validade" name="i_validade" placeholder="Validade (AAAA/MM/DD)" required title="A validade é obrigatória!"/><br> 
+        <form id="newOferta"> <!--action="javascript:novaOferta()"-->
+            <input type="date" id="i_validade" name="i_validade" placeholder="Validade (AAAA/MM/DD)" required title="A validade é obrigatória!" onchange="javascript:validarData()"/><br> 
             <input type="text" id="i_duracao" name="i_duracao" placeholder="Duração em meses. Ex:2" required title="A duração é obrigatória!"/><br>
             <select name="area" id="area" class="area"></select>
             <input type="text" id="i_renumeracao" name="i_renumeracao" placeholder="Renumeração"/><br>

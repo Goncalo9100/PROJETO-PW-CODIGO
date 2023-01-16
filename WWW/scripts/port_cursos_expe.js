@@ -68,3 +68,7 @@ function newDegree(){
     };
     xhttp2.send(JSON.stringify(info));
 }
+
+function validarInicio(){
+    
+}
