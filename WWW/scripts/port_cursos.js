@@ -54,8 +54,8 @@ function init() {
                 if ((xhr_userLogged.readyState === 4) && (xhr_userLogged.status === 200)) {
                     user = JSON.parse(xhr_userLogged.responseText);
                     verifyUser();
-                    
-                    document.getElementById("newDegree").onsubmit = function(evt){
+
+                    document.getElementById("newDegree").onsubmit = function (evt) {
                         //console.log(user[0].Users_idUser);
                         newDegree(user[0].Users_idUser);
                         evt.preventDefault();
@@ -69,8 +69,13 @@ function init() {
     }
 }
 
-function newDegree(Users_idUser){
+function newDegree(Users_idUser) {
     var tipo = document.getElementById("tipocurso");
+    var dataFim = document.getElementById("i_fim").value;
+
+    if(dataFim ===""){
+        dataFim = "9999-12-31";
+    }
 
     let info = {
         //@TODO Validações às datas de inicio e fim
@@ -80,7 +85,7 @@ function newDegree(Users_idUser){
         TipoCurso: tipo.options[tipo.selectedIndex].text,
         Media: document.getElementById("i_media").value,
         DataInicio: document.getElementById("i_inicio").value,
-        DataFim: document.getElementById("i_fim").value
+        DataFim: dataFim
     }
 
     var url = "/newDegree";
@@ -99,5 +104,36 @@ function newDegree(Users_idUser){
     };
     xhttp2.send(JSON.stringify(info));
 }
+
+
+
+function validarInicio() {
+    // Obtém a data selecionada pelo user
+    var dataSelecionada = new Date(document.getElementById("i_inicio").value);
+    // Obtém a data atual
+    var dataAtual = new Date();
+    // Compara as datas
+    if (dataSelecionada > dataAtual) {
+        alert("A data de inicio não pode ser superior ao dia de hoje!");
+        // Limpa o campo de data
+        document.getElementById("i_inicio").value = "";
+    }
+}
+
+
+function validarFim() {
+    // Obtém a data selecionada pelo user
+    var dataSelecionada = new Date(document.getElementById("i_fim").value);
+    // Obtém a data inserida no campo de inicio
+    var dataInicio = new Date(document.getElementById("i_inicio").value);
+
+    if (dataSelecionada < dataInicio){
+        alert("A data de fim não pode ser inferior à data de inicio!");
+        // Limpa o campo de data
+        document.getElementById("i_fim").value = "";
+    }
+
+}
+
 
 window.onload = init();

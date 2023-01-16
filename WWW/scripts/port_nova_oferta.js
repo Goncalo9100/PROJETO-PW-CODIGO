@@ -152,7 +152,7 @@ function novaOferta(Users_idUser) {
 
 //Validar a data inserida 
 function validarData() {
-    // Obtém a data selecionada pelo usuário
+    // Obtém a data selecionada pelo user
     var dataSelecionada = new Date(document.getElementById("i_validade").value);
     // Obtém a data atual
     var dataAtual = new Date();

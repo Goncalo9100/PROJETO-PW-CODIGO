@@ -69,3 +69,7 @@ select {
 #area option{
     color: gray;
 }
+
+label{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}

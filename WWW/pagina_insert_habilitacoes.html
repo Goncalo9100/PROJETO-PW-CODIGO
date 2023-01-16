@@ -46,8 +46,10 @@
                 <option value="doutoramento">Doutoramento</option>
             </select><br><br>
             <input type="text" id="i_media" name="i_media" placeholder="Média Final"/><br>
+            <label for="i_inicio">Data de inicio das habilitações</label><br>
             <input type="date" id="i_inicio" name="i_inicio" placeholder="Data Inicio (AAAA/MM/DD)" required title="A data de início é obrigatória!" onchange="validarInicio()"/><br>
-            <input type="date" id="i_fim" name="i_fim" placeholder="Data Fim (AAAA/MM/DD)" required title="A data de fim é obrigatória!" onchange="validarFim()"/><br>
+            <label for="i_inicio">Data de fim das habilitações</label><br>
+            <input type="date" id="i_fim" name="i_fim" placeholder="Data Fim (AAAA/MM/DD)" onchange="validarFim()"/><br>
             <br><br><br>
         </form>
         <!-- Botão para guardar a informação nova -->

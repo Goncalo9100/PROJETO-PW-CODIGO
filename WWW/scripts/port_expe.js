@@ -80,8 +80,6 @@ function init() {
 function newExperience(Users_idUser) {
     var dataFim = document.getElementById("i_fim").value;
 
-    console.log("entrou");
-
     if(dataFim ===""){
         dataFim = "9999-12-31";
     }
@@ -112,12 +110,6 @@ function newExperience(Users_idUser) {
         }
     };
     xhttp.send(JSON.stringify(info));
-}
-
-
-
-function validarInicio(){
-    
 }
 
 window.onload = init();
