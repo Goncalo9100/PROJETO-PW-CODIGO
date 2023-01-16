@@ -12,10 +12,10 @@
 </head>
 
 <body>
-    <div class="div_header">
+    <div class="div_header" id="div_header">
         <img class="img_logo" src="imagens/logo_com_nome.png">
-        <a class="a_login" onclick="window.location.href='http://127.0.0.1:5502/pagina_login.html'">Login</a>
-        <a class="a_register" onclick="window.location.href='http://127.0.0.1:5502/pagina_registo.html'">Registo</a>
+        <a class="a_login" id="a_login" onclick="window.location.href='http://127.0.0.1:5502/pagina_login.html'">Login</a>
+        <a class="a_register" id="a_register" onclick="window.location.href='http://127.0.0.1:5502/pagina_registo.html'">Registo</a>
     </div>
 
     <div class="div_menu">
@@ -33,7 +33,7 @@
 
     <div class="div_body">
         <br><h1 class="h1_funcionalidades">Nova experiência profissional</h1><br><br>
-        <form id="newExperience" action="javascript:newExperience()" method="POST">
+        <form id="newExperience">
             <input type="text" id="i_cargo" name="i_cargo" placeholder="Cargo" required title="O cargo é obrigatório!"/><br>
             <input type="text" id="i_empresa" name="i_empresa" placeholder="Empresa" required title="A empresa é obrigatória!"/><br>
             <input type="text" id="i_logoempresa" name="i_logoempresa" placeholder="URL do logo da empresa"/><br>

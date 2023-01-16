@@ -54,13 +54,7 @@ function init() {
                 if ((xhr_userLogged.readyState === 4) && (xhr_userLogged.status === 200)) {
                     user = JSON.parse(xhr_userLogged.responseText);
                     verifyUser();
-
-                    document.getElementById("newExperience").onsubmit = function(evt){
-                        //alert(user[0].Users_idUser);
-                        newExperience(user[0].Users_idUser);
-                        evt.preventDefault();
-                    };
-
+                    
                     document.getElementById("newDegree").onsubmit = function(evt){
                         //console.log(user[0].Users_idUser);
                         newDegree(user[0].Users_idUser);
@@ -75,49 +69,35 @@ function init() {
     }
 }
 
-
-//Função para criar uma nova experiência na base de dados
-function newExperience(Users_idUser) {
-    var dataFim = document.getElementById("i_fim").value;
-
-    console.log("entrou");
-
-    if(dataFim ===""){
-        dataFim = "9999-12-31";
-    }
+function newDegree(Users_idUser){
+    var tipo = document.getElementById("tipocurso");
 
     let info = {
-        IDUser: Users_idUser, 
-        Cargo: document.getElementById("i_cargo").value,
-        Empresa: document.getElementById("i_empresa").value,
-        URLLogo: document.getElementById("i_logoempresa").value,
-        Localizacao: document.getElementById("i_localizacao").value,
+        //@TODO Validações às datas de inicio e fim
+        IDUser: Users_idUser, //Este user é o que está na tabela de profissionais e não na dos users
+        Curso: document.getElementById("i_curso").value,
+        Estab: document.getElementById("i_estab").value,
+        TipoCurso: tipo.options[tipo.selectedIndex].text,
+        Media: document.getElementById("i_media").value,
         DataInicio: document.getElementById("i_inicio").value,
-        DataFim: dataFim,
-        Descricao: document.getElementById("descr_func").value
+        DataFim: document.getElementById("i_fim").value
     }
 
-    var url = "/newExperience";
+    var url = "/newDegree";
 
-    var xhttp = new XMLHttpRequest();
+    var xhttp2 = new XMLHttpRequest();
     //Open first, before setting the request headers.
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhttp.onreadystatechange = function () {
+    xhttp2.open("POST", url, true);
+    xhttp2.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhttp2.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //alert('Experiencia criada');
+            alert('Curso criado');
             //Limpar as caixas de texto todas
-            document.forms["newExperience"].reset();
+            document.forms["newDegree"].reset();
             window.location.href = 'http://127.0.0.1:5502/pagina_perfil_pro.html';
         }
     };
-    xhttp.send(JSON.stringify(info));
-}
-
-
-
-function validarInicio(){
-    
+    xhttp2.send(JSON.stringify(info));
 }
 
 window.onload = init();

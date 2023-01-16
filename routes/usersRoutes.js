@@ -11,63 +11,55 @@ let logged = 'N';
 module.exports = function (app) {
     app.post('/newOferta', function (req, res) {
 
-        let info = [[req.body.IdUser, req.body.Area , req.body.Descricao , req.body.Duracao, req.body.Renumeracao , req.body.Validade ]];
+        let info = [[req.body.IdUser, req.body.Area, req.body.Descricao, req.body.Duracao, req.body.Renumeracao, req.body.Validade]];
         console.log(info);
         let query = "INSERT INTO OfertasEmprego (Empresas_Users_idUser, Area_idArea, descricao, duracao, valor, dataValidade) VALUES ?";
 
-        var delayInMilliseconds = 1000; //1 second
-
-            connection.query(query, [info], function (err, data) {
-                if (err) {
-                    console.log("Error inserting : %s ", err);
-                }
-                else {
-                    console.log(data);
-                    res.status(200).send();
-                }
-            });
+        connection.query(query, [info], function (err, data) {
+            if (err) {
+                console.log("Error inserting : %s ", err);
+            }
+            else {
+                console.log(data);
+                res.status(200).send();
+            }
+        });
     });
 
     app.post('/newExperience', function (req, res) {
 
-        let info = [[req.body.IDUser, req.body.Cargo, req.body.Empresa, req.body.URLLogo, req.body.Localizacao, req.body.Descricao, req.body.DataInicio, req.body.DataFim ]];
+        let info = [[req.body.IDUser, req.body.Cargo, req.body.Empresa, req.body.URLLogo, req.body.Localizacao, req.body.Descricao, req.body.DataInicio, req.body.DataFim]];
         console.log(info);
-        let query = "INSERT INTO experienciapro (Profissionais_idUser, cargo, empresa, urlLogoEmp, localizacao, descriFunc, dataInicio, dataFim) VALUES ?";
 
-        var delayInMilliseconds = 1000; //1 second
+        let query = "INSERT INTO experienciapro (Users_idUser, cargo, empresa, urlLogoEmp, localizacao, descriFunc, dataInicio, dataFim) VALUES ?";
 
-        setTimeout(function () {
-            connection.query(query, [info], function (err, data) {
-                if (err) {
-                    console.log("Error inserting : %s ", err);
-                }
-                else {
-                    console.log(data);
-                    res.status(200).send();
-                }
-            });
-        }, delayInMilliseconds);
+        connection.query(query, [info], function (err, data) {
+            if (err) {
+                console.log("Error inserting : %s ", err);
+            }
+            else {
+                console.log(data);
+                res.status(200).send();
+            }
+        });
+        
     });
 
     app.post('/newDegree', function (req, res) {
 
-        let info = [[req.body.IDUser, req.body.Curso, req.body.TipoCurso,  req.body.Estab, req.body.Media, req.body.DataInicio, req.body.DataFim ]];
+        let info = [[req.body.IDUser, req.body.Curso, req.body.TipoCurso, req.body.Estab, req.body.Media, req.body.DataInicio, req.body.DataFim]];
         console.log(info);
-        let query = "INSERT INTO habilitacoes (Profissionais_idUser, curso, tipoCurso, estabelEnsino, mediaFinal, dataInicio, dataFim) VALUES ?";
+        let query = "INSERT INTO habilitacoes (Users_idUser, curso, tipoCurso, estabelEnsino, mediaFinal, dataInicio, dataFim) VALUES ?";
 
-        var delayInMilliseconds = 1000; //1 second
-
-        setTimeout(function () {
-            connection.query(query, [info], function (err, data) {
-                if (err) {
-                    console.log("Error inserting : %s ", err);
-                }
-                else {
-                    console.log(data);
-                    res.status(200).send();
-                }
-            });
-        }, delayInMilliseconds);
+        connection.query(query, [info], function (err, data) {
+            if (err) {
+                console.log("Error inserting : %s ", err);
+            }
+            else {
+                console.log(data);
+                res.status(200).send();
+            }
+        });
     });
 
     /**
@@ -264,11 +256,11 @@ module.exports = function (app) {
     app.post('/newUser/:idTipo', function (req, res) {
         var date = new Date();
         var datetime = date.getFullYear() + "-"
-        + (date.getMonth() + 1) + "-"
-        + date.getDate() + " "
-        + date.getHours() + ":"
-        + date.getMinutes() + ":"
-        + date.getSeconds();
+            + (date.getMonth() + 1) + "-"
+            + date.getDate() + " "
+            + date.getHours() + ":"
+            + date.getMinutes() + ":"
+            + date.getSeconds();
         let info = [[req.params.idTipo, datetime, req.body.Email]];
         console.log(info);
         let query = "INSERT INTO Users (TipoUser_idTipoUser,dataAdesao,email) VALUES ?";
@@ -334,49 +326,49 @@ module.exports = function (app) {
     });
 
     app.delete('/deleteAmigo/:idAmigos', function (req, res) {
-		var query = "DELETE FROM amigos Where idAmigos=?";
+        var query = "DELETE FROM amigos Where idAmigos=?";
 
-        connection.query(query, req.params.idAmigos, function(error, data){
-            if(error){
+        connection.query(query, req.params.idAmigos, function (error, data) {
+            if (error) {
                 res.render(error)
             }
-            else{
+            else {
                 console.log(data);
                 res.status(200).send(data);
             }
 
-        });			
-	});
+        });
+    });
 
     app.delete('/deleteEmpresa/:Users_idUser', function (req, res) {
-		var query = "DELETE FROM empresas Where Users_idUser=?";
+        var query = "DELETE FROM empresas Where Users_idUser=?";
 
-        connection.query(query, req.params.Users_idUser, function(error, data){
-            if(error){
+        connection.query(query, req.params.Users_idUser, function (error, data) {
+            if (error) {
                 res.render(error)
             }
-            else{
+            else {
                 console.log(data);
                 res.status(200).send(data);
             }
 
-        });			
-	});
+        });
+    });
 
     app.delete('/deleteUser/:Users_idUser', function (req, res) {
-		var query = "DELETE FROM users Where idUser=?";
+        var query = "DELETE FROM users Where idUser=?";
 
-        connection.query(query, req.params.Users_idUser, function(error, data){
-            if(error){
+        connection.query(query, req.params.Users_idUser, function (error, data) {
+            if (error) {
                 res.render(error)
             }
-            else{
+            else {
                 console.log(data);
                 res.status(200).send(data);
             }
 
-        });			
-	});
+        });
+    });
 
     //rest api para obter ofertas.
     app.get('/ofertas', function (req, res) {
@@ -493,11 +485,11 @@ module.exports = function (app) {
     app.patch('/aceitarAmigo/:idPedido', function (req, res) {
         var date = new Date();
         var datetime = date.getFullYear() + "-"
-        + (date.getMonth() + 1) + "-"
-        + date.getDate() + " "
-        + date.getHours() + ":"
-        + date.getMinutes() + ":"
-        + date.getSeconds();
+            + (date.getMonth() + 1) + "-"
+            + date.getDate() + " "
+            + date.getHours() + ":"
+            + date.getMinutes() + ":"
+            + date.getSeconds();
         let info = [datetime, req.params.idPedido];
         var query = "UPDATE pedidosamizade Set situacao='A', dataConfirmacao=? Where idPedidosAmizade=?";
         connection.query(query, info, function (error, result) {
