@@ -166,6 +166,7 @@ function init() {
 
             var div_header = document.getElementById("div_header");
             var linkPerfil = document.createElement("a");
+            linkPerfil.id = "a_user";
             linkPerfil.textContent =  user[0].nome;
             linkPerfil.className = "a_perfil";
             linkPerfil.addEventListener("click", function (evt) {
@@ -220,6 +221,8 @@ function init() {
 
             img_save.addEventListener("click", function() {
                 
+                atualizarUser();
+
                 img_editar.style.display = "inline";    
                 img_save.style.display = "none";
 
@@ -234,11 +237,65 @@ function init() {
                 const input_localidade = document.getElementById('input_localidade');
                 input_localidade.setAttribute('disabled', "");
                 input_localidade.style.border = "none";
-
-                //Alterar informação (bd)
-                
             });
         }
+    }
+
+    function atualizarUser() {
+        var xhr_atualizarUser;
+
+        let info = {
+            Users_idUser: sessionStorage.getItem("Users_idUser"),
+            Nome: "",
+            Descricao: "",
+            Localidade: ""
+        }
+        
+        if (document.getElementById('input_nome').value) {
+            info.Nome = document.getElementById('input_nome').value;
+        }else{
+            info.Nome = document.getElementById('input_nome').placeholder;
+        }
+
+        if (document.getElementById('input_descricao').value) {
+            info.Descricao = document.getElementById('input_descricao').value;
+        }else{
+            info.Descricao = document.getElementById('input_descricao').placeholder;
+        }
+
+        if (document.getElementById('input_localidade').value) {
+            info.Localidade = document.getElementById('input_localidade').value;
+        }else{
+            info.Localidade = document.getElementById('input_localidade').placeholder;
+        }
+
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_atualizarUser = new XMLHttpRequest();
+        } else {
+            xhr_atualizarUser = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        var url = "http://127.0.0.1:5502/atualizarProf/" + info.Nome + "/" + info.Descricao + "/" + info.Localidade + "/" + info.Users_idUser;
+
+        if (xhr_atualizarUser) {
+            // Configurar a solicitação
+            xhr_atualizarUser.open('PATCH', url, true);
+
+            // Definir a função de retorno de chamada
+            xhr_atualizarUser.onreadystatechange = function () {
+                if ((xhr_atualizarUser.readyState === 4) && (xhr_atualizarUser.status === 200)) {
+                    document.getElementById('input_nome').value = "";
+                    document.getElementById('input_descricao').value = "";
+                    document.getElementById('input_localidade').value = "";
+                    document.getElementById("a_user").textContent = info.Nome;
+                    obterInfoUserPro();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_atualizarUser.send();
     }
 
     function getLogOut() {

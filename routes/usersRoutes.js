@@ -668,4 +668,38 @@ module.exports = function (app) {
             });
         } else { res.status(401).send(); }
     });
+
+    app.patch('/atualizarProf/:nome/:descricao/:localidade/:Users_idUser', function (req, res) {
+
+        let info = [req.params.nome, req.params.descricao, req.params.localidade, req.params.Users_idUser];
+
+        var query = "UPDATE profissionais Set nome=?, descricao=?, localidade=? Where Users_idUser=?";
+        connection.query(query, info, function (error, result) {
+            console.log(query);
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(result);
+                res.status(200).send(JSON.stringify(result));
+            }
+        });
+    });
+
+    app.patch('/atualizarEmp/:nome/:descricao/:localidade/:Users_idUser', function (req, res) {
+
+        let info = [req.params.nome, req.params.descricao, req.params.localidade, req.params.Users_idUser];
+
+        var query = "UPDATE empresas Set nomeEmpresa=?, descricao=?, localidade=? Where Users_idUser=?";
+        connection.query(query, info, function (error, result) {
+            console.log(query);
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(result);
+                res.status(200).send(JSON.stringify(result));
+            }
+        });
+    });
 }

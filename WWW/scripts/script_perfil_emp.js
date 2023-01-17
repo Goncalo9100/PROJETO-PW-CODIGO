@@ -35,6 +35,7 @@ function init() {
             var div_header = document.getElementById("div_header");
             var linkPerfil = document.createElement("a");
             linkPerfil.textContent =  user[0].nome;
+            linkPerfil.id = "a_user";
             linkPerfil.className = "a_perfil";
             linkPerfil.addEventListener("click", function (evt) {
                 sessionStorage.setItem("Users_idUser", user[0].Users_idUser);
@@ -55,6 +56,10 @@ function init() {
 
             div_header.appendChild(linkPerfil);
 
+            
+            var img_editar = document.getElementById("img_editar");
+            var img_save = document.getElementById("img_save");
+
             var btn_menu_terminar_sessao = document.getElementById("btn_menu_terminar_sessao");
             btn_menu_terminar_sessao.addEventListener("click", function() {
                 getLogOut();
@@ -63,13 +68,110 @@ function init() {
                 btn_menu_terminar_sessao.style.marginLeft = "32.5%";
             }else if(user[0].TipoUser_idTipoUser === 3){
                 btn_menu_terminar_sessao.style.marginLeft = "26.5%";
+                img_editar.style.display = "none";
+                document.getElementById("img_body_pro").setAttribute('src', 'imagens/admin.png');
             }
 
             var idUser = sessionStorage.getItem("Users_idUser");
             if(user[0].Users_idUser != idUser) {
                 btn_menu_terminar_sessao.style.display = "none";
             }
+
+            img_editar.addEventListener("click", function() {
+                
+                img_editar.style.display = "none";
+                img_save.style.display = "inline";
+                
+                const input_nome = document.getElementById('input_nome');
+                input_nome.removeAttribute('disabled');
+                input_nome.style.border = "solid black";
+
+                const input_descricao = document.getElementById('input_descricao');
+                input_descricao.removeAttribute('disabled');
+                input_descricao.style.border = "solid black";
+
+                const input_localidade = document.getElementById('input_localidade');
+                input_localidade.removeAttribute('disabled');
+                input_localidade.style.border = "solid black";
+            });
+
+            img_save.addEventListener("click", function() {
+                
+                atualizarEmp();
+
+                img_editar.style.display = "inline";    
+                img_save.style.display = "none";
+
+                const input_nome = document.getElementById('input_nome');
+                input_nome.setAttribute('disabled', "");
+                input_nome.style.border = "none";
+
+                const input_descricao = document.getElementById('input_descricao');
+                input_descricao.setAttribute('disabled', "");
+                input_descricao.style.border = "none";
+
+                const input_localidade = document.getElementById('input_localidade');
+                input_localidade.setAttribute('disabled', "");
+                input_localidade.style.border = "none";
+            });
         }
+    }
+
+    function atualizarEmp() {
+        var xhr_atualizarEmp;
+
+        let info = {
+            Users_idUser: sessionStorage.getItem("Users_idUser"),
+            Nome: "",
+            Descricao: "",
+            Localidade: ""
+        }
+        
+        if (document.getElementById('input_nome').value) {
+            info.Nome = document.getElementById('input_nome').value;
+        }else{
+            info.Nome = document.getElementById('input_nome').placeholder;
+        }
+
+        if (document.getElementById('input_descricao').value) {
+            info.Descricao = document.getElementById('input_descricao').value;
+        }else{
+            info.Descricao = document.getElementById('input_descricao').placeholder;
+        }
+
+        if (document.getElementById('input_localidade').value) {
+            info.Localidade = document.getElementById('input_localidade').value;
+        }else{
+            info.Localidade = document.getElementById('input_localidade').placeholder;
+        }
+
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_atualizarEmp = new XMLHttpRequest();
+        } else {
+            xhr_atualizarEmp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        var url = "http://127.0.0.1:5502/atualizarEmp/" + info.Nome + "/" + info.Descricao + "/" + info.Localidade + "/" + info.Users_idUser;
+
+        if (xhr_atualizarEmp) {
+            // Configurar a solicitação
+            xhr_atualizarEmp.open('PATCH', url, true);
+
+            // Definir a função de retorno de chamada
+            xhr_atualizarEmp.onreadystatechange = function () {
+                if ((xhr_atualizarEmp.readyState === 4) && (xhr_atualizarEmp.status === 200)) {
+                    document.getElementById('input_nome').value = "";
+                    document.getElementById('input_descricao').value = "";
+                    document.getElementById('input_localidade').value = "";
+                    document.getElementById("a_user").textContent = info.Nome;
+                    obterInfoUserEmp();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_atualizarEmp.send();
     }
 
     function getLogOut() {
@@ -162,7 +264,7 @@ function init() {
 
         document.getElementById("input_descricao").placeholder = infoEmp[0].descricao;
         document.getElementById("input_nome").placeholder = infoEmp[0].nomeEmpresa;
-        document.getElementById("input_localizacao").placeholder = infoEmp[0].localidade;
+        document.getElementById("input_localidade").placeholder = infoEmp[0].localidade;
         document.getElementById("label_adesao").textContent = "Aderiu a " + adesao.getDate() + "/" + adesao.getMonth()+1 + "/" + adesao.getFullYear();
         
     }
