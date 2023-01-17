@@ -246,7 +246,7 @@ function init() {
         }
     }
 
-    function confirmarAmizade() {
+    function confirmarAmizade() { 
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
             xhr_confami = new XMLHttpRequest();

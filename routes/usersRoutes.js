@@ -15,7 +15,7 @@ module.exports = function (app) {
 * @param {*} Route caminho que despoleta esta função
 * @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
 */
-    app.get('/confirmAmizade/:amigo', function (req, res) {
+    app.get('/confirmAmizade/:amigo', function (req, res) { 
 
         let info=[req.params.amigo, idUser, 'R'];
 
