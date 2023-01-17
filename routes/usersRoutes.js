@@ -9,6 +9,35 @@ let logged = 'N';
 
 
 module.exports = function (app) {
+
+    /**
+* Função que verifica se e-mail de profissional já está em base de dados
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/confirmAmizade/:amigo', function (req, res) {
+
+        let info=[req.params.amigo, idUser, 'R'];
+
+        let query = "select * from pedidosamizade where Profissionais_idUser=? and idSoliciador=? and situacao<>?";
+        try {
+            connection.query(query, info, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                } else if (results.length === 0) {
+                    res.status(400).send({ error: 'Não existe pedidos de amizade' });
+                }
+                else {
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
     /**
 * Função que executa todas as operações para obter as experiências
 * @param {*} Route caminho que despoleta esta função
@@ -23,6 +52,60 @@ module.exports = function (app) {
                     //Tratar o erro aqui
                     res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
                 } else {
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
+    /**
+* Função que verifica se e-mail de profissional já está em base de dados
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/confirmEmailPro/:email', function (req, res) {
+
+        let query = "select * from profissionais where email=?";
+        try {
+            connection.query(query, req.params.email, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                } else if (results.length === 0) {
+                    res.status(400).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                }
+                else {
+                    res.end(JSON.stringify(results));
+                }
+            });
+        } catch (err) {
+            //Tratar o erro aqui
+            res.status(500).send({ error: 'Ocorreu um erro inesperado' });
+        }
+    });
+
+    /**
+* Função que verifica se e-mail de profissional já está em base de dados
+* @param {*} Route caminho que despoleta esta função
+* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+*/
+    app.get('/confirmEmailEmp/:email', function (req, res) {
+
+        let info = [req.params.email, "P", "A"];
+
+        let query = "select * from empresaconfirma where email=? and situacao=? or situacao=?";
+        try {
+            connection.query(query, info, function (error, results, fields) {
+                if (error) {
+                    //Tratar o erro aqui
+                    res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
+                } else if (results.length === 0) {
+                    res.status(400).send({ error: 'Não existe em base de dados' });
+                }
+                else {
                     res.end(JSON.stringify(results));
                 }
             });
@@ -355,6 +438,23 @@ module.exports = function (app) {
                 }
             });
         }, delayInMilliseconds);
+    });
+
+    //Criar pedido de amizade
+    app.post('/enviarPedidoAmizade/:idProfissional', function (req, res) {
+        let info = [[req.params.idProfissional, idUser, "P"]];
+
+        let query = "INSERT INTO pedidosamizade (Profissionais_idUser,idSoliciador,situacao) VALUES ?";
+
+        connection.query(query, [info], function (error, data) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(data);
+                res.status(200).send(JSON.stringify(data));
+            }
+        });
     });
 
     //Criar novo user

@@ -45,7 +45,7 @@ function newUserPro() {
     }
 
     //Validação para a descrição
-    if ( descricao === '' ){
+    if (descricao === '') {
         descricao = "Não tenho nada a dizer! :(";
     }
 
@@ -57,19 +57,19 @@ function newUserPro() {
 
     //Calcular Idade
     let idade = parseInt(year) - parseInt(anoNas);
-    if(month>mesNas){
+    if (month > mesNas) {
         idade = idade + 1;
-    }else{
+    } else {
         idade = idade - 1;
     }
-    if(idade < 18){
+    if (idade < 18) {
         document.getElementById("erroDatNas").textContent = "Tens de ter mais de 18 anos para te registares!";
-        return false;  
+        return false;
     }
-    if(dataNas > currentDate){
+    if (dataNas > currentDate) {
         document.getElementById("erroDatNas").textContent = "A data de nascimento está superior à data atual!";
         return false;
-    }else {
+    } else {
         document.getElementById("erroDatNas").textContent = "";
     }
 
@@ -154,6 +154,38 @@ function getUser(data) {
 
     // Enviar a solicitação
     xhr.send();
+}
+
+function confirmEmail() {
+    var data = {
+        Email: document.getElementById('email_pro').value
+    }
+
+    // Criar a instância de XMLHttpRequest
+    if (window.XMLHttpRequest) {
+        xhr_confirm = new XMLHttpRequest();
+    } else {
+        xhr_confirm = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    if (xhr_confirm) {
+        let url = "http://127.0.0.1:5502/confirmEmailPro/" + data.Email;
+        // Configurar a solicitação
+        xhr_confirm.open('GET', url, true);
+
+        // Definir a função de retorno de chamada
+        xhr_confirm.onreadystatechange = function () {
+            if ((xhr_confirm.readyState === 4) && (xhr_confirm.status !== 200)) {
+                newUserPro();
+            } else if ((xhr_confirm.readyState === 4) && (xhr_confirm.status === 200)) {
+                console.log(xhr_confirm.status);
+                alert("E-mail já registado em base de dados");
+            }
+        };
+    }
+
+    // Enviar a solicitação
+    xhr_confirm.send();
 }
 
 window.onload = init;

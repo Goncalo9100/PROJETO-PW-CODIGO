@@ -75,6 +75,7 @@ function init() {
             var idUser = sessionStorage.getItem("Users_idUser");
             if(user[0].Users_idUser != idUser) {
                 btn_menu_terminar_sessao.style.display = "none";
+                img_editar.style.display = "none";
             }
 
             img_editar.addEventListener("click", function() {

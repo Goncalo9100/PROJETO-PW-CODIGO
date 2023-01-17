@@ -99,36 +99,36 @@ function createEmpConf() {
     xhttp2.send(JSON.stringify(data));
 }
 
-//Funcao que vai buscar o user criado
-/*function getUser(data) {
-    // Criar a instância de XMLHttpRequest
-    if (window.XMLHttpRequest) {
-        xhr = new XMLHttpRequest();
-    } else {
-        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+function confirmEmailEmp() {
+    var data = {
+        Email: document.getElementById('email_emp').value
     }
 
-    if (xhr) {
-        let url = "http://127.0.0.1:5502/getUser/" + data.Email;
+    // Criar a instância de XMLHttpRequest
+    if (window.XMLHttpRequest) {
+        xhr_confemp = new XMLHttpRequest();
+    } else {
+        xhr_confemp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    if (xhr_confemp) {
+        let url = "http://127.0.0.1:5502/confirmEmailEmp/" + data.Email;
         // Configurar a solicitação
-        xhr.open('GET', url, true);
+        xhr_confemp.open('GET', url, true);
 
         // Definir a função de retorno de chamada
-        xhr.onreadystatechange = function () {
-            if ((xhr.readyState === 4) && (xhr.status === 200)) {
-                // Fazer algo com os dados recebidos
-                var resultado = JSON.parse(xhr.responseText);
-                var linhaResultado = resultado[0];
-
-                data.IdUser = linhaResultado["idUser"];
-
-                createEmp(data);
+        xhr_confemp.onreadystatechange = function () {
+            if ((xhr_confemp.readyState === 4) && (xhr_confemp.status !== 200)) {
+                createEmpConf();
+            } else if ((xhr_confemp.readyState === 4) && (xhr_confemp.status === 200)) {
+                console.log(xhr_confemp.status);
+                alert("E-mail já registado em base de dados");
             }
         };
     }
 
     // Enviar a solicitação
-    xhr.send();
-}*/
+    xhr_confemp.send();
+}
 
 window.onload = init;

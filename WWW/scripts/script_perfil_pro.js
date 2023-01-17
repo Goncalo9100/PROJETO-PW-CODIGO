@@ -14,7 +14,7 @@ function init() {
     function inserirExperiencias() {
         deleteDivExperiencias();
 
-        for(var elem of experiencias) {
+        for (var elem of experiencias) {
             var div_experiencia = document.createElement("div");
             div_experiencia.className = "div_experiencia";
 
@@ -43,16 +43,16 @@ function init() {
                 var datInicio = new Date(elem.dataInicio);
                 var fimString;
                 var iniString;
-                if(datFim.getFullYear() == '9999'){
+                if (datFim.getFullYear() == '9999') {
                     fimString = "Presente";
-                }else{
-                    fimString = datFim.getMonth()+1 + "/" + datFim.getFullYear();
+                } else {
+                    fimString = datFim.getMonth() + 1 + "/" + datFim.getFullYear();
                 }
 
-                iniString = datInicio.getMonth()+1 + "/" + datInicio.getFullYear();
+                iniString = datInicio.getMonth() + 1 + "/" + datInicio.getFullYear();
 
                 p_exp_right_top2.textContent = iniString + " até " + fimString;
-            }else{
+            } else {
                 p_exp_right_top2.textContent = elem.dataInicio + " até Presente";
             }
 
@@ -74,7 +74,7 @@ function init() {
     function insertCursos() {
         deleteDivCursos();
 
-        for(var elem of cursos) {
+        for (var elem of cursos) {
             var div_experiencia = document.createElement("div");
             div_experiencia.className = "div_experiencia";
 
@@ -102,16 +102,16 @@ function init() {
                 var datInicio = new Date(elem.dataInicio);
                 var fimString;
                 var iniString;
-                if(datFim.getFullYear() == '9999'){
+                if (datFim.getFullYear() == '9999') {
                     fimString = "Presente";
-                }else{
-                    fimString = datFim.getMonth()+1 + "/" + datFim.getFullYear();
+                } else {
+                    fimString = datFim.getMonth() + 1 + "/" + datFim.getFullYear();
                 }
 
-                iniString = datInicio.getMonth()+1 + "/" + datInicio.getFullYear();
+                iniString = datInicio.getMonth() + 1 + "/" + datInicio.getFullYear();
 
                 p_exp_right_top2.textContent = iniString + " até " + fimString;
-            }else{
+            } else {
                 p_exp_right_top2.textContent = elem.dataInicio + " até Presente";
             }
 
@@ -148,8 +148,8 @@ function init() {
             var btn_menu_empresas = document.getElementById("btn_menu_empresas");
             var a_login = document.getElementById("a_login");
             var a_register = document.getElementById("a_register");
-            
-            switch(user[0].TipoUser_idTipoUser) {
+
+            switch (user[0].TipoUser_idTipoUser) {
                 case 1:
                     break;
                 case 2:
@@ -167,12 +167,12 @@ function init() {
             var div_header = document.getElementById("div_header");
             var linkPerfil = document.createElement("a");
             linkPerfil.id = "a_user";
-            linkPerfil.textContent =  user[0].nome;
+            linkPerfil.textContent = user[0].nome;
             linkPerfil.className = "a_perfil";
             linkPerfil.addEventListener("click", function (evt) {
                 sessionStorage.setItem("Users_idUser", user[0].Users_idUser);
                 sessionStorage.setItem("TipoUsers_idUser", user[0].TipoUser_idTipoUser);
-                switch(user[0].TipoUser_idTipoUser) {
+                switch (user[0].TipoUser_idTipoUser) {
                     case 1:
                         window.location.href = "http://127.0.0.1:5502/pagina_perfil_emp.html";
                         break;
@@ -189,23 +189,28 @@ function init() {
             div_header.appendChild(linkPerfil);
 
             var idUser = sessionStorage.getItem("Users_idUser");
-            var btn_menu_terminar_sessao = document.getElementById("btn_menu_terminar_sessao");
-            btn_menu_terminar_sessao.addEventListener("click", function() {
-                getLogOut();
-            });
-            if(user[0].Users_idUser != idUser) {
-                btn_menu_terminar_sessao.style.display = "none";
-            }
-
             var img_editar = document.getElementById("img_editar");
             var img_save = document.getElementById("img_save");
+            var btn_menu_terminar_sessao = document.getElementById("btn_menu_terminar_sessao");
+            btn_menu_terminar_sessao.addEventListener("click", function () {
+                getLogOut();
+            });
+            if (user[0].Users_idUser != idUser) {
+                btn_menu_terminar_sessao.style.display = "none";
+                img_editar.style.display = "none";
+                document.getElementById("img_editar_info_left").style.display = "none";
+                document.getElementById("img_editar_info_right").style.display = "none";
+
+                //Pedido à base de dados para ver se é amigo
+                confirmarAmizade();
+            }
 
 
-            img_editar.addEventListener("click", function() {
-                
+            img_editar.addEventListener("click", function () {
+
                 img_editar.style.display = "none";
                 img_save.style.display = "inline";
-                
+
                 const input_nome = document.getElementById('input_nome');
                 input_nome.removeAttribute('disabled');
                 input_nome.style.border = "solid black";
@@ -219,11 +224,11 @@ function init() {
                 input_localidade.style.border = "solid black";
             });
 
-            img_save.addEventListener("click", function() {
-                
+            img_save.addEventListener("click", function () {
+
                 atualizarUser();
 
-                img_editar.style.display = "inline";    
+                img_editar.style.display = "inline";
                 img_save.style.display = "none";
 
                 const input_nome = document.getElementById('input_nome');
@@ -241,6 +246,55 @@ function init() {
         }
     }
 
+    function confirmarAmizade() {
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_confami = new XMLHttpRequest();
+        } else {
+            xhr_confami = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_confami) {
+            let url = "http://127.0.0.1:5502/confirmAmizade/" + sessionStorage.getItem("Users_idUser");
+            // Configurar a solicitação
+            xhr_confami.open('GET', url, true);
+
+            // Definir a função de retorno de chamada
+            xhr_confami.onreadystatechange = function () {
+                if ((xhr_confami.readyState === 4) && (xhr_confami.status !== 200)) {
+                    var btnAmizade = document.getElementById("enviarPedido");
+                    btnAmizade.style.display = "inline";
+                    btnAmizade.addEventListener("click", function () {
+                        criarPedidoAmizade();
+                    });
+                } else if ((xhr_confami.readyState === 4) && (xhr_confami.status === 200)) {
+                    console.log(xhr_confami.status);
+                    alert("Amizade já existe");
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_confami.send();
+    }
+
+    function criarPedidoAmizade() {
+        var url = "/enviarPedidoAmizade/" + sessionStorage.getItem("Users_idUser");
+
+        var xhttp_pedidoEnviar = new XMLHttpRequest();
+        //Open first, before setting the request headers.
+        xhttp_pedidoEnviar.open("POST", url, true);
+        xhttp_pedidoEnviar.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhttp_pedidoEnviar.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                alert('Pedido Enviado');
+                //Dar refresh à pagina
+                document.location.reload(true);
+            }
+        }
+        xhttp_pedidoEnviar.send();
+    }
+
     function atualizarUser() {
         var xhr_atualizarUser;
 
@@ -250,22 +304,22 @@ function init() {
             Descricao: "",
             Localidade: ""
         }
-        
+
         if (document.getElementById('input_nome').value) {
             info.Nome = document.getElementById('input_nome').value;
-        }else{
+        } else {
             info.Nome = document.getElementById('input_nome').placeholder;
         }
 
         if (document.getElementById('input_descricao').value) {
             info.Descricao = document.getElementById('input_descricao').value;
-        }else{
+        } else {
             info.Descricao = document.getElementById('input_descricao').placeholder;
         }
 
         if (document.getElementById('input_localidade').value) {
             info.Localidade = document.getElementById('input_localidade').value;
-        }else{
+        } else {
             info.Localidade = document.getElementById('input_localidade').placeholder;
         }
 
@@ -322,8 +376,8 @@ function init() {
         xhr_logOut.send();
     }
 
-    function obterInfoUserPro(){
-        var url = "/userPro/" + sessionStorage.getItem("Users_idUser"); 
+    function obterInfoUserPro() {
+        var url = "/userPro/" + sessionStorage.getItem("Users_idUser");
 
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -350,18 +404,18 @@ function init() {
         xhr_infopro.send();
     }
 
-    function inserirInfoUser(){
+    function inserirInfoUser() {
         var adesao = new Date(infoUser[0].dataAdesao);
 
         document.getElementById("input_descricao").placeholder = infoUser[0].descricao;
         document.getElementById("input_nome").placeholder = infoUser[0].nome;
         document.getElementById("input_localidade").placeholder = infoUser[0].localidade;
-        document.getElementById("label_adesao").textContent = "Aderiu a " + adesao.getDate() + "/" + adesao.getMonth()+1 + "/" + adesao.getFullYear();
-        
+        document.getElementById("label_adesao").textContent = "Aderiu a " + adesao.getDate() + "/" + adesao.getMonth() + 1 + "/" + adesao.getFullYear();
+
     }
 
-    function obterExperiencias(){
-        var url = "/experiencias/" + sessionStorage.getItem("Users_idUser"); 
+    function obterExperiencias() {
+        var url = "/experiencias/" + sessionStorage.getItem("Users_idUser");
 
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -387,8 +441,8 @@ function init() {
         xhr_exp.send();
     }
 
-    function obterCursos(){
-        var url = "/cursos/" + sessionStorage.getItem("Users_idUser"); 
+    function obterCursos() {
+        var url = "/cursos/" + sessionStorage.getItem("Users_idUser");
 
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -430,7 +484,7 @@ function init() {
             xhr_userLogged.onreadystatechange = function () {
                 if ((xhr_userLogged.readyState === 4) && (xhr_userLogged.status === 200)) {
                     user = JSON.parse(xhr_userLogged.responseText);
-                    
+
                     var perfilUser = sessionStorage.getItem("Users_idUser");
                     var perfilUserTipo = sessionStorage.getItem("TipoUsers_idUser");
                     verifyUser();
