@@ -231,3 +231,12 @@ html, body{
     margin-top: 0%;
     color: #606060;
 }
+.enviarPedido{
+    color: #123370;
+    font-size: 100%;
+    margin-top: 0%;
+    text-decoration: none;
+}
+.enviarPedido:hover{
+    cursor: pointer;
+}

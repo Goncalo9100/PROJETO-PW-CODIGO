@@ -269,7 +269,6 @@ function init() {
                     });
                 } else if ((xhr_confami.readyState === 4) && (xhr_confami.status === 200)) {
                     console.log(xhr_confami.status);
-                    alert("Amizade já existe");
                 }
             };
         }
@@ -288,8 +287,9 @@ function init() {
         xhttp_pedidoEnviar.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 alert('Pedido Enviado');
+                document.getElementById("enviarPedido").style.display = "none";
                 //Dar refresh à pagina
-                document.location.reload(true);
+                //document.location.reload(true);
             }
         }
         xhttp_pedidoEnviar.send();

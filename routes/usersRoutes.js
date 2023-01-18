@@ -517,7 +517,7 @@ module.exports = function (app) {
     app.get('/amigos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
-        let query = "select amigos.idAmigos, amigos.idAmigo, profissionais.nome, amigos.idAmigo from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
+        let query = "select amigos.idAmigos, amigos.idAmigo, profissionais.nome, amigos.idAmigo, amigos.Profissionais_idUser from amigos inner join profissionais on amigos.idAmigo = profissionais.Users_idUser where Profissionais_idUser = ?";
 
         connection.query(query, req.params.idUser, function (error, results, fields) {
             if (error) {
@@ -530,10 +530,44 @@ module.exports = function (app) {
         });
     });
 
+    /*
     app.delete('/deleteAmigo/:idAmigos', function (req, res) {
         var query = "DELETE FROM amigos Where idAmigos=?";
 
         connection.query(query, req.params.idAmigos, function (error, data) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(data);
+                res.status(200).send(data);
+            }
+
+        });
+    });
+    */
+
+    app.delete('/deleteAmigo/:idAmigo/:idProf', function (req, res) {
+        let info = [req.params.idAmigo, req.params.idProf, req.params.idProf, req.params.idAmigo];
+        var query = "DELETE FROM amigos Where ( idAmigo=? and Profissionais_idUser=? ) or (idAmigo=? and Profissionais_idUser=?)";
+
+        connection.query(query, info, function (error, data) {
+            if (error) {
+                res.render(error)
+            }
+            else {
+                console.log(data);
+                res.status(200).send(data);
+            }
+
+        });
+    });
+
+    app.delete('/deletePedido/:idAmigo/:idProf', function (req, res) {
+        let info = [req.params.idAmigo, req.params.idProf, req.params.idProf, req.params.idAmigo];
+        var query = "DELETE FROM pedidosamizade Where ( idSoliciador=? and Profissionais_idUser=? ) or (idSoliciador=? and Profissionais_idUser=?)";
+
+        connection.query(query, info, function (error, data) {
             if (error) {
                 res.render(error)
             }

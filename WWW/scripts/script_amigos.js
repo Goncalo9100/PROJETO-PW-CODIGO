@@ -182,6 +182,32 @@ function init() {
             // Definir a função de retorno de chamada
             xhr_criar_amizade.onreadystatechange = function () {
                 if ((xhr_criar_amizade.readyState === 4) && (xhr_criar_amizade.status === 200)) {
+                    criarAmizade2(pedido);
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_criar_amizade.send();
+    }
+
+    function criarAmizade2(pedido) {
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_criar_amizade2 = new XMLHttpRequest();
+        } else {
+            xhr_criar_amizade2 = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_criar_amizade2) {
+            // Configurar a solicitação
+            let url = "http://127.0.0.1:5502/criarAmizade/" + pedido[0].idSoliciador + "/" + pedido[0].Profissionais_idUser;
+            console.log(url);
+            xhr_criar_amizade2.open('POST', url, true);
+            xhr_criar_amizade2.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            // Definir a função de retorno de chamada
+            xhr_criar_amizade2.onreadystatechange = function () {
+                if ((xhr_criar_amizade2.readyState === 4) && (xhr_criar_amizade2.status === 200)) {
                     obterPedidosAmizade();
                     obterAmigos();
                 }
@@ -189,7 +215,7 @@ function init() {
         }
 
         // Enviar a solicitação
-        xhr_criar_amizade.send();
+        xhr_criar_amizade2.send();
     }
 
     function rejeitarPedido(idPedido) {
@@ -252,7 +278,8 @@ function init() {
             var btn_eliminar = document.createElement("button");
             btn_eliminar.className = "btn_rejeitar";
             btn_eliminar.textContent = "Eliminar";
-            btn_eliminar.addEventListener("click", function () { eliminarAmigo(elem.idAmigos); } );
+            //btn_eliminar.addEventListener("click", function () { eliminarAmigo(elem.idAmigos); } );
+            btn_eliminar.addEventListener("click", function () { eliminarAmigo(elem.idAmigo, elem.Profissionais_idUser); } );
 
             var hr = document.createElement("hr");
             hr.className = "hr_pedido";
@@ -273,6 +300,7 @@ function init() {
         }
     }
 
+    /*
     function eliminarAmigo(idAmigos) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -297,6 +325,59 @@ function init() {
 
         // Enviar a solicitação
         xhr_eliminar.send();
+    }
+    */
+
+    function eliminarAmigo(idAmigo, idProf) {
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_eliminar = new XMLHttpRequest();
+        } else {
+            xhr_eliminar = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_eliminar) {
+            // Configurar a solicitação
+            let url = "http://127.0.0.1:5502/deleteAmigo/" + idAmigo + "/" + idProf;
+            console.log(url);
+            xhr_eliminar.open('DELETE', url, true);
+            xhr_eliminar.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            // Definir a função de retorno de chamada
+            xhr_eliminar.onreadystatechange = function () {
+                if ((xhr_eliminar.readyState === 4) && (xhr_eliminar.status === 200)) {
+                    deletePedido(idAmigo, idProf);
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_eliminar.send();
+    }
+
+    function deletePedido(idAmigo, idProf) {
+        // Criar a instância de XMLHttpRequest
+        if (window.XMLHttpRequest) {
+            xhr_eliminarPedido = new XMLHttpRequest();
+        } else {
+            xhr_eliminarPedido = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (xhr_eliminarPedido) {
+            // Configurar a solicitação
+            let url = "http://127.0.0.1:5502/deletePedido/" + idAmigo + "/" + idProf;
+            console.log(url);
+            xhr_eliminarPedido.open('DELETE', url, true);
+            xhr_eliminarPedido.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            // Definir a função de retorno de chamada
+            xhr_eliminarPedido.onreadystatechange = function () {
+                if ((xhr_eliminarPedido.readyState === 4) && (xhr_eliminarPedido.status === 200)) {
+                    obterAmigos();
+                }
+            };
+        }
+
+        // Enviar a solicitação
+        xhr_eliminarPedido.send();
     }
 
     function obterPedidosAmizade() {
