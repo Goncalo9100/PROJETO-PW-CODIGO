@@ -65,12 +65,13 @@ function init() {
             btn_menu_terminar_sessao.addEventListener("click", function() {
                 getLogOut();
             });
+            console.log(user);
             if (user[0].TipoUser_idTipoUser === 1) {
                 btn_menu_terminar_sessao.style.marginLeft = "32.5%";
             }else if(user[0].TipoUser_idTipoUser === 3){
                 btn_menu_terminar_sessao.style.marginLeft = "26.5%";
                 img_editar.style.display = "none";
-                document.getElementById("img_body_pro").setAttribute('src', 'imagens/admin.png');
+                
             }
 
             var idUser = sessionStorage.getItem("Users_idUser");
@@ -234,6 +235,8 @@ function init() {
                 }else if(xhr_userLogged.status === 401){
                     var btn_menu_terminar_sessao = document.getElementById("btn_menu_terminar_sessao");
                     btn_menu_terminar_sessao.style.display = "none";
+                    document.getElementById("img_editar").style.display = "none";
+                    obterInfoUserEmp();
                 }
             };
         }

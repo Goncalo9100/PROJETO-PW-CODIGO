@@ -315,6 +315,8 @@ function init() {
             div_empresa.appendChild(hr);
             divEmpresas.appendChild(div_empresa);
         }
+
+        console.log(divEmpresas);
     }
 
     /**
