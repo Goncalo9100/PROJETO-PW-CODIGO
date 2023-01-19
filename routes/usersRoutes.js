@@ -2,24 +2,23 @@ const { Console } = require("console");
 const fs = require("fs");
 const connection = require("../config/connection");
 
-let idUser;
-let nomeUser;
-let tipoUser;
-let logged = 'N';
+let idUser; //id do User
+let nomeUser; //nome do User
+let tipoUser; //tipo do User
+let logged = 'N'; //Variavel para guardar se tem login efetuado ou não (N="Não" e S="Sim")
 
 
 module.exports = function (app) {
-
     /**
-* Função que verifica se e-mail de profissional já está em base de dados
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que confirma e seleciona a amizade que existe entre dois users
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId do amigo e confirma se existe o pedido de amizade entre os dois users
+    */
     app.get('/confirmAmizade/:amigo', function (req, res) { 
 
-        let info=[req.params.amigo, idUser, 'R'];
+        let info=[req.params.amigo, idUser, 'R', idUser, req.params.amigo, 'R'];
 
-        let query = "select * from pedidosamizade where Profissionais_idUser=? and idSoliciador=? and situacao<>?";
+        let query = "select * from pedidosamizade where ( Profissionais_idUser=? and idSoliciador=? and situacao<>? ) or ( Profissionais_idUser=? and idSoliciador=? and situacao<>? )";
         try {
             connection.query(query, info, function (error, results, fields) {
                 if (error) {
@@ -39,10 +38,10 @@ module.exports = function (app) {
     });
 
     /**
-* Função que executa todas as operações para obter as experiências
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que executa todas as operações para obter as experiências
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId do utilizador em que estamos a ver as experiencias
+    */
     app.get('/experiencias/:user', function (req, res) {
 
         let query = "select * from experienciapro where Users_idUser=?";
@@ -62,10 +61,10 @@ module.exports = function (app) {
     });
 
     /**
-* Função que verifica se e-mail de profissional já está em base de dados
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que verifica se e-mail de profissional já está em base de dados
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o email do utilizador e confirma se o email já está em uso
+    */
     app.get('/confirmEmailPro/:email', function (req, res) {
 
         let query = "select * from profissionais where email=?";
@@ -88,10 +87,10 @@ module.exports = function (app) {
     });
 
     /**
-* Função que verifica se e-mail de profissional já está em base de dados
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que verifica se e-mail da empresa já está em base de dados
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o email da empresa e confirma se o email já está em uso
+    */
     app.get('/confirmEmailEmp/:email', function (req, res) {
 
         let info = [req.params.email, "P", "A"];
@@ -116,10 +115,10 @@ module.exports = function (app) {
     });
 
     /**
-* Função que executa todas as operações para obter os cursos
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que executa todas as operações para obter os cursos
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId do utilizador em que estamos a ver os cursos
+    */
     app.get('/cursos/:user', function (req, res) {
 
         let query = "select * from habilitacoes where Users_idUser=?";
@@ -140,10 +139,10 @@ module.exports = function (app) {
     });
 
     /**
-* Função que executa todas as operações para obter a informação do perfil do user profissional
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que executa todas as operações para obter a informação do perfil do user profissional
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId do user e obtêm as informações do mesmo
+    */
     app.get('/userPro/:user', function (req, res) {
 
         let query = "select profissionais.Users_idUser, profissionais.nome, profissionais.descricao, profissionais.localidade, users.dataAdesao from profissionais inner join users on profissionais.Users_idUser = users.idUser where Users_idUser=?";
@@ -165,10 +164,10 @@ module.exports = function (app) {
     });
 
     /**
-* Função que executa todas as operações para obter a informação do perfil do user profissional
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que executa todas as operações para obter a informação da empresa
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId da empresa e obtêm as informações da mesma
+    */
     app.get('/userEmp/:user', function (req, res) {
 
         let query = "select empresas.Users_idUser, empresas.nomeEmpresa, empresas.descricao, empresas.localidade, users.dataAdesao from empresas inner join users on empresas.Users_idUser = users.idUser where Users_idUser=?";
@@ -189,6 +188,11 @@ module.exports = function (app) {
         }
     });
 
+    /**
+    * Função que executa todas as operações para criar uma nova oferta de emprego
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe todas as informações para criar a nova oferta e cria a mesma
+    */
     app.post('/newOferta', function (req, res) {
 
         let info = [[req.body.IdUser, req.body.Area, req.body.Descricao, req.body.Duracao, req.body.Renumeracao, req.body.Validade]];
@@ -206,6 +210,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para criar uma nova experiencia do utilizador
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe todas as informações para criar a nova experiencia
+    */
     app.post('/newExperience', function (req, res) {
 
         let info = [[req.body.IDUser, req.body.Cargo, req.body.Empresa, req.body.URLLogo, req.body.Localizacao, req.body.Descricao, req.body.DataInicio, req.body.DataFim]];
@@ -225,6 +234,11 @@ module.exports = function (app) {
 
     });
 
+    /**
+    * Função que executa todas as operações para criar um novo curso feito pelo utilizador
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe todas as informações para criar o novo curso feito
+    */
     app.post('/newDegree', function (req, res) {
 
         let info = [[req.body.IDUser, req.body.Curso, req.body.TipoCurso, req.body.Estab, req.body.Media, req.body.DataInicio, req.body.DataFim]];
@@ -243,10 +257,10 @@ module.exports = function (app) {
     });
 
     /**
- * Função que executa todas as operações necessárias para efetuar o login na aplicação para empresas
- * @param {*} Route caminho que despoleta esta função
- * @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
- */
+    * Função que executa todas as operações necessárias para efetuar o login na aplicação para empresas
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o email, password e o UserId para fazer o login 
+    */
     app.get('/loginEmpresa/:email/:password/:user', function (req, res) {
         let info = [req.params.email, req.params.password, req.params.user];
         console.log(info);
@@ -276,10 +290,10 @@ module.exports = function (app) {
     });
 
     /**
-* Função que executa todas as operações necessárias para efetuar o login na aplicação para profissionais
-* @param {*} Route caminho que despoleta esta função
-* @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
-*/
+    * Função que executa todas as operações necessárias para efetuar o login na aplicação para profissionais
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o email, a password e o UserId para fazer o login
+    */
     app.get('/loginProfissional/:email/:password/:user', function (req, res) {
         let info = [req.params.email, req.params.password, req.params.user];
 
@@ -314,7 +328,7 @@ module.exports = function (app) {
     /**
      * Função que executa todas as operações necessárias para efetuar o login na aplicação para administradores
      * @param {*} Route caminho que despoleta esta função
-     * @param {function} Callback recebe o email e a password que o utilizador introduziu e confirma se existe algum utilizador na base de dados com as mesmas credenciais
+     * @param {function} Callback recebe o email, password e o UserId para fazer o login
      */
     app.get('/loginAdmin/:email/:password/:user', function (req, res) {
         let info = [req.params.email, req.params.password, req.params.user];
@@ -345,6 +359,11 @@ module.exports = function (app) {
         }
     });
 
+    /**
+    * Função que executa todas as operações para obter o id do User que está a fazer login
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o email para obter o UserId
+    */
     app.get('/userLogin/:email', function (req, res) {
         console.log(req.params.email);
         let query = "select idUser, TipoUser_idTipoUser from Users where email=?";
@@ -364,6 +383,11 @@ module.exports = function (app) {
         } catch { }
     })
 
+    /**
+    * Função que executa todas as operações para fazer logOut
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback faz logOut do user logado
+    */
     app.get('/logOut', function (req, res) {
         idUser = 0;
         nomeUser = "";
@@ -371,17 +395,18 @@ module.exports = function (app) {
         logged = 'N';
         res.status(200).send();
     })
-    //-------------------------------------------------------------------------
 
+    /**
+    * Função que executa todas as operações para criar um novo registo de uma nova empresa
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe todas as informações para criar o registo
+    */
     app.post('/reg_emp', function (req, res) {
-        //Registo das empresas
-        console.log("sucesso empresa");
         //Registo das empresas
         let info = [[req.body.Nome, req.body.Descricao, req.body.URLSite, req.body.URLLogo, req.body.Email, req.body.Password, req.body.Localidade, req.body.DataPedido, 'P']];
         console.log(req.body);
         let query = "INSERT INTO empresaconfirma (nomeEmpresa, descricao, urlSite, urlLogo, email, password, localidade, dataPedido, situacao) VALUES ?";
 
-        console.log("INFO " + info);
         var delayInMilliseconds = 1000; //1 second
 
         setTimeout(function () {
@@ -397,6 +422,11 @@ module.exports = function (app) {
         }, delayInMilliseconds);
     });
 
+    /**
+    * Função que executa todas as operações para criar uma nova empresa
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe todas as informações para criar a nova empresa
+    */
     app.post('/criarEmp', function (req, res) {
         console.log(req);
         let info = [[req.body.IdUser, req.body.Nome, req.body.Descricao, req.body.UrlSite, req.body.UrlLogo, req.body.Email, req.body.Password, req.body.Localidade]];
@@ -416,7 +446,11 @@ module.exports = function (app) {
         }, delayInMilliseconds);
     });
 
-    //Cria novo profissional
+   /**
+    * Função que executa todas as operações para criar um novo profissional
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe todas as informações para criar um novo profissional
+    */
     app.post('/reg_pro', function (req, res) {
         console.log("sucesso");
         //Registo dos profissionais
@@ -440,7 +474,11 @@ module.exports = function (app) {
         }, delayInMilliseconds);
     });
 
-    //Criar pedido de amizade
+    /**
+    * Função que executa todas as operações para criar um novo pedido de amizade
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId do profissional e cria o pedido de amizade com o user que está logado
+    */
     app.post('/enviarPedidoAmizade/:idProfissional', function (req, res) {
         let info = [[req.params.idProfissional, idUser, "P"]];
 
@@ -457,7 +495,11 @@ module.exports = function (app) {
         });
     });
 
-    //Criar novo user
+    /**
+    * Função que executa todas as operações para criar um novo User
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o tipo e o email para criar o novo user
+    */
     app.post('/newUser/:idTipo', function (req, res) {
         var date = new Date();
         var datetime = date.getFullYear() + "-"
@@ -482,6 +524,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para obter as informações do User da tabela de users
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o email para obter o user
+    */
     app.get('/getUser/:email', function (req, res) {
         console.log(req.params.email);
         //let info = [[req.params.email]];
@@ -499,6 +546,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para obter todos os pedidos de amizade para um user especifico
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId para obter os pedidos de amizade
+    */
     app.get('/pedidos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
@@ -514,6 +566,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para obter os amigos de um user
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId do user para obter os amigos
+    */
     app.get('/amigos/:idUser', function (req, res) {
         console.log(req.params.idUser);
 
@@ -547,6 +604,11 @@ module.exports = function (app) {
     });
     */
 
+    /**
+    * Função que executa todas as operações para eliminar um amigo
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id do amigo e o id do profissional para eliminar a amizade
+    */
     app.delete('/deleteAmigo/:idAmigo/:idProf', function (req, res) {
         let info = [req.params.idAmigo, req.params.idProf, req.params.idProf, req.params.idAmigo];
         var query = "DELETE FROM amigos Where ( idAmigo=? and Profissionais_idUser=? ) or (idAmigo=? and Profissionais_idUser=?)";
@@ -563,6 +625,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para eliminar o pedido de amizade antes enviado e validado
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id do Amigo e do profissional para eliminar o pedido de amizade 
+    */
     app.delete('/deletePedido/:idAmigo/:idProf', function (req, res) {
         let info = [req.params.idAmigo, req.params.idProf, req.params.idProf, req.params.idAmigo];
         var query = "DELETE FROM pedidosamizade Where ( idSoliciador=? and Profissionais_idUser=? ) or (idSoliciador=? and Profissionais_idUser=?)";
@@ -579,6 +646,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para eliminar uma empresa
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId da empresa que é para eliminar
+    */
     app.delete('/deleteEmpresa/:Users_idUser', function (req, res) {
         var query = "DELETE FROM empresas Where Users_idUser=?";
 
@@ -594,6 +666,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para eliminar um user
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o UserId para eliminar o user
+    */
     app.delete('/deleteUser/:Users_idUser', function (req, res) {
         var query = "DELETE FROM users Where idUser=?";
 
@@ -609,7 +686,11 @@ module.exports = function (app) {
         });
     });
 
-    //rest api para obter ofertas.
+    /**
+    * Função que executa todas as operações para obter todas as ofertas que existem
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback obtêm todas as ofertas que existem
+    */
     app.get('/ofertas', function (req, res) {
         let query = "select ofertasemprego.idOferta, empresas.nomeEmpresa, area.descricao as areaDescricao, ofertasemprego.descricao, ofertasemprego.duracao, ofertasemprego.valor, ofertasemprego.dataValidade from ofertasemprego inner join empresas on ofertasemprego.Empresas_Users_idUser = empresas.Users_idUser inner join area on ofertasemprego.Area_idArea = area.idArea";
         connection.query(query, function (error, results, fields) {
@@ -624,7 +705,11 @@ module.exports = function (app) {
         });
     });
 
-    //rest api para obter areas.
+    /**
+    * Função que executa todas as operações para obter as áreas que existem
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback obtêm todas as áreas que existem
+    */
     app.get('/areas', function (req, res) {
         let query = "select * from area";
         connection.query(query, function (error, results, fields) {
@@ -639,7 +724,11 @@ module.exports = function (app) {
         });
     });
 
-    //rest api para obter areas.
+    /**
+    * Função que executa todas as operações para obter os profissionais
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback obtêm todos os profissionais
+    */
     app.get('/profissionais', function (req, res) {
         let query = "select * from profissionais";
         connection.query(query, function (error, results, fields) {
@@ -654,7 +743,11 @@ module.exports = function (app) {
         });
     });
 
-    //rest api para obter areas.
+    /**
+    * Função que executa todas as operações para obter todas as empresas
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback obtêm todas as empresas
+    */
     app.get('/empresas', function (req, res) {
         let query = "select * from empresas";
         connection.query(query, function (error, results, fields) {
@@ -669,6 +762,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para obter todos os pedidos de empresas que se querem registar
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback obtêm todos os pedidos das empresas que se querem registar
+    */
     app.get('/pedidosEmp', function (req, res) {
         let query = "select * from empresaconfirma where situacao = 'P'";
         connection.query(query, function (error, results, fields) {
@@ -682,6 +780,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para crejeitar um pedido de amizade
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id do pedido para rejeitar o mesmo
+    */
     app.patch('/rejeitarAmigo/:idPedido', function (req, res) {
         var query = "UPDATE pedidosamizade Set situacao='R' Where idPedidosAmizade=?";
         connection.query(query, req.params.idPedido, function (error, result) {
@@ -695,6 +798,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para rejeitar uma empresa
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id do pedido da empresa que se quer rejeitar 
+    */
     app.patch('/rejeitarEmpresa/:idEmpresaConfirm', function (req, res) {
         var query = "UPDATE empresaconfirma Set situacao='R' Where idEmpresaConfirm=?";
         connection.query(query, req.params.idEmpresaConfirm, function (error, result) {
@@ -708,6 +816,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para obter um certo pedido de amizade
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id do pedido de amizade para obter as informações do mesmo
+    */
     app.get('/pedidoAmizade/:idPedido', function (req, res) {
         let query = "select * from pedidosamizade where idPedidosAmizade = ?";
         connection.query(query, req.params.idPedido, function (error, results, fields) {
@@ -721,6 +834,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para aceitar um pedido de amizade
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id do pedido de amizade para aceitar o mesmo
+    */
     app.patch('/aceitarAmigo/:idPedido', function (req, res) {
         var date = new Date();
         var datetime = date.getFullYear() + "-"
@@ -743,6 +861,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para aceitar um pedido de empresa
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id do pedido de empresa para aceitar o mesmo
+    */
     app.patch('/aceitarEmpresa/:idPedido', function (req, res) {
         var query = "UPDATE empresaconfirma Set situacao='A' Where idEmpresaConfirm=?";
         connection.query(query, req.params.idPedido, function (error, result) {
@@ -757,6 +880,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para criar uma amizade
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o id profissional e do amigo para criar a amizade
+    */
     app.post('/criarAmizade/:idProf/:idAmigo', function (req, res) {
         let info = [[req.params.idProf, req.params.idAmigo]];
         console.log(info);
@@ -773,6 +901,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para aobter as informações do user que está com login efetuado
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback obtêm as informações do user que está com login efetuado
+    */
     app.get('/getUserLogged', function (req, res) {
         if (logged == 'S') {
             let query;
@@ -803,6 +936,11 @@ module.exports = function (app) {
         } else { res.status(401).send(); }
     });
 
+    /**
+    * Função que executa todas as operações para ãtualizar informações do perfil do profissional
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o nome, descricao, localiadde e UserId a atualizar e atualiza as informações do profissional
+    */
     app.patch('/atualizarProf/:nome/:descricao/:localidade/:Users_idUser', function (req, res) {
 
         let info = [req.params.nome, req.params.descricao, req.params.localidade, req.params.Users_idUser];
@@ -820,6 +958,11 @@ module.exports = function (app) {
         });
     });
 
+    /**
+    * Função que executa todas as operações para ãtualizar informações do perfil da empresa
+    * @param {*} Route caminho que despoleta esta função
+    * @param {function} Callback recebe o nome, descricao, localiadde e UserId a atualizar e atualiza as informações da empresa
+    */
     app.patch('/atualizarEmp/:nome/:descricao/:localidade/:Users_idUser', function (req, res) {
 
         let info = [req.params.nome, req.params.descricao, req.params.localidade, req.params.Users_idUser];
