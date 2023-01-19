@@ -10,6 +10,9 @@ function init() {
 
     getUserLogged();
 
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         if (user) {
             var btn_menu_amigos = document.getElementById("btn_menu_amigos");
@@ -57,6 +60,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por inserir os pedidos de amizade 
+    */
     function insertPedidos() {
         deleteDivPedidos();
 
@@ -108,12 +114,19 @@ function init() {
         
     }
 
+    /**
+    * Função responsável por limpar a div com a informação dos pedidos de amizade
+    */
     function deleteDivPedidos() {
         while (divPedidos.firstChild) {
             divPedidos.removeChild(divPedidos.firstChild);
         }
     }
 
+    /**
+    * Função responsável por aceitar pedidos de amizade
+    * @param idPedido - id do pedido
+    */
     function aceitarPedido(idPedido) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -140,6 +153,10 @@ function init() {
         xhr_aceitar.send();
     }
 
+    /**
+    * Função responsável por atualizar o pedido de amizade
+    * @param pedido - info do pedido
+    */
     function atualizarPedido(pedido) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -165,6 +182,10 @@ function init() {
         xhr_atualizar.send();
     }
 
+    /**
+    * Função responsável por criar amizade entre os users
+    * @param pedido - info do pedido
+    */
     function criarAmizade(pedido) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -191,6 +212,10 @@ function init() {
         xhr_criar_amizade.send();
     }
 
+    /**
+    * Função responsável por criar amizade entre os users trocando os users (configuração por causa da bd)
+    * @param pedido - info do pedido
+    */
     function criarAmizade2(pedido) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -218,6 +243,10 @@ function init() {
         xhr_criar_amizade2.send();
     }
 
+    /**
+    * Função responsável por rejeitar pedidos de amizade
+    * @param idPedido - id do pedido
+    */
     function rejeitarPedido(idPedido) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -244,6 +273,9 @@ function init() {
         xhr_rejeitar.send();
     }
 
+    /**
+    * Função responsável por inserir amigos na div de amigos
+    */
     function insertAmigos() {
         deleteDivAmigos();
         
@@ -294,6 +326,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por limpar a div com a informação dos amigos
+    */
     function deleteDivAmigos() {
         while (divAmigos.firstChild) {
             divAmigos.removeChild(divAmigos.firstChild);
@@ -328,6 +363,11 @@ function init() {
     }
     */
 
+    /**
+    * Função responsável por eliminar uma amizade
+    * @param idAmigo - id do amigo
+    * @param idProf - id do profissional logado
+    */
     function eliminarAmigo(idAmigo, idProf) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -354,6 +394,11 @@ function init() {
         xhr_eliminar.send();
     }
 
+    /**
+    * Função responsável por eliminar o pedido antes pedido
+    * @param idAmigo - id do amigo
+    * @param idProf - id do profissional logado
+    */
     function deletePedido(idAmigo, idProf) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -380,6 +425,9 @@ function init() {
         xhr_eliminarPedido.send();
     }
 
+    /**
+    * Função responsável por obter os pedidos de amizade
+    */
     function obterPedidosAmizade() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -406,6 +454,9 @@ function init() {
         xhr.send();
     }
 
+    /**
+    * Função responsável por obter os amigos
+    */
     function obterAmigos() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -432,6 +483,9 @@ function init() {
         xhr2.send();
     }
 
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {

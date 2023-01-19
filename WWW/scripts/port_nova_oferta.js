@@ -4,6 +4,9 @@ function init() {
     getUserLogged();
     obterAreas();
 
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         if (user) {
             var btn_menu_amigos = document.getElementById("btn_menu_amigos");
@@ -51,6 +54,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por obter as areas
+    */
     function obterAreas() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -81,7 +87,9 @@ function init() {
         xhr2.send();
     }
 
-    //Vai buscar o user logado
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -115,7 +123,10 @@ function init() {
     }
 }
 
-//Inserir nova oferta na base de dados
+/**
+* Função responsável por inserir nova oferta na base de dados
+* @param Users_idUser - id do User
+*/
 function novaOferta(Users_idUser) {
     var area = document.getElementById("area");
     var duracao = document.getElementById("i_duracao").value;
@@ -166,7 +177,9 @@ function novaOferta(Users_idUser) {
     xhttp.send(JSON.stringify(info));
 }
 
-//Validar a data inserida 
+/**
+* Função responsável por validar a data inserida 
+*/
 function validarData() {
     // Obtém a data selecionada pelo user
     var dataSelecionada = new Date(document.getElementById("i_validade").value);

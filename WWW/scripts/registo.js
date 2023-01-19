@@ -25,7 +25,9 @@ function init() {
 
 var user;
 
-//Função que regista um novo profissional
+/**
+* Função que regista um novo user
+*/
 function newUserPro() {
     const dataAtual = new Date();
     let day = dataAtual.getDate();
@@ -106,6 +108,10 @@ function newUserPro() {
     xhttp.send(JSON.stringify(data));
 }
 
+/**
+* Função que regista um novo profissional
+* @param dataPro - informação do profissional
+*/
 function createPro(dataPro) {
     console.log(dataPro);
 
@@ -125,6 +131,10 @@ function createPro(dataPro) {
     xhttp2.send(JSON.stringify(dataPro));
 }
 
+/**
+* Função que obtem o user criado
+* @param data - informação inserida
+*/
 function getUser(data) {
     // Criar a instância de XMLHttpRequest
     if (window.XMLHttpRequest) {
@@ -156,6 +166,9 @@ function getUser(data) {
     xhr.send();
 }
 
+/**
+* Função que confirma se o email já existe
+*/
 function confirmEmail() {
     var data = {
         Email: document.getElementById('email_pro').value

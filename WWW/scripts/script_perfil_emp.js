@@ -7,8 +7,9 @@ function init() {
 
     getUserLogged();
 
-
-
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         console.log(user);
         if (user) {
@@ -118,6 +119,9 @@ function init() {
         }
     }
 
+    /**
+    * Função que atualiza a informação do perfil introduzida pelo user
+    */
     function atualizarEmp() {
         var xhr_atualizarEmp;
 
@@ -175,6 +179,9 @@ function init() {
         xhr_atualizarEmp.send();
     }
 
+    /**
+    * Função que efetua o logOut do user
+    */
     function getLogOut() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -199,6 +206,9 @@ function init() {
         xhr_logOut.send();
     }
 
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -231,7 +241,10 @@ function init() {
         // Enviar a solicitação
         xhr_userLogged.send();
     }
-
+    	
+    /**
+    * Função responsável por obter a informação do perfil do utilizador (empresa) a visualizar
+    */
     function obterInfoUserEmp(){
         var url = "/userEmp/" + sessionStorage.getItem("Users_idUser"); 
 
@@ -260,6 +273,9 @@ function init() {
         xhr_infoemp.send();
     }
 
+    /**
+    * Função responsável por inserir a informação do user (empresa) nos locais apropriados
+    */
     function inserirInfoEmp(){
         var adesao = new Date(infoEmp[0].dataAdesao);
 

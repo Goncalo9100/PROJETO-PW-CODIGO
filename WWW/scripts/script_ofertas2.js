@@ -27,6 +27,9 @@ function init() {
         validateFilter();
     });
 
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         if (user) {
             var btn_menu_amigos = document.getElementById("btn_menu_amigos");
@@ -428,6 +431,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por obter as ofertas disponiveis
+    */
     function obterOfertas() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -487,6 +493,9 @@ function init() {
         xhr.send();
     }
 
+    /**
+    * Função responsável por obter as áreas existentes
+    */
     function obterAreas() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -517,6 +526,9 @@ function init() {
         xhr2.send();
     }
 
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {

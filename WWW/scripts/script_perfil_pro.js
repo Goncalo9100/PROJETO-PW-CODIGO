@@ -11,6 +11,9 @@ function init() {
 
     getUserLogged();
 
+    /**
+    * Função responsável por inserir as experiencias do profissional na div correspondente às experiencias
+    */
     function inserirExperiencias() {
         deleteDivExperiencias();
 
@@ -71,6 +74,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por inserir os cursos do profissional na div correspondente os cursos
+    */
     function insertCursos() {
         deleteDivCursos();
 
@@ -130,18 +136,27 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por limpar a div com informação das experiencias
+    */
     function deleteDivExperiencias() {
         while (div_experiencias_scroll.firstChild) {
             div_experiencias_scroll.removeChild(div_experiencias_scroll.firstChild);
         }
     }
 
+    /**
+    * Função responsável por limpar a div com informação dos cursos
+    */
     function deleteDivCursos() {
         while (div_cursos_scroll.firstChild) {
             div_cursos_scroll.removeChild(div_cursos_scroll.firstChild);
         }
     }
 
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         if (user) {
             var btn_menu_amigos = document.getElementById("btn_menu_amigos");
@@ -246,6 +261,9 @@ function init() {
         }
     }
 
+    /**
+    * Função que verifica a amizade do perfil a visualizar e o user logado (para ver se são amigos)
+    */
     function confirmarAmizade() { 
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -277,6 +295,9 @@ function init() {
         xhr_confami.send();
     }
 
+    /**
+    * Função que cria o pedido de amizade
+    */
     function criarPedidoAmizade() {
         var url = "/enviarPedidoAmizade/" + sessionStorage.getItem("Users_idUser");
 
@@ -295,6 +316,9 @@ function init() {
         xhttp_pedidoEnviar.send();
     }
 
+    /**
+    * Função que atualiza a informação do perfil introduzida pelo user
+    */
     function atualizarUser() {
         var xhr_atualizarUser;
 
@@ -352,6 +376,9 @@ function init() {
         xhr_atualizarUser.send();
     }
 
+    /**
+    * Função que efetua o logOut do user
+    */
     function getLogOut() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -376,6 +403,9 @@ function init() {
         xhr_logOut.send();
     }
 
+    /**
+    * Função responsável por obter a informação do perfil do utilizador a visualizar
+    */
     function obterInfoUserPro() {
         var url = "/userPro/" + sessionStorage.getItem("Users_idUser");
 
@@ -404,6 +434,9 @@ function init() {
         xhr_infopro.send();
     }
 
+    /**
+    * Função responsável por inserir a informação do user nos locais apropriados
+    */
     function inserirInfoUser() {
         var adesao = new Date(infoUser[0].dataAdesao);
 
@@ -414,6 +447,9 @@ function init() {
 
     }
 
+    /**
+    * Função responsável por obter as experiencias do user a visualizar
+    */
     function obterExperiencias() {
         var url = "/experiencias/" + sessionStorage.getItem("Users_idUser");
 
@@ -441,6 +477,9 @@ function init() {
         xhr_exp.send();
     }
 
+    /**
+    * Função responsável por obter os cursos do user a visualizar
+    */
     function obterCursos() {
         var url = "/cursos/" + sessionStorage.getItem("Users_idUser");
 
@@ -468,6 +507,9 @@ function init() {
         xhr_curso.send();
     }
 
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {

@@ -10,6 +10,9 @@ function init() {
 
     getUserLogged();
 
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         if (user) {
             var btn_menu_amigos = document.getElementById("btn_menu_amigos");
@@ -57,6 +60,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por inserir pedidos de empresas registadas
+    */
     function insertPedidos() {
         deleteDivPedidos();
 
@@ -101,12 +107,19 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por limpar a div com informação dos pedidos
+    */
     function deleteDivPedidos() {
         while (divPedidos.firstChild) {
             divPedidos.removeChild(divPedidos.firstChild);
         }
     }
-
+    
+    /**
+    * Função responsável por aceitar o pedido de resgisto da empresa
+    * @param empresa - id da empresa aceite
+    */
     function aceitarPedido(empresa) {
         var data = {
             Nome: empresa.nomeEmpresa,
@@ -120,7 +133,12 @@ function init() {
 
         atualizarPedido(data, empresa.idEmpresaConfirm);
     }
-
+    
+    /**
+    * Função responsável por atualizar o pedido para Aceite
+    * @param data - informação da empresa
+    * @param idPedido - id do pedido
+    */
     function atualizarPedido(data, idPedido) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -146,6 +164,10 @@ function init() {
         xhr_atualizar.send();
     } 
 
+    /**
+    * Função responsável por criar o user da nova empresa
+    * @param data - informação da empresa
+    */
     function criarUser(data) {
         var url = "/newUser/" + 1;
 
@@ -163,6 +185,10 @@ function init() {
         xhttp.send(JSON.stringify(data));
     }
 
+    /**
+    * Função responsável por obter o user criado para a criação da empresa
+    * @param data - informação da empresa
+    */
     //Funcao que vai buscar o user criado
     function getUser(data) {
         // Criar a instância de XMLHttpRequest
@@ -195,6 +221,10 @@ function init() {
         xhr_getUser.send();
     }
 
+    /**
+    * Função responsável por criar a empresa
+    * @param data - informação da empresa
+    */
     function criarEmpresa(data) {
         var url = "/criarEmp";
 
@@ -211,6 +241,9 @@ function init() {
         xhttp2.send(JSON.stringify(data));
     }
 
+    /**
+    * Função responsável por rejeitar o pedido da empresa
+    */
     function rejeitarPedido(empresa) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -237,6 +270,9 @@ function init() {
         xhr_rejeitar.send();
     }
 
+    /**
+    * Função responsável por inserir as empresas na div com empresas existentes
+    */
     function insertEmpresas() {
         deleteDivEmpresas();
 
@@ -281,6 +317,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por eliminar a empresa já existente
+    */
     function eliminarEmpresa(Users_idUser) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -307,6 +346,9 @@ function init() {
         xhr_eliminarEmp.send();
     }
 
+    /**
+    * Função responsável por eliminar a empresa já existente
+    */
     function eliminarUser(Users_idUser) {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -333,12 +375,18 @@ function init() {
         xhr_eliminarEmp.send();
     }
 
+    /**
+    * Função responsável por limpar a div com as informações das empresas
+    */
     function deleteDivEmpresas() {
         while (divEmpresas.firstChild) {
             divEmpresas.removeChild(divEmpresas.firstChild);
         }
     }
 
+    /**
+    * Função responsável por obter os pedidos das empresas
+    */
     function obterPedidosEmpresas() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -365,6 +413,9 @@ function init() {
         xhr.send();
     }
 
+    /**
+    * Função responsável por obter as empresas existentes
+    */
     function obterEmpresas() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -391,6 +442,9 @@ function init() {
         xhr2.send();
     }
 
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {

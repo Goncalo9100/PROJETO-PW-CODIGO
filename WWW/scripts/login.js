@@ -18,7 +18,9 @@ btn_registab.addEventListener("click", function(evt){
 });
 }
 
-
+/**
+* Função responsável por realizar o login do user
+*/
 function login(){
     var info = {
         email: document.getElementById('i_email').value,
@@ -41,6 +43,11 @@ function login(){
     xhttp.send();
 }
 
+/**
+* Função responsável por realizar o login do user
+* @param resultado - resultado da chamada anterior
+* @param info - informação do user
+*/
 function loginFinal(resultado, info){
     let url;
 

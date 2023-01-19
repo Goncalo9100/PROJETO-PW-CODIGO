@@ -99,6 +99,9 @@ function createEmpConf() {
     xhttp2.send(JSON.stringify(data));
 }
 
+/**
+* Função que confirma se o email já existe
+*/
 function confirmEmailEmp() {
     var data = {
         Email: document.getElementById('email_emp').value

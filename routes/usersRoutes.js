@@ -902,7 +902,7 @@ module.exports = function (app) {
     });
 
     /**
-    * Função que executa todas as operações para aobter as informações do user que está com login efetuado
+    * Função que executa todas as operações para a obter as informações do user que está com login efetuado
     * @param {*} Route caminho que despoleta esta função
     * @param {function} Callback obtêm as informações do user que está com login efetuado
     */

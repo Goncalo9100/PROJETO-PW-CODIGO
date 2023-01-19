@@ -28,6 +28,9 @@ function init() {
         cleanFilterEmp();
     });
 
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         if (user) {
             var btn_menu_amigos = document.getElementById("btn_menu_amigos");
@@ -76,7 +79,7 @@ function init() {
     }
 
     /**
-    * Função que inicializa os botões e os eventos dos mesmos
+    * Função que inicializa os eventos dos botões de empresas e curriculos
     */
     function init_btn_filtro_emp_curr() {
         var btn_empresas = document.getElementById("btn_empresas");
@@ -112,6 +115,10 @@ function init() {
         });
     };
 
+    /**
+    * Função responsável por inserir as empresas na div correspondente à informação das empresas
+    * @param dataEmpresas - Objeto com a informação de cada empresa
+    */
     function insertEmpresas(dataEmpresas) {
         deleteDataDivEmpresas();
 
@@ -181,6 +188,10 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por inserir as informações dos curriculos dos profissionais na div correspondente à informação dos mesmos
+    * @param dataProf - Objeto com a informação de cada curriculos dos profissionais
+    */
     function insertProfissionais(dataProf) {
         deleteDataDivProfissionais();
 
@@ -269,22 +280,35 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por calcular a idade
+    * @param data - data de nascimento
+    */
     function calculateAge(data) {
         return new Date().getFullYear() - new Date(data).getFullYear();
     }
 
+    /**
+    * Função responsável por limpar a div com informação das empresas
+    */
     function deleteDataDivEmpresas() {
         while (div_body_empresas.firstChild) {
             div_body_empresas.removeChild(div_body_empresas.firstChild);
         }
     }
 
+    /**
+    * Função responsável por limpar a div com informação dos profissionais
+    */
     function deleteDataDivProfissionais() {
         while (div_body_profissionais.firstChild) {
             div_body_profissionais.removeChild(div_body_profissionais.firstChild);
         }
     }
 
+    /**
+    * Função responsável por limpar o filtro dos profissionais
+    */
     function cleanFilterProf() {
         deleteDataDivProfissionais();
         insertProfissionais(profissionais);
@@ -304,6 +328,9 @@ function init() {
         inputLocal.value = "";
     }
 
+    /**
+    * Função responsável por limpar o filtro das empresas
+    */
     function cleanFilterEmp() {
         deleteDataDivEmpresas();
         insertEmpresas(empresas);
@@ -315,6 +342,9 @@ function init() {
         inputNome.value = "";
     }
 
+    /**
+    * Função responsável por validar o filtro e aplicar o filtro à informação dos profissionais
+    */
     function validateFilterProf() {
         var radioButtonsIdade = document.querySelectorAll('input[name="idade"]');
         for (var radioButtonIdade of radioButtonsIdade) {
@@ -355,6 +385,11 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por filtrar por idade
+    * @param {Array} array - array com a info a filtrar
+    * @param ordem - ordem a filtrar 
+    */
     function filterByIdade(array, ordem) {
         switch (ordem) {
             case "crescente":
@@ -390,6 +425,11 @@ function init() {
         return array;
     }
 
+    /**
+    * Função responsável por obter os elementos por idade
+    * @param {Array} array - array com a info a pesquisar
+    * @param valor - valor a pesquisar 
+    */
     function getElemsByIdade(array, valor) {
         var arrayFinal = [];
 
@@ -406,6 +446,11 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por obter os elementos por localidade
+    * @param {Array} array - array com a info a pesquisar
+    * @param valor - valor a pesquisar 
+    */
     function getElemsByLocal(array, valor) {
         var arrayFinal = [];
 
@@ -422,6 +467,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por validar o filtro e aplicar o filtro à informação das empresas
+    */
     function validateFilterEmp() {
         var inputNome = document.getElementById("input_procura").value;
         var inputLocalidade = document.getElementById("empresa_localidade").value;
@@ -442,6 +490,11 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por obter os elementos por nome
+    * @param {Array} array - array com a info a pesquisar
+    * @param valor - valor a pesquisar 
+    */
     function getElemsByName(array, valor) {
         var arrayFinal = [];
 
@@ -458,6 +511,9 @@ function init() {
         }
     }
 
+    /**
+    * Função responsável por obter oa informação dos profissionais existentes
+    */
     function obterProfissionais() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -516,6 +572,9 @@ function init() {
         xhr.send();
     }
 
+    /**
+    * Função responsável por obter a informação das empresas existentes
+    */
     function obterEmpresas() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {
@@ -559,7 +618,10 @@ function init() {
         // Enviar a solicitação
         xhr2.send();
     }
-
+    
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
         // Criar a instância de XMLHttpRequest
         if (window.XMLHttpRequest) {

@@ -3,6 +3,9 @@ function init() {
 
     getUserLogged();
 
+    /**
+    * Função que verifica o user logado e aplica regras para objetos do ecrã 
+    */
     function verifyUser() {
         if (user) {
             var btn_menu_amigos = document.getElementById("btn_menu_amigos");
@@ -50,7 +53,9 @@ function init() {
         }
     }
 
-    //Vai buscar o user logado
+    /**
+    * Função responsável por obter as informações do user que está com login efetuado
+    */
     function getUserLogged() {
 
         console.log("teste");
@@ -85,6 +90,9 @@ function init() {
     }
 }
 
+/**
+* Função para criar um novo curso na base de dados
+*/
 function newDegree(Users_idUser) {
     var tipo = document.getElementById("tipocurso");
     var dataFim = document.getElementById("i_fim").value;
@@ -123,8 +131,9 @@ function newDegree(Users_idUser) {
     xhttp2.send(JSON.stringify(info));
 }
 
-
-
+/**
+* Função para validar a informação inserida no inicio
+*/
 function validarInicio() {
     // Obtém a data selecionada pelo user
     var dataSelecionada = new Date(document.getElementById("i_inicio").value);
@@ -138,7 +147,9 @@ function validarInicio() {
     }
 }
 
-
+/**
+* Função para validar a informação inserida no final
+*/
 function validarFim() {
     // Obtém a data selecionada pelo user
     var dataSelecionada = new Date(document.getElementById("i_fim").value);
