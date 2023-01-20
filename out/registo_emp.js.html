@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: registo_emp.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: registo_emp.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Função chamada quando página é carregada
+ */
+function init() {
+
+    var btn_empre = document.getElementById("btn_empre"); //Botão de registo da tab de empresas
+    var btn_profi = document.getElementById("btn_profi"); //Botão de registo da tab de profissionais
+    var div_emp = document.getElementById("reg_emp"); //DIV com a informação para registar uma empresa
+    var div_pro = document.getElementById("reg_pro");//DIV com a informação para registar um profissional
+
+    btn_empre.addEventListener("click", function (evt) {
+        btn_empre.style.color = "#123370"; //Azul
+        btn_profi.style.color = "#aaaaaa"; //Cinzento
+        div_emp.style.display = "initial";
+        div_pro.style.display = "none";
+    });
+
+    btn_profi.addEventListener("click", function (evt) {
+        btn_profi.style.color = "#123370"; //Azul
+        btn_empre.style.color = "#aaaaaa"; //Cinzento
+        div_emp.style.display = "none";
+        div_pro.style.display = "initial";
+    });
+}
+
+//Função que regista uma nova empresa
+/*function newUserEmp() {
+    var descricao = document.getElementById('desc_emp').value;
+
+    var data = {
+        Nome: document.getElementById('nome_emp').value,
+        Email: document.getElementById('email_emp').value,
+        Password: document.getElementById('password_emp').value,
+        URLSite: document.getElementById('url_site').value,
+        URLLogo: document.getElementById('url_logo').value,
+        Descricao: descricao,
+    };
+    console.log(data);
+
+    var url = "/newUser/" + 1;
+
+    var xhttp = new XMLHttpRequest();
+    //Open first, before setting the request headers.
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 &amp;&amp; this.status == 200) {
+            //Ir buscar o user que foi criado
+            getUser(data);
+        }
+    };
+
+    xhttp.send(JSON.stringify(data));
+}*/
+
+//Função que cria uma nova empresa
+function createEmpConf() {
+    var descricao = document.getElementById('desc_emp').value;
+
+    //Validação da descrição da empresa
+    if (descricao === '') {
+        descricao = "Não temos nada a dizer! :(";
+    }
+
+    //Obter data atual para pedido de empresa
+    var currentdate = new Date();
+    var datetime = currentdate.getFullYear() + "-"
+        + (currentdate.getMonth() + 1) + "-"
+        + currentdate.getDate() + " "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds();
+
+    var data = {
+        Nome: document.getElementById('nome_emp').value,
+        Email: document.getElementById('email_emp').value,
+        Password: document.getElementById('password_emp').value,
+        URLSite: document.getElementById('url_site').value,
+        URLLogo: document.getElementById('url_logo').value,
+        Localidade: document.getElementById('localidade').value,
+        Descricao: descricao,
+        DataPedido: datetime,
+    };
+    console.log(data);
+
+    var url = "/reg_emp";
+
+    var xhttp2 = new XMLHttpRequest();
+    //Open first, before setting the request headers.
+    xhttp2.open("POST", url, true);
+    xhttp2.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhttp2.onreadystatechange = function () {
+        if (this.readyState == 4 &amp;&amp; this.status == 200) {
+            alert('Empresa criada');
+            //Limpar as caixas de texto todas
+            document.forms["reg_empresa"].reset();
+        }
+    }
+    xhttp2.send(JSON.stringify(data));
+}
+
+/**
+* Função que confirma se o email já existe
+*/
+function confirmEmailEmp() {
+    var data = {
+        Email: document.getElementById('email_emp').value
+    }
+
+    // Criar a instância de XMLHttpRequest
+    if (window.XMLHttpRequest) {
+        xhr_confemp = new XMLHttpRequest();
+    } else {
+        xhr_confemp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    if (xhr_confemp) {
+        let url = "http://127.0.0.1:5502/confirmEmailEmp/" + data.Email;
+        // Configurar a solicitação
+        xhr_confemp.open('GET', url, true);
+
+        // Definir a função de retorno de chamada
+        xhr_confemp.onreadystatechange = function () {
+            if ((xhr_confemp.readyState === 4) &amp;&amp; (xhr_confemp.status !== 200)) {
+                createEmpConf();
+            } else if ((xhr_confemp.readyState === 4) &amp;&amp; (xhr_confemp.status === 200)) {
+                console.log(xhr_confemp.status);
+                alert("E-mail já registado em base de dados");
+            }
+        };
+    }
+
+    // Enviar a solicitação
+    xhr_confemp.send();
+}
+
+window.onload = init;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#confirmEmailEmp">confirmEmailEmp</a></li><li><a href="global.html#init">init</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Jan 20 2023 12:40:53 GMT+0000 (Hora padrão da Europa Ocidental)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
