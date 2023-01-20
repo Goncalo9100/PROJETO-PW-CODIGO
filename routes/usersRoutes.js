@@ -28,7 +28,7 @@ module.exports = function (app) {
                     res.status(400).send({ error: 'Não existe pedidos de amizade' });
                 }
                 else {
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch (err) {
@@ -51,7 +51,7 @@ module.exports = function (app) {
                     //Tratar o erro aqui
                     res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
                 } else {
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch (err) {
@@ -77,7 +77,7 @@ module.exports = function (app) {
                     res.status(400).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
                 }
                 else {
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch (err) {
@@ -105,7 +105,7 @@ module.exports = function (app) {
                     res.status(400).send({ error: 'Não existe em base de dados' });
                 }
                 else {
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch (err) {
@@ -128,8 +128,7 @@ module.exports = function (app) {
                     //Tratar o erro aqui
                     res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
                 } else {
-                    console.log(results);
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch (err) {
@@ -153,8 +152,7 @@ module.exports = function (app) {
                     //Tratar o erro aqui
                     res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
                 } else {
-                    console.log(results);
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch (err) {
@@ -178,8 +176,7 @@ module.exports = function (app) {
                     //Tratar o erro aqui
                     res.status(500).send({ error: 'Ocorreu um erro ao processar sua solicitação' });
                 } else {
-                    console.log(results);
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch (err) {
@@ -201,10 +198,8 @@ module.exports = function (app) {
 
         connection.query(query, [info], function (err, data) {
             if (err) {
-                console.log("Error inserting : %s ", err);
             }
             else {
-                console.log(data);
                 res.status(200).send();
             }
         });
@@ -227,7 +222,6 @@ module.exports = function (app) {
                 console.log("Error inserting : %s ", err);
             }
             else {
-                console.log(data);
                 res.status(200).send();
             }
         });
@@ -247,10 +241,8 @@ module.exports = function (app) {
 
         connection.query(query, [info], function (err, data) {
             if (err) {
-                console.log("Error inserting : %s ", err);
             }
             else {
-                console.log(data);
                 res.status(200).send();
             }
         });
@@ -371,13 +363,10 @@ module.exports = function (app) {
         try {
             connection.query(query, req.params.email, function (error, results, fields) {
                 if (error) {
-                    console.log(query);
                     res.render(error)
                 }
                 else {
-                    console.log(query);
-                    console.log(results);
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
             });
         } catch { }
@@ -412,10 +401,8 @@ module.exports = function (app) {
         setTimeout(function () {
             connection.query(query, [info], function (err, data) {
                 if (err) {
-                    console.log("Error inserting : %s ", err);
                 }
                 else {
-                    console.log(data);
                     res.status(200).send();
                 }
             });
@@ -436,10 +423,8 @@ module.exports = function (app) {
         setTimeout(function () {
             connection.query(query, [info], function (err, data) {
                 if (err) {
-                    console.log("Error inserting : %s ", err);
                 }
                 else {
-                    console.log(data);
                     res.status(200).send();
                 }
             });
@@ -464,10 +449,8 @@ module.exports = function (app) {
         setTimeout(function () {
             connection.query(query, [info], function (err, data) {
                 if (err) {
-                    console.log("Error inserting : %s ", err);
                 }
                 else {
-                    console.log(data);
                     res.status(200).send();
                 }
             });
@@ -489,7 +472,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(data);
                 res.status(200).send(JSON.stringify(data));
             }
         });
@@ -518,7 +500,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(data);
                 res.status(200).send(JSON.stringify(data));
             }
         });
@@ -540,8 +521,7 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(results);
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
         });
     });
@@ -561,7 +541,7 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
         });
     });
@@ -581,28 +561,10 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(results);
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
         });
     });
-
-    /*
-    app.delete('/deleteAmigo/:idAmigos', function (req, res) {
-        var query = "DELETE FROM amigos Where idAmigos=?";
-
-        connection.query(query, req.params.idAmigos, function (error, data) {
-            if (error) {
-                res.render(error)
-            }
-            else {
-                console.log(data);
-                res.status(200).send(data);
-            }
-
-        });
-    });
-    */
 
     /**
     * Função que executa todas as operações para eliminar um amigo
@@ -618,7 +580,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(data);
                 res.status(200).send(data);
             }
 
@@ -639,7 +600,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(data);
                 res.status(200).send(data);
             }
 
@@ -659,7 +619,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(data);
                 res.status(200).send(data);
             }
 
@@ -679,7 +638,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(data);
                 res.status(200).send(data);
             }
 
@@ -698,10 +656,8 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
-            console.log(results);
         });
     });
 
@@ -717,10 +673,8 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
-            console.log(results);
         });
     });
 
@@ -736,10 +690,8 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
-            console.log(results);
         });
     });
 
@@ -755,10 +707,8 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
-            console.log(results);
         });
     });
 
@@ -774,9 +724,8 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
-            console.log(results);
         });
     });
 
@@ -792,7 +741,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(result);
                 res.status(200).send();
             }
         });
@@ -810,7 +758,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(result);
                 res.status(200).send();
             }
         });
@@ -828,9 +775,8 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                res.end(JSON.stringify(results));
+                res.status(200).end(JSON.stringify(results));
             }
-            console.log(results);
         });
     });
 
@@ -855,7 +801,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(result);
                 res.status(200).send(JSON.stringify(result));
             }
         });
@@ -874,7 +819,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(result);
                 res.status(200).send(JSON.stringify(result));
             }
         });
@@ -895,7 +839,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(data);
                 res.status(200).send();
             }
         });
@@ -928,10 +871,8 @@ module.exports = function (app) {
                     res.render(error)
                 }
                 else {
-                    //res.status(200).render('pagina_ofertas_empregos.ejs', { title: 'ofertas', sampleData: results});
-                    res.end(JSON.stringify(results));
+                    res.status(200).end(JSON.stringify(results));
                 }
-                console.log(results);
             });
         } else { res.status(401).send(); }
     });
@@ -952,7 +893,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(result);
                 res.status(200).send(JSON.stringify(result));
             }
         });
@@ -974,7 +914,6 @@ module.exports = function (app) {
                 res.render(error)
             }
             else {
-                console.log(result);
                 res.status(200).send(JSON.stringify(result));
             }
         });
